@@ -80,19 +80,21 @@ class UI:
         self.display_surface.blit(weapon_surf, weapon_rect)
     
     def magic_overlay(self, magic_index, has_swaped):
-        bg_rect = self.selection_box(100, 630, has_swaped)  
+        bg_rect = self.selection_box(100, 630, has_swaped)
         magic_surf = self.magic_graphics[magic_index]
         magic_rect = magic_surf.get_rect(center = bg_rect.center)
-        
+
         self.display_surface.blit(magic_surf, magic_rect)
         
     def display(self, player):
+
         if player.sprite_type == 'player':
             self.show_bar(player.health, player.stats['health'], self.health_bar_rect, HEALTH_COLOR)
             self.show_bar(player.energy, player.stats['energy'], self.energy_bar_rect, ENERGY_COLOR)
             self.show_exp(player.exp)
             self.weapon_overlay(player.weapon_index, player.can_rotate_weapon)
             self.magic_overlay(player.magic_index, player.can_swap_magic)
+
         if player.sprite_type == 'camera':
             self.show_exp(player.exp)
             

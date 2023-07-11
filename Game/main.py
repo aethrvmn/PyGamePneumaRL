@@ -4,7 +4,7 @@ import sys
 from utils.settings import *
 from utils.debug import debug
 
-from objects.level import Level
+from level import Level
 
 class Game:
 
@@ -18,12 +18,12 @@ class Game:
         
         self.level = Level()
 
-        # Sound
-        main_sound = pygame.mixer.Sound('../Graphics/audio/main.ogg')
-        main_sound.set_volume(0.4)
-        main_sound.play(loops = -1)
+        # # Sound
+        # main_sound = pygame.mixer.Sound('../Graphics/audio/main.ogg')
+        # main_sound.set_volume(0.4)
+        # main_sound.play(loops = -1)
     def run(self):
-        while True:
+
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.quit()
@@ -38,5 +38,12 @@ class Game:
             self.clock.tick(FPS)
 
 if __name__ == '__main__':
+
+
     game = Game()
-    game.run()
+    while True:
+        game.run()
+    
+    
+    
+    
