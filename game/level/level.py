@@ -1,20 +1,28 @@
+import os
 import pygame
+
 from random import choice, randint
 
-from utils.settings import *
+from configs.game.spell_config import magic_data
+from configs.game.weapon_config import weapon_data
+from configs.game.monster_config import monster_data
+from configs.system.window_config import TILESIZE
+
 from utils.debug import debug
-from utils.support import *
+from utils.resource_loader import import_csv_layout, import_folder
 
-from UI.ui import UI
+from interface.ui import UI
+from interface.upgrade import Upgrade
 
-from effects.particles import AnimationPlayer
-from effects.magic import MagicPlayer
-from effects.weapon import Weapon
+from effects.magic_effects import MagicPlayer
+from effects.particle_effects import AnimationPlayer
+from effects.weapon_effects import Weapon
 
-from terrain.tiles import Tile
+from entities.observer import Observer
+from entities.player import Player
 
-from view.observer import Observer
-from view.camera import Camera
+from .terrain import Tile
+from .camera import Camera
 
 
 class Level:
@@ -38,18 +46,22 @@ class Level:
 
         # UI setup
         self.ui = UI()
+        self.upgrade = Upgrade(self.player)
 
     def create_map(self):
+        script_dir = os.path.dirname(os.path.abspath(__file__))
+        asset_path = os.path.join(
+            script_dir, '../..', 'assets')
         layouts = {
-            'boundary': import_csv_layout('../Map/FloorBlocks.csv'),
-            'grass': import_csv_layout('../Map/Grass.csv'),
-            'objects': import_csv_layout('../Map/Objects.csv'),
-            'entities': import_csv_layout('../Map/Entities.csv')
+            'boundary': import_csv_layout(f"{asset_path}/map/FloorBlocks.csv"),
+            'grass': import_csv_layout(f"{asset_path}/map/Grass.csv"),
+            'objects': import_csv_layout(f"{asset_path}/map/Objects.csv"),
+            'entities': import_csv_layout(f"{asset_path}/map/Entities.csv")
         }
 
         graphics = {
-            'grass': import_folder('../Graphics/grass'),
-            'objects': import_folder('../Graphics/objects')
+            'grass': import_folder(f"{asset_path}/graphics/grass"),
+            'objects': import_folder(f"{asset_path}/graphics/objects")
         }
 
         for style, layout in layouts.items():
@@ -72,51 +84,37 @@ class Level:
                                  self.obstacle_sprites], 'object', surf)
 
                         if style == 'entities':
-                            # The numbers represent their IDs in the map .csv files generated from TILED.
+                            # The numbers represent their IDs in .csv files generated from TILED.
                             if col == '395':
                                 self.observer = Observer(
                                     (x, y), [self.visible_sprites])
 
                             elif col == '394':
-                                pass
-                                # player generation
+                                # Player Generation
+                                self.player = Player(
+                                    (x, y), [self.visible_sprites], self.obstacle_sprites, self.visible_sprites, self.attack_sprites)
 
                             else:
                                 pass
                                 # monster generation
 
-    def create_attack_sprite(self):
-        self.current_attack = Weapon(
-            self.player, [self.visible_sprites, self.attack_sprites])
-
-    def delete_attack_sprite(self):
-        if self.current_attack:
-            self.current_attack.kill()
-        self.current_attack = None
-
-    def create_magic_sprite(self, style, strength, cost):
-        if style == 'heal':
-            self.magic_player.heal(self.player, strength, cost, [
-                                   self.visible_sprites])
-
-        if style == 'flame':
-            self.magic_player.flame(
-                self.player, cost, [self.visible_sprites, self.attack_sprites])
+    def toggle_menu(self):
+        self.game_paused = not self.game_paused
 
     def run(self):
         # Draw the game
-        self.visible_sprites.custom_draw(self.observer)
-        self.ui.display(self.observer)
-        if self.game_paused:
+        self.visible_sprites.custom_draw(self.player)
+        self.ui.display(self.player)
+        debug(self.player.status)
+        if not self.game_paused:
+            # Update the game
+            # self.player.distance_direction_to_player = self.get_state()
+            self.visible_sprites.update()
+            # self.visible_sprites.enemy_update(self.player)
+            # self.player_attack_logic()
+        else:
             if self.visible_sprites.sprite_type == 'player':
                 self.upgrade.display()
-                pass
-        else:
-            # Update the game
-            self.player.distance_direction_to_player = self.get_state()
-            self.visible_sprites.update()
-            self.visible_sprites.enemy_update(self.player)
-            self.player_attack_logic()
 
-        if self.player.health <= 0:
+        if self.player.stats.health <= 0:
             self.__init__()

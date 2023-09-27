@@ -1,9 +1,15 @@
+import os
+
+script_dir = os.path.dirname(os.path.abspath(__file__))
+asset_path = os.path.join(
+    script_dir, '../..', 'assets')
+
 # ui
 BAR_HEIGHT = 20
 HEALTH_BAR_WIDTH = 200
 ENERGY_BAR_WIDTH = 140
 ITEM_BOX_SIZE = 80
-UI_FONT = '../Graphics/graphics/font/joystix.ttf'
+UI_FONT = f"{asset_path}/font/joystix.ttf"
 UI_FONT_SIZE = 18
 
 # general colors

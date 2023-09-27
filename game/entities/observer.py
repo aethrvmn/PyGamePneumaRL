@@ -1,19 +1,22 @@
+import os
 import pygame
-import random
 
-from utils.settings import *
-from utils.support import import_folder
+from configs.system.window_config import HITBOX_OFFSET
 
 
-class Camera(pygame.sprite.Sprite):
+class Observer(pygame.sprite.Sprite):
 
     def __init__(self, position, groups):
         super().__init__(groups)
 
         self.sprite_type = 'camera'
 
+        script_dir = os.path.dirname(os.path.abspath(__file__))
+        asset_path = os.path.join(
+            script_dir, '../..', 'assets')
+
         self.image = pygame.image.load(
-            '../Graphics/graphics/camera.png').convert_alpha()
+            f"{asset_path}/graphics/observer.png").convert_alpha()
         self.rect = self.image.get_rect(topleft=position)
         self.hitbox = self.rect.inflate(HITBOX_OFFSET[self.sprite_type])
 

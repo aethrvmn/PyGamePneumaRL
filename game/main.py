@@ -1,10 +1,10 @@
 import pygame
 import sys
 
-from utils.settings import *
+from configs.system.window_config import WIDTH, HEIGHT, WATER_COLOR, FPS
 from utils.debug import debug
 
-from level import Level
+from level.level import Level
 
 
 class Game:
@@ -20,9 +20,10 @@ class Game:
         self.level = Level()
 
         # # Sound
-        # main_sound = pygame.mixer.Sound('../Graphics/audio/main.ogg')
+        # main_sound = pygame.mixer.Sound('../assets/audio/main.ogg')
         # main_sound.set_volume(0.4)
-        # main_sound.play(loops = -1)
+        # main_sound.play(loops=-1)
+
     def run(self):
 
         for event in pygame.event.get():
