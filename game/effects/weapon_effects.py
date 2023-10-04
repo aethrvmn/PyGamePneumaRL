@@ -12,7 +12,7 @@ class Weapon(pygame.sprite.Sprite):
             script_dir, '../..', 'assets')
 
         self.sprite_type = 'weapon'
-        direction = player.status.split('_')[0]
+        direction = player._input.status.split('_')[0]
 
         # Graphic
         full_path = f"{asset_path}/graphics/weapons/{player._input.combat.weapon}/{direction}.png"

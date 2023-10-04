@@ -1,24 +1,26 @@
+import os
 import pygame
 from random import randint
 
 from configs.system.window_config import TILESIZE
 
-from configs.game.spell_config import *
-
 
 class MagicPlayer:
     def __init__(self, animation_player):
         self.animation_player = animation_player
+        script_dir = os.path.dirname(os.path.abspath(__file__))
+        asset_path = os.path.join(
+            script_dir, '../..', 'assets')
 
         # Sound Setup
-        # self.sounds = {
-        #     'heal': pygame.mixer.Sound('../Graphics/audio/heal.wav'),
-        #     'flame': pygame.mixer.Sound('../Graphics/audio/flame.wav')
-        # }
+        self.sounds = {
+            'heal': pygame.mixer.Sound(f'{asset_path}/audio/heal.wav'),
+            'flame': pygame.mixer.Sound(f'{asset_path}/audio/flame.wav')
+        }
 
     def heal(self, player, strength, cost, groups):
         if player.stats.energy >= cost:
-            # self.sounds['heal'].play()
+            self.sounds['heal'].play()
             player.stats.health += strength
             player.stats.energy -= cost
             if player.stats.health >= player.stats.stats['health']:
@@ -31,13 +33,13 @@ class MagicPlayer:
     def flame(self, player, cost, groups):
         if player.stats.energy >= cost:
             player.stats.energy -= cost
-            # self.sounds['flame'].play()
+            self.sounds['flame'].play()
 
-            if player.status.split('_')[0] == 'right':
+            if player._input.status.split('_')[0] == 'right':
                 direction = pygame.math.Vector2(1, 0)
-            elif player.status.split('_')[0] == 'left':
+            elif player._input.status.split('_')[0] == 'left':
                 direction = pygame.math.Vector2(-1, 0)
-            elif player.status.split('_')[0] == 'up':
+            elif player._input.status.split('_')[0] == 'up':
                 direction = pygame.math.Vector2(0, -1)
             else:
                 direction = pygame.math.Vector2(0, 1)

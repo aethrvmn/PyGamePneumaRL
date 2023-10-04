@@ -2,9 +2,11 @@ import pygame
 import sys
 
 from configs.system.window_config import WIDTH, HEIGHT, WATER_COLOR, FPS
-from utils.debug import debug
 
 from level.level import Level
+
+import os
+import psutil
 
 
 class Game:
@@ -13,16 +15,17 @@ class Game:
 
         pygame.init()
 
-        self.screen = pygame.display.set_mode((WIDTH, HEIGHT))
+        self.screen = pygame.display.set_mode(
+            (WIDTH, HEIGHT))
         pygame.display.set_caption('Pneuma')
         self.clock = pygame.time.Clock()
 
         self.level = Level()
 
-        # # Sound
-        # main_sound = pygame.mixer.Sound('../assets/audio/main.ogg')
-        # main_sound.set_volume(0.4)
-        # main_sound.play(loops=-1)
+        # Sound
+        main_sound = pygame.mixer.Sound('../assets/audio/main.ogg')
+        main_sound.set_volume(0.4)
+        main_sound.play(loops=-1)
 
     def run(self):
 
@@ -35,7 +38,7 @@ class Game:
                     self.level.toggle_menu()
 
         self.screen.fill(WATER_COLOR)
-        self.level.run()
+        self.level.run('player')
         pygame.display.update()
         self.clock.tick(FPS)
 

@@ -1,40 +1,41 @@
+from configs.game.player_config import stats, max_stats, upgrade_costs
+from configs.game.monster_config import monster_data
+
+
 class StatsHandler:
 
-    def __init__(self):
-        self.stats = {
-            'health': 100,
-            'energy': 60,
-            'attack': 10,
-            'magic': 4,
-            'speed': 5
-        }
+    def __init__(self, sprite_type, monster_name=None):
 
-        self.max_stats = {
-            'health': 300,
-            'energy': 150,
-            'attack': 20,
-            'magic': 10,
-            'speed': 10
-        }
+        if sprite_type == 'player':
 
-        self.upgrade_costs = {
-            'health': 100,
-            'energy': 100,
-            'attack': 100,
-            'magic': 100,
-            'speed': 100
-        }
+            self.stats = stats
 
-        self.health = self.stats['health']
-        self.energy = self.stats['energy']
-        self.attack = self.stats['attack']
-        self.magic = self.stats['magic']
-        self.speed = self.stats['speed']
-        self.exp = 10000
+            self.max_stats = max_stats
+
+            self.upgrade_costs = upgrade_costs
+
+            self.health = self.stats['health']
+            self.energy = self.stats['energy']
+            self.attack = self.stats['attack']
+            self.magic = self.stats['magic']
+            self.speed = self.stats['speed']
+            self.exp = 10000
+
+        if sprite_type == 'enemy':
+
+            self.monster_info = monster_data[monster_name]
+            self.health = self.monster_info['health']
+            self.attack = self.monster_info['attack']
+            self.attack_type = self.monster_info['attack_type']
+            self.attack_radius = self.monster_info['attack_radius']
+            self.speed = self.monster_info['speed']
+            self.knockback = self.monster_info['knockback']
+            self.notice_radius = self.monster_info['notice_radius']
+            self.exp = self.monster_info['exp']
 
     def energy_recovery(self):
         if self.energy < self.stats['energy']:
-            self.energy += 0.01 * self.stats['magic']
+            self.energy += 0.01 * self.magic
         else:
             self.energy = self.stats['energy']
 

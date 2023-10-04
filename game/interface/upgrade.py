@@ -1,6 +1,6 @@
 import pygame
 
-from .ui_settings import *
+from .ui_settings import UI_FONT, UI_FONT_SIZE, TEXT_COLOR, TEXT_COLOR_SELECTED, UPGRADE_BG_COLOR_SELECTED, UI_BORDER_COLOR, UI_BG_COLOR, BAR_COLOR_SELECTED, BAR_COLOR
 
 
 class Upgrade:

@@ -1,10 +1,12 @@
 import pygame
 import sys
+import os
 
 from utils.settings import *
 from utils.debug import debug
 
 from objects.level import Level
+
 
 
 class Game:
@@ -13,7 +15,8 @@ class Game:
 
         pygame.init()
 
-        self.screen = pygame.display.set_mode((WIDTH, HEIGHT))
+        self.screen = pygame.display.set_mode(
+            (WIDTH, HEIGHT))
         pygame.display.set_caption('Pneuma')
         self.clock = pygame.time.Clock()
 
@@ -43,6 +46,5 @@ class Game:
 if __name__ == '__main__':
 
     game = Game()
-    figure_file = 'rl/plots/pneuma.png'
     while True:
         game.run()
