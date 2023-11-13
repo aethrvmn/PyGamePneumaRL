@@ -35,7 +35,12 @@ class InputHandler:
         self.can_swap_magic = True
         self.magic_swap_time = None
 
+        # Setup Action Space
+        self.action = 10
+
     def check_input(self, speed, hitbox, obstacle_sprites, rect, player):
+
+        self.action = 10
 
         if not self.attacking and self.can_move:
 
@@ -50,10 +55,14 @@ class InputHandler:
                 self.movement.direction.y = -1
                 self.status = 'up'
                 self.can_move = False
+                self.action = 0
+
             elif button == 1:  # keys[pygame.K_s]:
                 self.movement.direction.y = 1
                 self.status = 'down'
                 self.can_move = False
+                self.action = 1
+
             else:
                 self.movement.direction.y = 0
 
@@ -61,10 +70,14 @@ class InputHandler:
                 self.movement.direction.x = -1
                 self.status = 'left'
                 self.can_move = False
+                self.action = 2
+
             elif button == 3:  # keys[pygame.K_d]:
                 self.movement.direction.x = 1
                 self.status = 'right'
                 self.can_move = False
+                self.action = 3
+
             else:
                 self.movement.direction.x = 0
 
@@ -77,6 +90,7 @@ class InputHandler:
                     self.attack_time = pygame.time.get_ticks()
                     self.combat.create_attack_sprite(player)
                     self.combat.weapon_attack_sound.play()
+                    self.action = 4
 
                 # Magic Input
                 if button == 5:  # keys[pygame.K_q]:
@@ -93,6 +107,7 @@ class InputHandler:
                         self.combat.magic_index]['cost']
                     self.combat.create_magic_sprite(
                         player, self.combat.magic, strength, cost)
+                    self.action = 5
 
                 # Rotating Weapons
                 # keys[pygame.K_LSHIFT]
@@ -106,6 +121,7 @@ class InputHandler:
 
                     self.combat.weapon = list(weapon_data.keys())[
                         self.combat.weapon_index]
+                    self.action = 6
 
                 # Swap Spells
                 # keys[pygame.K_LCTRL] :
@@ -116,6 +132,7 @@ class InputHandler:
                         self.combat.magic_index += 1
                     else:
                         self.combat.magic_index = 0
+                    self.action = 7
 
     def cooldowns(self, vulnerable):
         current_time = pygame.time.get_ticks()

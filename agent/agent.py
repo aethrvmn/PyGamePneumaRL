@@ -3,9 +3,11 @@ import torch
 
 from numpy.random import default_rng
 
-#from rl.brain import PPONet
 from rl.brain import ActorNetwork, CriticNetwork, PPOMemory
+
+
 class Agent:
+
     def __init__(self, n_actions, input_dims, gamma = 0.99, alpha = 0.0003, policy_clip = 0.2, batch_size = 64, N=2048, n_epochs = 10, gae_lambda = 0.95):
     
         self.gamma = gamma
@@ -27,13 +29,13 @@ class Agent:
     def save_models(self):
         print('... saving models ...')
         self.actor.save_checkpoint()
-        self.critic.save_chaeckpoint()
+        self.critic.save_checkpoint()
         print('... done ...')
         
     def load_models(self):
         print('... loadng models ...')
         self.actor.load_checkpoint()
-        self.critic.load_chaeckpoint() 
+        self.critic.load_checkpoint()
         print('.. done ...')
     
     def choose_action(self, observation):
@@ -95,40 +97,3 @@ class Agent:
                 self.critic.optimizer.step()
                 
         self.memory.clear_memory()
-                
-        
-  #  def __init__(self, actions, inputs, player_info, reward, save_dir, checkpoint = None):
- #       self.inputs = inputs
-#
- #       self.input_dim = len(inputs) + len(player_info)
-#
-#        self.output_dim = len(actions)
-        
-       # self.reward = reward
-      #  
-     #   if torch.cuda.is_available():
-    #        self.device = "cuda"
-   #     elif torch.backends.mps.is_available():
-  #          self.device = "mps"
- #       else:
-#            self.device="cpu"
-            
-       # self.net = PPONet(self.input_dim, self.output_dim)
-      #  self.net = self.net.to(device=self.device)
-     #   
-    #    self.rng = default_rng()
-   #     
-  #      
- #       ## DEFINING PARAMETERS
-#        pass
-                
-                
-        #print(f"Model ready, using {self.device}")
-       # if checkpoint:
-      #      print(f"chkpt at {checkpoint}")
-     #       self.load(checkpoint)
-    #    else:
-   #         print('No chkpt passed')
-  #          
- #   def act(self, distance_direction_to_player):
-#       print(distance_direction_to_player)

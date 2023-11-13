@@ -27,10 +27,22 @@ class Game:
         main_sound.play(loops=-1)
 
     def extract_features(self):
+        self.state_features = []
+        self.reward_features = []
+        self.action_features = []
         self.features = []
+
         for i, player in enumerate(self.level.player_sprites):
 
-            player_features = {
+            player_action_features = {
+                "player_action": player._input.action
+                }
+
+            player_reward_features = {
+                "player_exp": player.stats.exp
+                }
+
+            player_state_features = {
                 "player_position": player.rect.center,
                 "player role": player.stats.role_id,
                 "player_health": player.stats.health,
@@ -38,7 +50,6 @@ class Game:
                 "player_attack": player.stats.attack,
                 "player_magic": player.stats.magic,
                 "player_speed": player.stats.speed,
-                "player_exp": player.stats.exp,
                 "player_vulnerable": int(player._input.combat.vulnerable),
                 "player_can_move": int(player._input.can_move),
                 "player_attacking": int(player._input.attacking),
@@ -62,35 +73,40 @@ class Game:
                     "enemy_direction": direction
                 })
 
-                player_features["enemies"] = distances_directions
-            self.features.append(player_features)
+                player_state_features["enemies"] = distances_directions
+            self.reward_features.append(player_reward_features)
+            self.state_features.append(player_state_features)
+            self.action_features.append(player_action_features)
 
     def convert_features_to_tensor(self):
 
-        self.tensors = []
-        for player_features in self.features:
+        self.state_tensors = []
+        self.action_tensors = []
+        self.reward_tensors = []
+
+        for features in self.state_features:
             info_array = []
 
             # Adding player features to tensor
             player_info = [
-                player_features['player_position'][0],
-                player_features['player_position'][1],
-                player_features['player role'],
-                player_features['player_health'],
-                player_features['player_energy'],
-                player_features['player_attack'],
-                player_features['player_magic'],
-                player_features['player_speed'],
-                player_features['player_exp'],
-                player_features['player_vulnerable'],
-                player_features['player_can_move'],
-                player_features['player_attacking'],
-                player_features['player_can_rotate_weapon'],
-                player_features['playercan_swap_magic'],
+                features['player_position'][0],
+                features['player_position'][1],
+                features['player role'],
+                features['player_health'],
+                features['player_energy'],
+                features['player_attack'],
+                features['player_magic'],
+                features['player_speed'],
+                features['player_vulnerable'],
+                features['player_can_move'],
+                features['player_attacking'],
+                features['player_can_rotate_weapon'],
+                features['playercan_swap_magic'],
             ]
             info_array.extend(player_info)
 
-            for enemy in player_features['enemies']:
+            # Adding enemy features per player
+            for enemy in features['enemies']:
                 enemy_info = [
                     enemy['enemy_id'],
                     enemy['enemy_status'],
@@ -106,9 +122,37 @@ class Game:
                 ]
                 info_array.extend(enemy_info)
 
-            player_tensor = torch.tensor(
-                np.array(info_array, dtype=np.float32))
-            self.tensors.append(player_tensor)
+            state_tensor = torch.tensor(
+            np.array(info_array, dtype=np.float32))
+
+            self.state_tensors.append(state_tensor)
+
+
+        for features in self.action_features:
+            info_array = []
+
+            # Adding action features
+            action_info = [
+                features["player_action"]
+                ]
+
+            action_tensor = torch.tensor(
+                np.array(action_info, dtype=np.float32))
+
+            self.action_tensors.append(action_tensor)
+
+        for features in self.reward_features:
+            info_array = []
+
+            # Adding reward features
+            reward_info = [
+                features["player_exp"]
+                ]
+
+            reward_tensor = torch.tensor(
+                np.array(reward_info, dtype=np.float32))
+
+            self.reward_tensors.append(reward_tensor)
 
     def run(self):
 
@@ -133,7 +177,11 @@ class Game:
 if __name__ == '__main__':
 
     game = Game()
-    for _ in range(0, 10000):
+    for i in range(0, 10000):
         game.run()
         game.extract_features()
         game.convert_features_to_tensor()
+        if i == 100:
+            print(game.reward_tensors)
+            print(game.action_tensors)
+            print(game.state_tensors)
