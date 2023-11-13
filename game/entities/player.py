@@ -13,7 +13,7 @@ from effects.particle_effects import AnimationPlayer
 
 class Player(pygame.sprite.Sprite):
 
-    def __init__(self, position, groups, obstacle_sprites, visible_sprites, attack_sprites, attackable_sprites):
+    def __init__(self, position, groups, obstacle_sprites, visible_sprites, attack_sprites, attackable_sprites, role):
         super().__init__(groups)
 
         # Setup Sprites
@@ -35,7 +35,8 @@ class Player(pygame.sprite.Sprite):
             self.sprite_type, self.animation_player)  # , self.status)
 
         # Setup Stats
-        self.stats = StatsHandler(self.sprite_type)
+        self.role = role
+        self.stats = StatsHandler(self.sprite_type, self.role)
 
         self.distance_direction_from_enemy = None
 

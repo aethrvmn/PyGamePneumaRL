@@ -22,7 +22,6 @@ class Enemy(pygame.sprite.Sprite):
         self.animation_player = AnimationPlayer()
         self.animation = AnimationHandler(self.sprite_type, self.name)
         self.animation.import_assets(position)
-        self.status = self.animation.status
         self.image = self.animation.image
         self.rect = self.animation.rect
 
@@ -31,12 +30,10 @@ class Enemy(pygame.sprite.Sprite):
             self.sprite_type, self.animation_player)
 
         # Setup Stats
-        self.stats = StatsHandler(self.sprite_type, self.name)
+        self.stats = StatsHandler(self.sprite_type, monster_name=self.name)
         self.obstacle_sprites = obstacle_sprites
 
         self.distance_direction_from_player = None
-
-        self.kills = 0
 
     def get_action(self):
         player_distance = sorted(
@@ -83,9 +80,9 @@ class Enemy(pygame.sprite.Sprite):
     def update(self):
 
         self.get_action()
-        self.status = self.animation.status
 
-        self.animation.animate(self.status, self._input.combat.vulnerable)
+        self.animation.animate(self.animation.status,
+                               self._input.combat.vulnerable)
         self.image = self.animation.image
         self.rect = self.animation.rect
 

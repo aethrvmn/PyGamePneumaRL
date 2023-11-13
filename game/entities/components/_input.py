@@ -1,5 +1,5 @@
 import pygame
-from random import randint
+from random import randint, choice
 
 from configs.game.spell_config import magic_data
 from configs.game.weapon_config import weapon_data
@@ -11,7 +11,7 @@ from .combat import CombatHandler
 class InputHandler:
 
     # , status):
-    def __init__(self, sprite_type, animation_player):
+    def __init__(self, sprite_type, animation_player, ai_controller=False):
         self.status = 'down'
         self.sprite_type = sprite_type
 
@@ -41,27 +41,27 @@ class InputHandler:
 
             keys = pygame.key.get_pressed()
 
-            # button = randint(0, 5)
+            button = randint(0, 4)
 
             self.move_time = pygame.time.get_ticks()
 
             # Movement Input
-            if keys[pygame.K_w]:  # button == 0:  # keys[pygame.K_w]:
+            if button == 0:  # keys[pygame.K_w]:
                 self.movement.direction.y = -1
                 self.status = 'up'
                 self.can_move = False
-            elif keys[pygame.K_s]:  # button == 1:  # keys[pygame.K_s]:
+            elif button == 1:  # keys[pygame.K_s]:
                 self.movement.direction.y = 1
                 self.status = 'down'
                 self.can_move = False
             else:
                 self.movement.direction.y = 0
 
-            if keys[pygame.K_a]:  # button == 2:  # keys[pygame.K_a]:
+            if button == 2:  # keys[pygame.K_a]:
                 self.movement.direction.x = -1
                 self.status = 'left'
                 self.can_move = False
-            elif keys[pygame.K_d]:  # keys[pygame.K_d]:
+            elif button == 3:  # keys[pygame.K_d]:
                 self.movement.direction.x = 1
                 self.status = 'right'
                 self.can_move = False
@@ -72,14 +72,14 @@ class InputHandler:
 
             if self.sprite_type == 'player':
                 # Combat Input
-                if keys[pygame.K_e] and not self.attacking:  # keys[pygame.K_e]
+                if button == 4 and not self.attacking:  # keys[pygame.K_e]
                     self.attacking = True
                     self.attack_time = pygame.time.get_ticks()
                     self.combat.create_attack_sprite(player)
                     self.combat.weapon_attack_sound.play()
 
                 # Magic Input
-                if keys[pygame.K_q]:  # keys[pygame.K_q]:
+                if button == 5:  # keys[pygame.K_q]:
                     self.attacking = True
                     self.attack_time = pygame.time.get_ticks()
 
@@ -96,7 +96,7 @@ class InputHandler:
 
                 # Rotating Weapons
                 # keys[pygame.K_LSHIFT]
-                if keys[pygame.K_LSHIFT] and self.can_rotate_weapon:
+                if button == 6 and self.can_rotate_weapon:
                     self.can_rotate_weapon = False
                     self.weapon_rotation_time = pygame.time.get_ticks()
                     if self.combat.weapon_index < len(list(weapon_data.keys())) - 1:
@@ -109,7 +109,7 @@ class InputHandler:
 
                 # Swap Spells
                 # keys[pygame.K_LCTRL] :
-                if keys[pygame.K_LCTRL] and self.can_swap_magic:
+                if button == 7 and self.can_swap_magic:
                     self.can_swap_magic = False
                     self.magic_swap_time = pygame.time.get_ticks()
                     if self.combat.magic_index < len(list(magic_data.keys())) - 1:

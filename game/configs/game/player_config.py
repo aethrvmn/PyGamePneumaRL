@@ -1,4 +1,23 @@
-stats = {
+tank_stats = {
+    'role_id': 1,
+    'health': 150,
+    'energy': 40,
+    'attack': 7,
+    'magic': 3,
+    'speed': 3
+}
+
+mage_stats = {
+    'role_id': 2,
+    'health': 70,
+    'energy': 80,
+    'attack': 3,
+    'magic': 6,
+    'speed': 5
+}
+
+warrior_stats = {
+    'role_id': 3,
     'health': 100,
     'energy': 60,
     'attack': 10,

@@ -1,29 +1,32 @@
-from configs.game.player_config import stats, max_stats, upgrade_costs
+from configs.game.player_config import warrior_stats, mage_stats, tank_stats
 from configs.game.monster_config import monster_data
 
 
 class StatsHandler:
 
-    def __init__(self, sprite_type, monster_name=None):
+    def __init__(self, sprite_type, role=None, monster_name=None):
 
         if sprite_type == 'player':
 
-            self.stats = stats
+            if role == 'warrior':
+                self.stats = warrior_stats
+            elif role == 'tank':
+                self.stats = tank_stats
+            elif role == 'mage':
+                self.stats = mage_stats
 
-            self.max_stats = max_stats
-
-            self.upgrade_costs = upgrade_costs
-
+            self.role_id = self.stats['role_id']
             self.health = self.stats['health']
             self.energy = self.stats['energy']
             self.attack = self.stats['attack']
             self.magic = self.stats['magic']
             self.speed = self.stats['speed']
-            self.exp = 10000
+            self.exp = 0
 
         if sprite_type == 'enemy':
 
             self.monster_info = monster_data[monster_name]
+            self.monster_id = self.monster_info['id']
             self.health = self.monster_info['health']
             self.attack = self.monster_info['attack']
             self.attack_type = self.monster_info['attack_type']

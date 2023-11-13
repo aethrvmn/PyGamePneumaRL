@@ -40,7 +40,7 @@ class Level:
 
         # UI setup
         self.ui = UI()
-        self.upgrade = Upgrade(self.player)
+        # self.upgrade = Upgrade(self.player)
 
         self.get_players_enemies()
         self.get_distance_direction()
@@ -86,10 +86,20 @@ class Level:
                                 self.observer = Observer(
                                     (x, y), [self.visible_sprites])
 
-                            elif col == '394':
+                            elif col == '400':
                                 # Player Generation
-                                self.player = Player(
-                                    (x, y), [self.visible_sprites], self.obstacle_sprites, self.visible_sprites, self.attack_sprites, self.attackable_sprites)
+                                Player(
+                                    (x, y), [self.visible_sprites], self.obstacle_sprites, self.visible_sprites, self.attack_sprites, self.attackable_sprites, 'tank')
+
+                            elif col == '401':
+                                # Player Generation
+                                Player(
+                                    (x, y), [self.visible_sprites], self.obstacle_sprites, self.visible_sprites, self.attack_sprites, self.attackable_sprites, 'warrior')
+
+                            elif col == '402':
+                                # Player Generation
+                                Player(
+                                    (x, y), [self.visible_sprites], self.obstacle_sprites, self.visible_sprites, self.attack_sprites, self.attackable_sprites, 'mage')
 
                             else:
                                 # Monster Generation
@@ -154,7 +164,9 @@ class Level:
         elif who == 'player':
             self.visible_sprites.custom_draw(self.player)
             self.ui.display(self.player)
-        debug('v0.5')
+
+        debug('v0.6')
+
         if not self.game_paused:
             # Update the game
             for player in self.player_sprites:
@@ -168,7 +180,8 @@ class Level:
             # self.visible_sprites.enemy_update(self.player)
             # self.player_attack_logic()
         else:
-            self.upgrade.display()
+            debug('PAUSED')
 
-        if self.player.stats.health <= 0:
-            self.__init__()
+        for player in self.player_sprites:
+            if player.stats.health <= 0:
+                player.kill()
