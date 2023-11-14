@@ -10,14 +10,18 @@ from .components.animaton import AnimationHandler
 
 from effects.particle_effects import AnimationPlayer
 
+from agent.agent import Agent
+
 
 class Player(pygame.sprite.Sprite):
 
-    def __init__(self, position, groups, obstacle_sprites, visible_sprites, attack_sprites, attackable_sprites, role):
+    def __init__(self, position, groups, obstacle_sprites, visible_sprites, attack_sprites, attackable_sprites, role, player_id, extract_features, convert_features_to_tensor):
         super().__init__(groups)
 
         # Setup Sprites
         self.sprite_type = 'player'
+        self.status = 'down'
+        self.player_id = player_id
         self.visible_sprites = visible_sprites
         self.attack_sprites = attack_sprites
         self.obstacle_sprites = obstacle_sprites
@@ -39,6 +43,14 @@ class Player(pygame.sprite.Sprite):
         self.stats = StatsHandler(self.sprite_type, self.role)
 
         self.distance_direction_from_enemy = None
+
+        # Setup AI
+        self.extract_features = extract_features
+        self.convert_features_to_tensor = convert_features_to_tensor
+        self.agent = Agent(input_dims=398, n_actions=self._input.num_actions)
+        self.state_tensor = None
+        self.action_tensor = None
+        self.reward_tensor = None
 
     def get_status(self):
         if self._input.movement.direction.x == 0 and self._input.movement.direction.y == 0:
@@ -85,10 +97,41 @@ class Player(pygame.sprite.Sprite):
         spell_damage = magic_data[self._input.combat.magic]['strength']
         return (base_damage + spell_damage)
 
+    def get_current_state(self):
+        pass
+
+    def is_dead(self):
+        if self.stats.health == 0:
+            self.stats.exp = -10
+            return True
+        else:
+            return False
+
     def update(self):
+        self.extract_features()
+        self.convert_features_to_tensor()
+
+        # Choose action based on current state
+        action, probs, value = self.agent.choose_action(self.state_tensor)
+
+        print(action)
+        # Apply chosen action
+        self._input.check_input(action, self.stats.speed, self.animation.hitbox,
+                                self.obstacle_sprites, self.animation.rect, self)
+
+        done = self.is_dead()
+
+        self.extract_features()
+        self.convert_features_to_tensor()
+
+        self.agent.remember(self.state_tensor, self.action_tensor,
+                            probs, value, self.reward_tensor, done)
+
+        if done:
+            self.agent.learn()
+            self.agent.memory.clear_memory()
+
         # Refresh objects based on input
-        self._input.check_input(
-            self.stats.speed, self.animation.hitbox, self.obstacle_sprites, self.animation.rect, self)
         self.status = self._input.status
 
         # Animate

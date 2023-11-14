@@ -2,7 +2,7 @@ import os
 
 script_dir = os.path.dirname(os.path.abspath(__file__))
 asset_path = os.path.join(
-    script_dir, '../../..', 'assets')
+    script_dir, '../..', 'assets')
 
 weapon_data = {
     'sword': {'cooldown': 100, 'damage': 15, 'graphic': f"{asset_path}/graphics/weapons/sword/full.png"},

@@ -13,7 +13,7 @@ class Observer(pygame.sprite.Sprite):
 
         script_dir = os.path.dirname(os.path.abspath(__file__))
         asset_path = os.path.join(
-            script_dir, '../..', 'assets')
+            script_dir, '..', 'assets')
 
         self.image = pygame.image.load(
             f"{asset_path}/graphics/observer.png").convert_alpha()

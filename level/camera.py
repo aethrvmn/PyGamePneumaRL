@@ -16,7 +16,7 @@ class Camera(pygame.sprite.Group):
         # Creating the floor
         script_dir = os.path.dirname(os.path.abspath(__file__))
         image_path = os.path.join(
-            script_dir, '../..', 'assets', 'graphics', 'tilemap', 'ground.png')
+            script_dir, '..', 'assets', 'graphics', 'tilemap', 'ground.png')
 
         self.floor_surf = pygame.image.load(image_path).convert()
         self.floor_rect = self.floor_surf.get_rect(topleft=(0, 0))

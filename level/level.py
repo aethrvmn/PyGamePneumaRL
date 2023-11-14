@@ -9,7 +9,6 @@ from utils.debug import debug
 from utils.resource_loader import import_csv_layout, import_folder
 
 from interface.ui import UI
-from interface.upgrade import Upgrade
 
 from entities.observer import Observer
 from entities.player import Player
@@ -21,10 +20,15 @@ from .camera import Camera
 
 class Level:
 
-    def __init__(self):
+    def __init__(self, extract_features,
+                 convert_features_to_tensor):
 
         # General Settings
         self.game_paused = False
+
+        # AI setup
+        self.extract_features = extract_features
+        self.convert_features_to_tensor = convert_features_to_tensor
 
         # Get display surface
         self.display_surface = pygame.display.get_surface()
@@ -37,18 +41,17 @@ class Level:
 
         # Sprite setup and entity generation
         self.create_map()
-
-        # UI setup
-        self.ui = UI()
-        # self.upgrade = Upgrade(self.player)
-
         self.get_players_enemies()
         self.get_distance_direction()
 
+        # UI setup
+        self.ui = UI()
+
     def create_map(self):
+        player_id = 0
         script_dir = os.path.dirname(os.path.abspath(__file__))
         asset_path = os.path.join(
-            script_dir, '../..', 'assets')
+            script_dir, '..', 'assets')
         layouts = {
             'boundary': import_csv_layout(f"{asset_path}/map/FloorBlocks.csv"),
             'grass': import_csv_layout(f"{asset_path}/map/Grass.csv"),
@@ -89,17 +92,20 @@ class Level:
                             elif col == '400':
                                 # Player Generation
                                 Player(
-                                    (x, y), [self.visible_sprites], self.obstacle_sprites, self.visible_sprites, self.attack_sprites, self.attackable_sprites, 'tank')
+                                    (x, y), [self.visible_sprites], self.obstacle_sprites, self.visible_sprites, self.attack_sprites, self.attackable_sprites, 'tank', player_id, self.extract_features, self.convert_features_to_tensor)
+                                player_id += 1
 
                             elif col == '401':
                                 # Player Generation
                                 Player(
-                                    (x, y), [self.visible_sprites], self.obstacle_sprites, self.visible_sprites, self.attack_sprites, self.attackable_sprites, 'warrior')
+                                    (x, y), [self.visible_sprites], self.obstacle_sprites, self.visible_sprites, self.attack_sprites, self.attackable_sprites, 'warrior', player_id, self.extract_features, self.convert_features_to_tensor)
+                                player_id += 1
 
                             elif col == '402':
                                 # Player Generation
                                 Player(
-                                    (x, y), [self.visible_sprites], self.obstacle_sprites, self.visible_sprites, self.attack_sprites, self.attackable_sprites, 'mage')
+                                    (x, y), [self.visible_sprites], self.obstacle_sprites, self.visible_sprites, self.attack_sprites, self.attackable_sprites, 'mage', player_id, self.extract_features, self.convert_features_to_tensor)
+                                player_id += 1
 
                             else:
                                 # Monster Generation
@@ -167,6 +173,14 @@ class Level:
 
         debug('v0.6')
 
+        for player in self.player_sprites:
+            if player.is_dead():
+                print(player.stats.health)
+                player.kill()
+
+        if self.player_sprites == []:
+            self.__init__()
+
         if not self.game_paused:
             # Update the game
             for player in self.player_sprites:
@@ -177,11 +191,5 @@ class Level:
             self.apply_damage_to_player()
             self.visible_sprites.update()
 
-            # self.visible_sprites.enemy_update(self.player)
-            # self.player_attack_logic()
         else:
             debug('PAUSED')
-
-        for player in self.player_sprites:
-            if player.stats.health <= 0:
-                player.kill()

@@ -3,7 +3,7 @@ import os
 
 script_dir = os.path.dirname(os.path.abspath(__file__))
 asset_path = os.path.join(
-    script_dir, '../../..', 'assets')
+    script_dir, '../..', 'assets')
 
 monster_data = {
     'squid': {'id': 1, 'health': 100, 'exp': 100, 'attack': 20, 'attack_type': 'slash', 'attack_sound': f'{asset_path}/audio/attack/slash.wav', 'speed': 3, 'knockback': 20, 'attack_radius': 80, 'notice_radius': 360},

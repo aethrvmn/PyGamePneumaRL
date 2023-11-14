@@ -19,10 +19,11 @@ class Game:
         pygame.display.set_caption('Pneuma')
         self.clock = pygame.time.Clock()
 
-        self.level = Level()
+        self.level = Level(self.extract_features,
+                           self.convert_features_to_tensor)
 
         # Sound
-        main_sound = pygame.mixer.Sound('../assets/audio/main.ogg')
+        main_sound = pygame.mixer.Sound('assets/audio/main.ogg')
         main_sound.set_volume(0.4)
         main_sound.play(loops=-1)
 
@@ -35,14 +36,17 @@ class Game:
         for i, player in enumerate(self.level.player_sprites):
 
             player_action_features = {
+                "player_id": player.player_id,
                 "player_action": player._input.action
-                }
+            }
 
             player_reward_features = {
+                "player_id": player.player_id,
                 "player_exp": player.stats.exp
-                }
+            }
 
             player_state_features = {
+                "player_id": player.player_id,
                 "player_position": player.rect.center,
                 "player role": player.stats.role_id,
                 "player_health": player.stats.health,
@@ -79,10 +83,6 @@ class Game:
             self.action_features.append(player_action_features)
 
     def convert_features_to_tensor(self):
-
-        self.state_tensors = []
-        self.action_tensors = []
-        self.reward_tensors = []
 
         for features in self.state_features:
             info_array = []
@@ -123,10 +123,11 @@ class Game:
                 info_array.extend(enemy_info)
 
             state_tensor = torch.tensor(
-            np.array(info_array, dtype=np.float32))
+                np.array(info_array, dtype=np.float32))
 
-            self.state_tensors.append(state_tensor)
-
+            for player in self.level.player_sprites:
+                if player.player_id == features["player_id"]:
+                    player.state_tensor = state_tensor
 
         for features in self.action_features:
             info_array = []
@@ -134,12 +135,14 @@ class Game:
             # Adding action features
             action_info = [
                 features["player_action"]
-                ]
+            ]
 
             action_tensor = torch.tensor(
                 np.array(action_info, dtype=np.float32))
 
-            self.action_tensors.append(action_tensor)
+            for player in self.level.player_sprites:
+                if player.player_id == features["player_id"]:
+                    player.action_tensor = action_tensor
 
         for features in self.reward_features:
             info_array = []
@@ -147,12 +150,14 @@ class Game:
             # Adding reward features
             reward_info = [
                 features["player_exp"]
-                ]
+            ]
 
             reward_tensor = torch.tensor(
                 np.array(reward_info, dtype=np.float32))
 
-            self.reward_tensors.append(reward_tensor)
+            for player in self.level.player_sprites:
+                if player.player_id == features["player_id"]:
+                    player.reward_tensor = reward_tensor
 
     def run(self):
 
@@ -166,10 +171,8 @@ class Game:
 
         self.screen.fill(WATER_COLOR)
 
-        self.extract_features()
-        self.convert_features_to_tensor()
+        self.level.run(who='observer')
 
-        self.level.run('observer')
         pygame.display.update()
         self.clock.tick(FPS)
 
@@ -179,9 +182,4 @@ if __name__ == '__main__':
     game = Game()
     for i in range(0, 10000):
         game.run()
-        game.extract_features()
-        game.convert_features_to_tensor()
-        if i == 100:
-            print(game.reward_tensors)
-            print(game.action_tensors)
-            print(game.state_tensors)
+        print(i)

@@ -9,7 +9,7 @@ class AudioHandler:
     def __init__(self, sprite_type, monster_name=None):
         script_dir = os.path.dirname(os.path.abspath(__file__))
         asset_path = os.path.join(
-            script_dir, '../../..', 'assets', 'audio')
+            script_dir, '../..', 'assets', 'audio')
 
         if sprite_type == 'player':
             pass

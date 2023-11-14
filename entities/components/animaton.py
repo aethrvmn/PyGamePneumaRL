@@ -19,7 +19,7 @@ class AnimationHandler:
     def import_assets(self, position):
         script_dir = os.path.dirname(os.path.abspath(__file__))
         asset_path = os.path.join(
-            script_dir, '../../..', 'assets', 'graphics')
+            script_dir, '../..', 'assets', 'graphics')
 
         if self.sprite_type == 'player':
 

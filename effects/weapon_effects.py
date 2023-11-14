@@ -9,7 +9,7 @@ class Weapon(pygame.sprite.Sprite):
 
         script_dir = os.path.dirname(os.path.abspath(__file__))
         asset_path = os.path.join(
-            script_dir, '../..', 'assets')
+            script_dir, '..', 'assets')
 
         self.sprite_type = 'weapon'
         direction = player._input.status.split('_')[0]

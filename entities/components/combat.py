@@ -33,7 +33,7 @@ class CombatHandler:
         # Import Sounds
         script_dir = os.path.dirname(os.path.abspath(__file__))
         asset_path = os.path.join(
-            script_dir, '../../..', 'assets', 'audio')
+            script_dir, '../..', 'assets', 'audio')
 
         self.weapon_attack_sound = pygame.mixer.Sound(
             f"{asset_path}/sword.wav")

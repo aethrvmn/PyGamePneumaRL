@@ -36,17 +36,14 @@ class InputHandler:
         self.magic_swap_time = None
 
         # Setup Action Space
+        self.num_actions = 7
         self.action = 10
 
-    def check_input(self, speed, hitbox, obstacle_sprites, rect, player):
+    def check_input(self, button, speed, hitbox, obstacle_sprites, rect, player):
 
         self.action = 10
 
         if not self.attacking and self.can_move:
-
-            keys = pygame.key.get_pressed()
-
-            button = randint(0, 4)
 
             self.move_time = pygame.time.get_ticks()
 

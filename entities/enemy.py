@@ -17,6 +17,7 @@ class Enemy(pygame.sprite.Sprite):
         self.name = name
         self.visible_sprites = visible_sprites
 
+        self.position = position
         # Setup Graphics
         self.audio = AudioHandler(self.sprite_type, self.name)
         self.animation_player = AnimationPlayer()

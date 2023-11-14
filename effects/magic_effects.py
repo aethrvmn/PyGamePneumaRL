@@ -10,7 +10,7 @@ class MagicPlayer:
         self.animation_player = animation_player
         script_dir = os.path.dirname(os.path.abspath(__file__))
         asset_path = os.path.join(
-            script_dir, '../..', 'assets')
+            script_dir, '..', 'assets')
 
         # Sound Setup
         self.sounds = {
