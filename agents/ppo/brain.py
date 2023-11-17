@@ -35,6 +35,7 @@ class PPOMemory:
 
     def store_memory(self, state, action, probs, vals, reward, done):
         self.states.append(state)
+        self.actions.append(action)
         self.probs.append(probs)
         self.vals.append(vals)
         self.rewards.append(reward)
@@ -55,6 +56,7 @@ class ActorNetwork(nn.Module):
         super(ActorNetwork, self).__init__()
 
         self.checkpoint_file = os.path.join(chkpt_dir, 'actor_torch_ppo')
+
         self.actor = nn.Sequential(
             nn.Linear(input_dim, fc1_dims),
             nn.ReLU(),
@@ -90,6 +92,7 @@ class CriticNetwork(nn.Module):
         super(CriticNetwork, self).__init__()
 
         self.checkpoint_file = os.path.join(chkpt_dir, 'critic_torch_ppo')
+
         self.critic = nn.Sequential(
             nn.Linear(input_dims, fc1_dims),
             nn.ReLU(),

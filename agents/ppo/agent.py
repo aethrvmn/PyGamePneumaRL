@@ -6,7 +6,9 @@ from .brain import ActorNetwork, CriticNetwork, PPOMemory
 
 class Agent:
 
-    def __init__(self, input_dims, n_actions, gamma=0.99, alpha=0.0003, policy_clip=0.2, batch_size=64, N=2048, n_epochs=10, gae_lambda=0.95):
+    def __init__(self, input_dims, n_actions, gamma=0.99, alpha=0.0003,
+                 policy_clip=0.2, batch_size=64, N=2048, n_epochs=10,
+                 gae_lambda=0.95):
 
         self.gamma = gamma
         self.policy_clip = policy_clip
@@ -37,7 +39,7 @@ class Agent:
         print('.. done ...')
 
     def choose_action(self, observation):
-        state = observation.to(self.actor.device, dtype=T.float)
+        state = T.tensor([observation], dtype=T.float).to(self.actor.device)
 
         dist = self.actor(state)
         value = self.critic(state)
@@ -46,12 +48,11 @@ class Agent:
         probs = T.squeeze(dist.log_prob(action)).item()
         action = T.squeeze(action).item()
         value = T.squeeze(value).item()
-
         return action, probs, value
 
     def learn(self):
         for _ in range(self.n_epochs):
-            state_arr, action_arr, old_probs_arr, vals_arr, reward_arr, done_arr, batches = self.memory.generate_batches()
+            state_arr, action_arr, old_probs_arr, vals_arr, reward_arr, dones_arr, batches = self.memory.generate_batches()
 
             values = vals_arr
             advantage = np.zeros(len(reward_arr), dtype=np.float32)
@@ -62,12 +63,13 @@ class Agent:
                 for k in range(t, len(reward_arr)-1):
                     a_t += discount * \
                         (reward_arr[k] + self.gamma*values[k+1]
-                         * (1-int(done_arr[k])) - values[k])
+                         * (1-int(dones_arr[k])) - values[k])
                     discount *= self.gamma * self.gae_lambda
                 advantage[t] = a_t
             advantage = T.tensor(advantage).to(self.actor.device)
 
             values = T.tensor(values).to(self.actor.device)
+
             for batch in batches:
                 states = T.tensor(state_arr[batch], dtype=T.float).to(
                     self.actor.device)

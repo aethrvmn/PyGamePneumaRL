@@ -1,4 +1,5 @@
 import pygame
+import numpy as np
 from random import randint
 
 from configs.game.weapon_config import weapon_data
@@ -10,12 +11,12 @@ from .components.animaton import AnimationHandler
 
 from effects.particle_effects import AnimationPlayer
 
-from agent.agent import Agent
+from agents.ppo.agent import Agent
 
 
 class Player(pygame.sprite.Sprite):
 
-    def __init__(self, position, groups, obstacle_sprites, visible_sprites, attack_sprites, attackable_sprites, role, player_id, extract_features, convert_features_to_tensor):
+    def __init__(self, position, groups, obstacle_sprites, visible_sprites, attack_sprites, attackable_sprites, role, player_id):
         super().__init__(groups)
 
         # Setup Sprites
@@ -43,14 +44,6 @@ class Player(pygame.sprite.Sprite):
         self.stats = StatsHandler(self.sprite_type, self.role)
 
         self.distance_direction_from_enemy = None
-
-        # Setup AI
-        self.extract_features = extract_features
-        self.convert_features_to_tensor = convert_features_to_tensor
-        self.agent = Agent(input_dims=398, n_actions=self._input.num_actions)
-        self.state_tensor = None
-        self.action_tensor = None
-        self.reward_tensor = None
 
     def get_status(self):
         if self._input.movement.direction.x == 0 and self._input.movement.direction.y == 0:
@@ -98,7 +91,54 @@ class Player(pygame.sprite.Sprite):
         return (base_damage + spell_damage)
 
     def get_current_state(self):
-        pass
+
+        self.action_features = [self._input.action]
+        self.reward_features = [self.stats.exp]
+        self.state_features = [
+            self.stats.role_id,
+            self.rect.center[0],
+            self.rect.center[1],
+            self.stats.health,
+            self.stats.energy,
+            self.stats.attack,
+            self.stats.magic,
+            self.stats.speed,
+            int(self._input.combat.vulnerable),
+            int(self._input.can_move),
+            int(self._input.attacking),
+            int(self._input.can_rotate_weapon),
+            int(self._input.can_swap_magic)
+        ]
+
+        enemy_states = []
+
+        for distance, direction, enemy in self.distance_direction_from_enemy:
+            enemy_states.extend([
+                distance,
+                direction[0],
+                direction[1],
+                enemy.stats.monster_id,
+                0 if enemy.animation.status == "idle" else (
+                    1 if enemy.animation.status == "move" else 2),
+                enemy.stats.health,
+                enemy.stats.attack,
+                enemy.stats.speed,
+                enemy.stats.exp,
+                enemy.stats.attack_radius,
+                enemy.stats.notice_radius
+            ])
+        self.state_features.extend(enemy_states)
+
+    def setup_agent(self):
+        # Setup AI
+        self.get_current_state()
+        self.agent = Agent(
+            input_dims=len(self.state_features), n_actions=len(self._input.possible_actions), batch_size=5, n_epochs=4)
+        self.score = 0
+        self.learn_iters = 0
+
+        self.n_steps = 0
+        self.N = 20
 
     def is_dead(self):
         if self.stats.health == 0:
@@ -108,28 +148,32 @@ class Player(pygame.sprite.Sprite):
             return False
 
     def update(self):
-        self.extract_features()
-        self.convert_features_to_tensor()
+
+        # Get the current state
+        self.get_current_state()
 
         # Choose action based on current state
-        action, probs, value = self.agent.choose_action(self.state_tensor)
+        action, probs, value = self.agent.choose_action(self.state_features)
 
-        print(action)
+        self.n_steps += 1
         # Apply chosen action
         self._input.check_input(action, self.stats.speed, self.animation.hitbox,
                                 self.obstacle_sprites, self.animation.rect, self)
 
-        done = self.is_dead()
+        self.done = self.is_dead()
 
-        self.extract_features()
-        self.convert_features_to_tensor()
+        self.score = self.stats.exp
+        self.agent.remember(self.state_features, action,
+                            probs, value, self.stats.exp, self.done)
 
-        self.agent.remember(self.state_tensor, self.action_tensor,
-                            probs, value, self.reward_tensor, done)
-
-        if done:
+        if self.n_steps % self.N == 0:
             self.agent.learn()
-            self.agent.memory.clear_memory()
+            self.learn_iters += 1
+
+        self.get_current_state()
+
+        if self.done:
+            self.agent.learn()
 
         # Refresh objects based on input
         self.status = self._input.status

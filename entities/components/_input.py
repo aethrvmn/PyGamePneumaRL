@@ -36,7 +36,7 @@ class InputHandler:
         self.magic_swap_time = None
 
         # Setup Action Space
-        self.num_actions = 7
+        self.possible_actions = [0, 1, 2, 3, 4, 5]
         self.action = 10
 
     def check_input(self, button, speed, hitbox, obstacle_sprites, rect, player):

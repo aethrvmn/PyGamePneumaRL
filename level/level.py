@@ -20,15 +20,11 @@ from .camera import Camera
 
 class Level:
 
-    def __init__(self, extract_features,
-                 convert_features_to_tensor):
+    def __init__(self):
 
         # General Settings
         self.game_paused = False
-
-        # AI setup
-        self.extract_features = extract_features
-        self.convert_features_to_tensor = convert_features_to_tensor
+        self.done = False
 
         # Get display surface
         self.display_surface = pygame.display.get_surface()
@@ -43,6 +39,8 @@ class Level:
         self.create_map()
         self.get_players_enemies()
         self.get_distance_direction()
+        for player in self.player_sprites:
+            player.setup_agent()
 
         # UI setup
         self.ui = UI()
@@ -85,26 +83,99 @@ class Level:
 
                         if style == 'entities':
                             # The numbers represent their IDs in .csv files generated from TILED.
-                            if col == '395':
+                            if col == '500':
                                 self.observer = Observer(
                                     (x, y), [self.visible_sprites])
 
                             elif col == '400':
                                 # Player Generation
                                 Player(
-                                    (x, y), [self.visible_sprites], self.obstacle_sprites, self.visible_sprites, self.attack_sprites, self.attackable_sprites, 'tank', player_id, self.extract_features, self.convert_features_to_tensor)
+                                    (x, y), [self.visible_sprites], self.obstacle_sprites, self.visible_sprites, self.attack_sprites, self.attackable_sprites, 'tank', player_id)
                                 player_id += 1
 
                             elif col == '401':
                                 # Player Generation
                                 Player(
-                                    (x, y), [self.visible_sprites], self.obstacle_sprites, self.visible_sprites, self.attack_sprites, self.attackable_sprites, 'warrior', player_id, self.extract_features, self.convert_features_to_tensor)
+                                    (x, y), [self.visible_sprites], self.obstacle_sprites, self.visible_sprites, self.attack_sprites, self.attackable_sprites, 'warrior', player_id)
                                 player_id += 1
 
                             elif col == '402':
                                 # Player Generation
                                 Player(
-                                    (x, y), [self.visible_sprites], self.obstacle_sprites, self.visible_sprites, self.attack_sprites, self.attackable_sprites, 'mage', player_id, self.extract_features, self.convert_features_to_tensor)
+                                    (x, y), [self.visible_sprites], self.obstacle_sprites, self.visible_sprites, self.attack_sprites, self.attackable_sprites, 'mage', player_id)
+                                player_id += 1
+
+                            else:
+                                # Monster Generation
+                                if col == '390':
+                                    monster_name = 'bamboo'
+                                elif col == '391':
+                                    monster_name = 'spirit'
+                                elif col == '392':
+                                    monster_name = 'raccoon'
+                                else:
+                                    monster_name = 'squid'
+
+                                Enemy(monster_name, (x, y), [
+                                      self.visible_sprites, self.attackable_sprites], self.visible_sprites, self.obstacle_sprites)
+
+    def reset_map(self):
+        script_dir = os.path.dirname(os.path.abspath(__file__))
+        asset_path = os.path.join(
+            script_dir, '..', 'assets')
+        layouts = {
+            'boundary': import_csv_layout(f"{asset_path}/map/FloorBlocks.csv"),
+            'grass': import_csv_layout(f"{asset_path}/map/Grass.csv"),
+            'objects': import_csv_layout(f"{asset_path}/map/Objects.csv"),
+            'entities': import_csv_layout(f"{asset_path}/map/Entities.csv")
+        }
+
+        graphics = {
+            'grass': import_folder(f"{asset_path}/graphics/grass"),
+            'objects': import_folder(f"{asset_path}/graphics/objects")
+        }
+
+        for style, layout in layouts.items():
+            for row_index, row in enumerate(layout):
+                for col_index, col in enumerate(row):
+                    if col != '-1':
+                        x = col_index * TILESIZE
+                        y = row_index * TILESIZE
+                        if style == 'boundary':
+                            Tile((x, y), [self.obstacle_sprites], 'invisible')
+
+                        if style == 'grass':
+                            random_grass_image = choice(graphics['grass'])
+                            Tile((x, y), [self.visible_sprites, self.obstacle_sprites,
+                                 self.attackable_sprites], 'grass', random_grass_image)
+
+                        if style == 'objects':
+                            surf = graphics['objects'][int(col)]
+                            Tile((x, y), [self.visible_sprites,
+                                 self.obstacle_sprites], 'object', surf)
+
+                        if style == 'entities':
+                            # The numbers represent their IDs in .csv files generated from TILED.
+                            if col == '500':
+                                self.observer = Observer(
+                                    (x, y), [self.visible_sprites])
+
+                            elif col == '400':
+                                # Player Generation
+                                Player(
+                                    (x, y), [self.visible_sprites], self.obstacle_sprites, self.visible_sprites, self.attack_sprites, self.attackable_sprites, 'tank', player_id)
+                                player_id += 1
+
+                            elif col == '401':
+                                # Player Generation
+                                Player(
+                                    (x, y), [self.visible_sprites], self.obstacle_sprites, self.visible_sprites, self.attack_sprites, self.attackable_sprites, 'warrior', player_id)
+                                player_id += 1
+
+                            elif col == '402':
+                                # Player Generation
+                                Player(
+                                    (x, y), [self.visible_sprites], self.obstacle_sprites, self.visible_sprites, self.attack_sprites, self.attackable_sprites, 'mage', player_id)
                                 player_id += 1
 
                             else:
@@ -175,11 +246,7 @@ class Level:
 
         for player in self.player_sprites:
             if player.is_dead():
-                print(player.stats.health)
-                player.kill()
-
-        if self.player_sprites == []:
-            self.__init__()
+                self.done = True
 
         if not self.game_paused:
             # Update the game
