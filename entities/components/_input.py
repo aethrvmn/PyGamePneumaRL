@@ -10,7 +10,6 @@ from .combat import CombatHandler
 
 class InputHandler:
 
-    # , status):
     def __init__(self, sprite_type, animation_player, ai_controller=False):
         self.status = 'down'
         self.sprite_type = sprite_type

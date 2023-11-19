@@ -22,6 +22,6 @@ class AudioHandler:
             self.death_sound = pygame.mixer.Sound(
                 f'{asset_path}/death.wav')
             self.hit_sound = pygame.mixer.Sound(f'{asset_path}/hit.wav')
-            self.death_sound.set_volume(0.2)
-            self.hit_sound.set_volume(0.2)
-            self.attack_sound.set_volume(0.2)
+            self.death_sound.set_volume(0)
+            self.hit_sound.set_volume(0)
+            self.attack_sound.set_volume(0)

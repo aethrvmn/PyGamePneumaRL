@@ -66,7 +66,7 @@ class ActorNetwork(nn.Module):
             nn.Softmax(dim=-1)
         )
 
-        self.optimizer = optim.Adam(self.parameters(), lr=alpha)
+        self.optimizer = optim.Adam(self.parameters(), lr=alpha, eps=1e-5)
 
         self.device = T.device('cuda:0' if T.cuda.is_available() else (
             'mps' if T.backends.mps.is_available() else 'cpu'))
@@ -101,7 +101,8 @@ class CriticNetwork(nn.Module):
             nn.Linear(fc2_dims, 1)
         )
 
-        self.optimizer = optim.Adam(self.parameters(), lr=alpha)
+        self.optimizer = optim.Adam(self.parameters(), lr=alpha, eps=1e-5)
+
         self.device = T.device('cuda:0' if T.cuda.is_available() else (
             'mps' if T.backends.mps.is_available() else 'cpu'))
 
@@ -109,7 +110,6 @@ class CriticNetwork(nn.Module):
 
     def forward(self, state):
         value = self.critic(state)
-
         return value
 
     def save_checkpoint(self):

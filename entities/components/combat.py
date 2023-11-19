@@ -37,7 +37,7 @@ class CombatHandler:
 
         self.weapon_attack_sound = pygame.mixer.Sound(
             f"{asset_path}/sword.wav")
-        self.weapon_attack_sound.set_volume(0.2)
+        self.weapon_attack_sound.set_volume(0)
 
     def create_attack_sprite(self, player):
         self.current_attack = Weapon(

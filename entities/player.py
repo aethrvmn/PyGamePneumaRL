@@ -45,6 +45,12 @@ class Player(pygame.sprite.Sprite):
 
         self.distance_direction_from_enemy = None
 
+        # Setup AI
+        self.score = 0
+        self.learn_iters = 0
+        self.n_steps = 0
+        self.N = 20
+
     def get_status(self):
         if self._input.movement.direction.x == 0 and self._input.movement.direction.y == 0:
             if 'idle' not in self.status and 'attack' not in self.status:
@@ -92,34 +98,40 @@ class Player(pygame.sprite.Sprite):
 
     def get_current_state(self):
 
+        if self.distance_direction_from_enemy != []:
+            sorted_distances = sorted(
+                self.distance_direction_from_enemy, key=lambda x: x[0])
+        else:
+            sorted_distances = np.zeros(self.num_features)
+
+        nearest_dist, _, nearest_enemy = sorted_distances[0]
+
         self.action_features = [self._input.action]
-        self.reward_features = [self.stats.exp]
+
+        self.reward_features = [self.stats.exp,
+                                np.exp(-(nearest_dist)),
+                                np.exp(-(nearest_enemy.stats.health)),
+                                - np.exp(self.stats.health)
+                                ]
+
         self.state_features = [
-            self.stats.role_id,
             self.rect.center[0],
             self.rect.center[1],
             self.stats.health,
             self.stats.energy,
             self.stats.attack,
             self.stats.magic,
-            self.stats.speed,
-            int(self._input.combat.vulnerable),
-            int(self._input.can_move),
-            int(self._input.attacking),
-            int(self._input.can_rotate_weapon),
-            int(self._input.can_swap_magic)
+            self.stats.speed
         ]
 
         enemy_states = []
 
-        for distance, direction, enemy in self.distance_direction_from_enemy:
+        for distance, direction, enemy in sorted_distances[:5]:
+
             enemy_states.extend([
                 distance,
                 direction[0],
                 direction[1],
-                enemy.stats.monster_id,
-                0 if enemy.animation.status == "idle" else (
-                    1 if enemy.animation.status == "move" else 2),
                 enemy.stats.health,
                 enemy.stats.attack,
                 enemy.stats.speed,
@@ -127,22 +139,37 @@ class Player(pygame.sprite.Sprite):
                 enemy.stats.attack_radius,
                 enemy.stats.notice_radius
             ])
+
         self.state_features.extend(enemy_states)
 
-    def setup_agent(self):
-        # Setup AI
-        self.get_current_state()
-        self.agent = Agent(
-            input_dims=len(self.state_features), n_actions=len(self._input.possible_actions), batch_size=5, n_epochs=4)
-        self.score = 0
-        self.learn_iters = 0
+        if hasattr(self, 'num_features'):
+            while len(self.state_features) < self.num_features:
+                self.state_features.append(0)
 
-        self.n_steps = 0
-        self.N = 20
+        self.state_features = np.array(self.state_features)
+        min_feat = np.min(self.state_features)
+        max_feat = np.max(self.state_features)
+        self.state_features = (self.state_features -
+                               min_feat) / (max_feat-min_feat)
+
+    def get_max_num_states(self):
+        self.get_current_state()
+        self.num_features = len(self.state_features)
+
+    def setup_agent(self):
+        self.agent = Agent(
+            input_dims=len(self.state_features),
+            n_actions=len(self._input.possible_actions),
+            batch_size=5,
+            n_epochs=4)
+        try:
+            self.agent.load_models()
+        except FileNotFoundError as e:
+            print(f"{e}. Skipping loading...")
 
     def is_dead(self):
         if self.stats.health == 0:
-            self.stats.exp = -10
+            self.stats.exp = -100
             return True
         else:
             return False
@@ -157,8 +184,12 @@ class Player(pygame.sprite.Sprite):
 
         self.n_steps += 1
         # Apply chosen action
-        self._input.check_input(action, self.stats.speed, self.animation.hitbox,
-                                self.obstacle_sprites, self.animation.rect, self)
+        self._input.check_input(action,
+                                self.stats.speed,
+                                self.animation.hitbox,
+                                self.obstacle_sprites,
+                                self.animation.rect,
+                                self)
 
         self.done = self.is_dead()
 
