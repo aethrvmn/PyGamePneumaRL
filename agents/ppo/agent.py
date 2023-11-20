@@ -1,4 +1,3 @@
-import os
 import numpy as np
 import torch as T
 
@@ -40,7 +39,7 @@ class Agent:
         print('.. done ...')
 
     def choose_action(self, observation):
-        state = T.tensor([observation], dtype=T.float).to(self.actor.device)
+        state = T.tensor(observation, dtype=T.float).to(self.actor.device)
 
         dist = self.actor(state)
         value = self.critic(state)
