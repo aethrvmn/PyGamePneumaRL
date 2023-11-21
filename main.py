@@ -6,7 +6,7 @@ environ['PYGAME_HIDE_SUPPORT_PROMPT'] = '1'
 
 
 if __name__ == '__main__':
-    n_episodes = 1000
+    n_episodes = 1
 
     figure_file = 'plots/score.png'
     score_history = []
@@ -15,7 +15,7 @@ if __name__ == '__main__':
 
     agent_list = []
 
-    game_len = 5000
+    game_len = 1
 
     game = Game()
 

@@ -34,7 +34,6 @@ class Player(pygame.sprite.Sprite):
         self.animation.import_assets(position)
         self.image = self.animation.image
         self.rect = self.animation.rect
-
         # Setup Inputs
         self._input = InputHandler(
             self.sprite_type, self.animation_player)  # , self.status)
@@ -116,8 +115,10 @@ class Player(pygame.sprite.Sprite):
 
         self.state_features = [
             # TODO: Find a way to normalize
-            # self.rect.center[0],
-            # self.rect.center[1],
+            self.rect.center[0]/3616,
+            self.rect.center[1]/3168,
+            self._input.movement.direction.x,
+            self._input.movement.direction.y,
             self.stats.health/self.stats.stats['health'],
             self.stats.energy/self.stats.stats['energy']
         ]
@@ -127,7 +128,7 @@ class Player(pygame.sprite.Sprite):
         for distance, direction, enemy in sorted_distances[:5]:
 
             enemy_states.extend([
-                distance/sorted_distances[-1][1],
+                distance/sorted_distances[-1][0],
                 direction[0],
                 direction[1],
                 enemy.stats.health/enemy.stats.monster_info['health'],
@@ -173,7 +174,6 @@ class Player(pygame.sprite.Sprite):
 
         # Get the current state
         self.get_current_state()
-
         # Choose action based on current state
         action, probs, value = self.agent.choose_action(self.state_features)
 
