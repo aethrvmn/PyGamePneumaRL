@@ -115,13 +115,11 @@ class Player(pygame.sprite.Sprite):
                                 ]
 
         self.state_features = [
-            self.rect.center[0],
-            self.rect.center[1],
-            self.stats.health,
-            self.stats.energy,
-            self.stats.attack,
-            self.stats.magic,
-            self.stats.speed
+            # TODO: Find a way to normalize
+            # self.rect.center[0],
+            # self.rect.center[1],
+            self.stats.health/self.stats.stats['health'],
+            self.stats.energy/self.stats.stats['energy']
         ]
 
         enemy_states = []
@@ -129,15 +127,12 @@ class Player(pygame.sprite.Sprite):
         for distance, direction, enemy in sorted_distances[:5]:
 
             enemy_states.extend([
-                distance,
+                distance/sorted_distances[-1][1],
                 direction[0],
                 direction[1],
-                enemy.stats.health,
-                enemy.stats.attack,
-                enemy.stats.speed,
-                enemy.stats.exp,
-                enemy.stats.attack_radius,
-                enemy.stats.notice_radius
+                enemy.stats.health/enemy.stats.monster_info['health'],
+                enemy.stats.attack/enemy.stats.monster_info['attack'],
+                enemy.stats.exp/enemy.stats.monster_info['exp'],
             ])
 
         self.state_features.extend(enemy_states)
