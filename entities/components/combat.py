@@ -1,6 +1,3 @@
-import os
-import pygame
-
 from effects.weapon_effects import Weapon
 from effects.magic_effects import MagicPlayer
 
@@ -29,15 +26,6 @@ class CombatHandler:
         self.vulnerable = True
         self.hurt_time = None
         self.invulnerability_duration = 300
-
-        # Import Sounds
-        script_dir = os.path.dirname(os.path.abspath(__file__))
-        asset_path = os.path.join(
-            script_dir, '../..', 'assets', 'audio')
-
-        self.weapon_attack_sound = pygame.mixer.Sound(
-            f"{asset_path}/sword.wav")
-        self.weapon_attack_sound.set_volume(0)
 
     def create_attack_sprite(self, player):
         self.current_attack = Weapon(

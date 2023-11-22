@@ -6,8 +6,6 @@ from .components._input import InputHandler
 
 from effects.particle_effects import AnimationPlayer
 
-from .components.audio import AudioHandler
-
 
 class Enemy(pygame.sprite.Sprite):
 
@@ -19,7 +17,6 @@ class Enemy(pygame.sprite.Sprite):
 
         self.position = position
         # Setup Graphics
-        self.audio = AudioHandler(self.sprite_type, self.name)
         self.animation_player = AnimationPlayer()
         self.animation = AnimationHandler(self.sprite_type, self.name)
         self.animation.import_assets(position)
@@ -58,12 +55,10 @@ class Enemy(pygame.sprite.Sprite):
             self.add_exp(player)
             self.animation.trigger_death_particles(
                 self.animation_player, self.rect.center, self.name, self.visible_sprites)
-            self.audio.death_sound.play()
             self.kill()
 
     def get_damaged(self, player, attack_type):
         if self._input.combat.vulnerable:
-            self.audio.hit_sound.play()
             for _, direction, attacking_player in self.distance_direction_from_player:
                 if attacking_player == player:
                     self._input.movement.direction = -direction

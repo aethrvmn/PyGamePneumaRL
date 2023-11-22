@@ -8,17 +8,6 @@ from configs.system.window_config import TILESIZE
 class MagicPlayer:
     def __init__(self, animation_player):
         self.animation_player = animation_player
-        script_dir = os.path.dirname(os.path.abspath(__file__))
-        asset_path = os.path.join(
-            script_dir, '..', 'assets')
-
-        # Sound Setup
-        self.sounds = {
-            'heal': pygame.mixer.Sound(f'{asset_path}/audio/heal.wav'),
-            'flame': pygame.mixer.Sound(f'{asset_path}/audio/flame.wav')
-        }
-
-        self.sounds['flame'].set_volume(0)
 
     def heal(self, player, strength, cost, groups):
         if player.stats.energy >= cost:
@@ -35,7 +24,6 @@ class MagicPlayer:
     def flame(self, player, cost, groups):
         if player.stats.energy >= cost:
             player.stats.energy -= cost
-            self.sounds['flame'].play()
 
             if player._input.status.split('_')[0] == 'right':
                 direction = pygame.math.Vector2(1, 0)

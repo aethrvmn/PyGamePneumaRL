@@ -107,14 +107,15 @@ class Player(pygame.sprite.Sprite):
 
         self.action_features = [self._input.action]
 
-        self.reward_features = [self.stats.exp,
-                                np.exp(-(nearest_dist)),
-                                np.exp(-(nearest_enemy.stats.health)),
-                                - np.exp(self.stats.health)
-                                ]
+        self.reward_features = [
+            1 - np.exp(-self.stats.exp),
+            np.exp(-(nearest_dist)),
+            np.exp(-(nearest_enemy.stats.health)),
+            - np.exp(-self.stats.health)
+        ]
 
         self.state_features = [
-            # TODO: Find a way to normalize
+            # TODO: Find a way to not use magic numbers
             self.rect.center[0]/3616,
             self.rect.center[1]/3168,
             self._input.movement.direction.x,
@@ -126,14 +127,14 @@ class Player(pygame.sprite.Sprite):
         enemy_states = []
 
         for distance, direction, enemy in sorted_distances[:5]:
-
+            # TODO: Find a way to not use magic numbers
             enemy_states.extend([
                 distance/sorted_distances[-1][0],
                 direction[0],
                 direction[1],
                 enemy.stats.health/enemy.stats.monster_info['health'],
                 enemy.stats.attack/enemy.stats.monster_info['attack'],
-                enemy.stats.exp/enemy.stats.monster_info['exp'],
+                enemy.stats.exp/250,
             ])
 
         self.state_features.extend(enemy_states)

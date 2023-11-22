@@ -79,56 +79,52 @@ class InputHandler:
 
             self.movement.move(speed, hitbox, obstacle_sprites, rect)
 
-            if self.sprite_type == 'player':
-                # Combat Input
-                if button == 4 and not self.attacking:  # keys[pygame.K_e]
-                    self.attacking = True
-                    self.attack_time = pygame.time.get_ticks()
-                    self.combat.create_attack_sprite(player)
-                    self.combat.weapon_attack_sound.play()
-                    self.action = 4
+            # Combat Input
+            if button == 4 and not self.attacking:  # keys[pygame.K_e]
+                self.attacking = True
+                self.attack_time = pygame.time.get_ticks()
+                self.combat.create_attack_sprite(player)
+                self.action = 4
 
-                # Magic Input
-                if button == 5:  # keys[pygame.K_q]:
-                    self.attacking = True
-                    self.attack_time = pygame.time.get_ticks()
+            # Magic Input
+            if button == 5:
+                self.attacking = True
+                self.attack_time = pygame.time.get_ticks()
 
-                    self.combat.magic = list(magic_data.keys())[
-                        self.combat.magic_index]
+                self.combat.magic = list(magic_data.keys())[
+                    self.combat.magic_index]
 
-                    strength = list(magic_data.values())[
-                        self.combat.magic_index]['strength'] + player.stats.magic
+                strength = list(magic_data.values())[
+                    self.combat.magic_index]['strength'] + player.stats.magic
 
-                    cost = list(magic_data.values())[
-                        self.combat.magic_index]['cost']
-                    self.combat.create_magic_sprite(
-                        player, self.combat.magic, strength, cost)
-                    self.action = 5
+                cost = list(magic_data.values())[
+                    self.combat.magic_index]['cost']
+                self.combat.create_magic_sprite(
+                    player, self.combat.magic, strength, cost)
+                self.action = 5
 
-                # Rotating Weapons
-                # keys[pygame.K_LSHIFT]
-                if button == 6 and self.can_rotate_weapon:
-                    self.can_rotate_weapon = False
-                    self.weapon_rotation_time = pygame.time.get_ticks()
-                    if self.combat.weapon_index < len(list(weapon_data.keys())) - 1:
-                        self.combat.weapon_index += 1
-                    else:
-                        self.combat.weapon_index = 0
+            # Rotating Weapons
+            if button == 6 and self.can_rotate_weapon:
+                self.can_rotate_weapon = False
+                self.weapon_rotation_time = pygame.time.get_ticks()
+                if self.combat.weapon_index < len(list(weapon_data.keys())) - 1:
+                    self.combat.weapon_index += 1
+                else:
+                    self.combat.weapon_index = 0
 
-                    self.combat.weapon = list(weapon_data.keys())[
-                        self.combat.weapon_index]
-                    self.action = 6
+                self.combat.weapon = list(weapon_data.keys())[
+                    self.combat.weapon_index]
+                self.action = 6
 
-                # Swap Spells
-                # keys[pygame.K_LCTRL] :
-                if button == 7 and self.can_swap_magic:
-                    self.can_swap_magic = False
-                    self.magic_swap_time = pygame.time.get_ticks()
-                    if self.combat.magic_index < len(list(magic_data.keys())) - 1:
-                        self.combat.magic_index += 1
-                    else:
-                        self.combat.magic_index = 0
-                    self.action = 7
+            # Swap Spells
+            if button == 7 and self.can_swap_magic:
+                self.can_swap_magic = False
+                self.magic_swap_time = pygame.time.get_ticks()
+                if self.combat.magic_index < len(list(magic_data.keys())) - 1:
+                    self.combat.magic_index += 1
+                else:
+                    self.combat.magic_index = 0
+                self.action = 7
 
     def cooldowns(self, vulnerable):
         current_time = pygame.time.get_ticks()
