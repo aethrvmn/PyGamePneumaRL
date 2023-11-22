@@ -144,10 +144,6 @@ class Player(pygame.sprite.Sprite):
                 self.state_features.append(0)
 
         self.state_features = np.array(self.state_features)
-        min_feat = np.min(self.state_features)
-        max_feat = np.max(self.state_features)
-        self.state_features = (self.state_features -
-                               min_feat) / (max_feat-min_feat)
 
     def get_max_num_states(self):
         self.get_current_state()
