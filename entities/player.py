@@ -120,9 +120,9 @@ class Player(pygame.sprite.Sprite):
 
         self.reward_features = [
             self.stats.exp,
-            np.exp(-nearest_dist**2),
-            np.exp(-nearest_enemy.stats.health**2),
-            -np.exp(-self.stats.health)
+            2*np.exp(-nearest_dist**2),
+            np.exp(-nearest_enemy.stats.health),
+            -np.exp(-self.stats.health**2)
         ]
 
         self.state_features = [
@@ -158,20 +158,21 @@ class Player(pygame.sprite.Sprite):
         self.num_features = len(self.state_features)
 
     def setup_agent(self):
+        print(f"Initializing Agent {self.player_id} ...")
         self.agent = Agent(
             input_dims=len(self.state_features),
             n_actions=len(self._input.possible_actions),
             batch_size=5,
             n_epochs=4)
+        print(f" Agent initialized using {self.agent.actor.device}. Attempting to load models ...")
         try:
-            self.agent.load_models()
+            self.agent.load_models(actr_chkpt = f"player_{self.player_id}_actor", crtc_chkpt = f"player_{self.player_id}_critic")
+            print("Models loaded ...\n")
         except FileNotFoundError:
-            print("FileNotFoundError for agent.load_model().\
-                Skipping loading...")
+            print("FileNotFound for agent. Skipping loading...\n")
 
     def is_dead(self):
         if self.stats.health <= 0:
-            self.stats.exp = max(0, self.stats.exp - .5)
             return True
         else:
             return False
@@ -202,9 +203,6 @@ class Player(pygame.sprite.Sprite):
 
         self.get_current_state()
 
-        if self.is_dead():
-            self.agent.learn()
-
         # Refresh objects based on input
         self.status = self._input.status
 
@@ -218,3 +216,6 @@ class Player(pygame.sprite.Sprite):
         self.stats.health_recovery()
         self.stats.energy_recovery()
         self._input.cooldowns(self._input.combat.vulnerable)
+
+        if self.is_dead():
+            self.stats.exp = max(-1, self.stats.exp - .5)

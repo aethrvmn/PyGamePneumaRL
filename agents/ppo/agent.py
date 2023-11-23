@@ -15,28 +15,20 @@ class Agent:
         self.n_epochs = n_epochs
         self.gae_lambda = gae_lambda
 
-        print("Preparing Actor model...")
         self.actor = ActorNetwork(input_dims, n_actions, alpha)
-        print(f"Actor network activated using {self.actor.device}")
-        print("\nPreparing Critic model...")
         self.critic = CriticNetwork(input_dims, alpha)
-        print(f"Critic network activated using {self.critic.device}")
         self.memory = PPOMemory(batch_size)
 
     def remember(self, state, action, probs, vals, reward, done):
         self.memory.store_memory(state, action, probs, vals, reward, done)
 
-    def save_models(self):
-        print('... saving models ...')
-        self.actor.save_checkpoint()
-        self.critic.save_checkpoint()
-        print('... done ...')
+    def save_models(self, actr_chkpt = 'actor_ppo', crtc_chkpt = 'critic_ppo'):
+        self.actor.save_checkpoint(actr_chkpt)
+        self.critic.save_checkpoint(crtc_chkpt)
 
-    def load_models(self):
-        print('... loading models ...')
-        self.actor.load_checkpoint()
-        self.critic.load_checkpoint()
-        print('.. done ...')
+    def load_models(self, actr_chkpt = 'actor_ppo', crtc_chkpt = 'critic_ppo'):
+        self.actor.load_checkpoint(actr_chkpt)
+        self.critic.load_checkpoint(crtc_chkpt)
 
     def choose_action(self, observation):
         state = T.tensor(observation, dtype=T.float).to(self.actor.device)
@@ -56,7 +48,7 @@ class Agent:
             state_arr, action_arr, old_probs_arr, vals_arr, reward_arr, dones_arr, batches = self.memory.generate_batches()
 
             values = vals_arr
-            advantage = np.zeros(len(reward_arr), dtype=np.float32)
+            advantage = np.zeros(len(reward_arr), dtype=np.float64)
 
             for t in range(len(reward_arr)-1):
                 discount = 1

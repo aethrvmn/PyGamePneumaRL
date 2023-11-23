@@ -55,7 +55,7 @@ class ActorNetwork(nn.Module):
     def __init__(self, input_dim, output_dim, alpha, fc1_dims=256, fc2_dims=256, chkpt_dir='tmp/ppo'):
         super(ActorNetwork, self).__init__()
 
-        self.checkpoint_file = os.path.join(chkpt_dir, 'actor_torch_ppo')
+        self.chkpt_dir = chkpt_dir
 
         self.actor = nn.Sequential(
             nn.Linear(input_dim, fc1_dims),
@@ -68,8 +68,7 @@ class ActorNetwork(nn.Module):
 
         self.optimizer = optim.Adam(self.parameters(), lr=alpha, eps=1e-5)
 
-        self.device = T.device('cuda:0' if T.cuda.is_available() else (
-            'mps' if T.backends.mps.is_available() else 'cpu'))
+        self.device = T.device('cuda:0' if T.cuda.is_available() else 'cpu')
 
         self.to(self.device)
 
@@ -79,11 +78,11 @@ class ActorNetwork(nn.Module):
 
         return dist
 
-    def save_checkpoint(self):
-        T.save(self.state_dict(), self.checkpoint_file)
+    def save_checkpoint(self, filename = 'actor_torch_ppo'):
+        T.save(self.state_dict(), os.path.join(self.chkpt_dir, filename))
 
-    def load_checkpoint(self):
-        self.load_state_dict(T.load(self.checkpoint_file))
+    def load_checkpoint(self, filename = 'actor_torch_ppo'):
+        self.load_state_dict(T.load(os.path.join(self.chkpt_dir, filename)))
 
 
 class CriticNetwork(nn.Module):
@@ -91,7 +90,7 @@ class CriticNetwork(nn.Module):
     def __init__(self, input_dims, alpha, fc1_dims=256, fc2_dims=256, chkpt_dir='tmp/ppo'):
         super(CriticNetwork, self).__init__()
 
-        self.checkpoint_file = os.path.join(chkpt_dir, 'critic_torch_ppo')
+        self.chkpt_dir = chkpt_dir
 
         self.critic = nn.Sequential(
             nn.Linear(input_dims, fc1_dims),
@@ -103,8 +102,7 @@ class CriticNetwork(nn.Module):
 
         self.optimizer = optim.Adam(self.parameters(), lr=alpha, eps=1e-5)
 
-        self.device = T.device('cuda:0' if T.cuda.is_available() else (
-            'mps' if T.backends.mps.is_available() else 'cpu'))
+        self.device = T.device('cuda:0' if T.cuda.is_available() else 'cpu')
 
         self.to(self.device)
 
@@ -112,8 +110,8 @@ class CriticNetwork(nn.Module):
         value = self.critic(state)
         return value
 
-    def save_checkpoint(self):
-        T.save(self.state_dict(), self.checkpoint_file)
+    def save_checkpoint(self, filename = 'critic_torch_ppo'):
+        T.save(self.state_dict(), os.path.join(self.chkpt_dir, filename))
 
-    def load_checkpoint(self):
-        self.load_state_dict(T.load(self.checkpoint_file))
+    def load_checkpoint(self, filename = 'critic_torch_ppo'):
+        self.load_state_dict(T.load(os.path.join(self.chkpt_dir, filename)))

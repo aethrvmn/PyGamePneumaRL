@@ -172,17 +172,9 @@ class Level:
         if who == 'observer':
             self.visible_sprites.custom_draw(self.observer)
             self.ui.display(self.observer)
-        elif who == 'player':
-            self.visible_sprites.custom_draw(self.player)
-            self.ui.display(self.player)
 
         debug('v0.8')
 
-        for player in self.player_sprites:
-            if player.is_dead():
-                self.dead_players[player.player_id] = True
-
-        self.done = True if self.dead_players.all() == 1 else False
 
         if not self.game_paused:
             # Update the game
@@ -191,8 +183,16 @@ class Level:
 
             self.get_players_enemies()
             self.get_distance_direction()
-            self.apply_damage_to_player()
             self.visible_sprites.update()
+            self.apply_damage_to_player()
 
         else:
             debug('PAUSED')
+
+        for player in self.player_sprites:
+            if player.is_dead():
+                self.dead_players[player.player_id] = True
+
+        self.done = True if self.dead_players.all() == 1 else False
+
+

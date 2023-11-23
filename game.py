@@ -12,7 +12,7 @@ class Game:
         pygame.init()
 
         self.screen = pygame.display.set_mode(
-            (WIDTH, HEIGHT))
+            (WIDTH, HEIGHT), pygame.HIDDEN)
 
         pygame.display.set_caption('Pneuma')
 
@@ -22,8 +22,11 @@ class Game:
 
         self.level = Level()
 
+        self.max_num_players = len(self.level.player_sprites)
+
     def calc_score(self):
-        self.scores = [0 for _ in range(len(self.level.player_sprites))]
+
+        self.scores = [0 for _ in range(self.max_num_players)]
 
         for player in self.level.player_sprites:
             self.scores[player.player_id] = player.stats.exp
@@ -39,7 +42,7 @@ class Game:
 
         self.screen.fill(WATER_COLOR)
 
-        self.level.run(who='observer')
+        self.level.run()
 
         pygame.display.update()
         self.clock.tick(FPS)
