@@ -1,5 +1,6 @@
 import os
 import pygame
+import numpy as np
 
 from random import choice
 
@@ -46,6 +47,7 @@ class Level:
         else:
             for player in self.player_sprites:
                 player.get_max_num_states()
+        self.dead_players = np.zeros(len(self.player_sprites))
 
         # UI setup
         self.ui = UI()
@@ -174,11 +176,13 @@ class Level:
             self.visible_sprites.custom_draw(self.player)
             self.ui.display(self.player)
 
-        debug('v0.6')
+        debug('v0.8')
 
         for player in self.player_sprites:
             if player.is_dead():
-                self.done = True
+                self.dead_players[player.player_id] = True
+
+        self.done = True if self.dead_players.all() == 1 else False
 
         if not self.game_paused:
             # Update the game

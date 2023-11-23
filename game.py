@@ -13,17 +13,26 @@ class Game:
 
         self.screen = pygame.display.set_mode(
             (WIDTH, HEIGHT))
+
         pygame.display.set_caption('Pneuma')
+
+        img = pygame.image.load('assets/graphics/icon.png')
+        pygame.display.set_icon(img)
         self.clock = pygame.time.Clock()
 
         self.level = Level()
+
+    def calc_score(self):
+        self.scores = [0 for _ in range(len(self.level.player_sprites))]
+
+        for player in self.level.player_sprites:
+            self.scores[player.player_id] = player.stats.exp
 
     def run(self):
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                pygame.quit()
-                sys.exit()
+                self.quit()
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_m:
                     self.level.toggle_menu()
@@ -34,3 +43,7 @@ class Game:
 
         pygame.display.update()
         self.clock.tick(FPS)
+
+    def quit(self):
+        pygame.quit()
+        sys.exit()

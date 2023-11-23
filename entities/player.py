@@ -16,7 +16,16 @@ from agents.ppo.agent import Agent
 
 class Player(pygame.sprite.Sprite):
 
-    def __init__(self, position, groups, obstacle_sprites, visible_sprites, attack_sprites, attackable_sprites, role, player_id):
+    def __init__(self,
+                 position,
+                 groups,
+                 obstacle_sprites,
+                 visible_sprites,
+                 attack_sprites,
+                 attackable_sprites,
+                 role,
+                 player_id):
+
         super().__init__(groups)
 
         # Setup Sprites
@@ -79,7 +88,9 @@ class Player(pygame.sprite.Sprite):
                             offset = pygame.math.Vector2(0, 75)
                             for leaf in range(randint(3, 6)):
                                 self.animation_player.create_grass_particles(
-                                    position=pos - offset, groups=[self.visible_sprites])
+                                    position=pos - offset,
+                                    groups=[self.visible_sprites])
+
                             target_sprite.kill()
                         else:
                             target_sprite.get_damaged(
@@ -109,13 +120,12 @@ class Player(pygame.sprite.Sprite):
 
         self.reward_features = [
             self.stats.exp,
-            # nearest_dist,
-            -nearest_enemy.stats.health,
-            self.stats.health
+            np.exp(-nearest_dist**2),
+            np.exp(-nearest_enemy.stats.health**2),
+            -np.exp(-self.stats.health)
         ]
 
         self.state_features = [
-            # TODO: Find a way to not use magic numbers
             np.exp(-self.rect.center[0]),
             np.exp(-self.rect.center[1]),
             self._input.movement.direction.x,
@@ -127,7 +137,6 @@ class Player(pygame.sprite.Sprite):
         enemy_states = []
 
         for distance, direction, enemy in sorted_distances[:5]:
-            # TODO: Find a way to not use magic numbers
             enemy_states.extend([
                 np.exp(-distance),
                 direction[0],
@@ -156,12 +165,13 @@ class Player(pygame.sprite.Sprite):
             n_epochs=4)
         try:
             self.agent.load_models()
-        except FileNotFoundError as e:
-            print(f"{e}. Skipping loading...")
+        except FileNotFoundError:
+            print("FileNotFoundError for agent.load_model().\
+                Skipping loading...")
 
     def is_dead(self):
-        if self.stats.health == 0:
-            self.stats.exp = -100
+        if self.stats.health <= 0:
+            self.stats.exp = max(0, self.stats.exp - .5)
             return True
         else:
             return False
@@ -182,11 +192,9 @@ class Player(pygame.sprite.Sprite):
                                 self.animation.rect,
                                 self)
 
-        self.done = self.is_dead()
-
         self.score = self.stats.exp
         self.agent.remember(self.state_features, action,
-                            probs, value, self.stats.exp, self.done)
+                            probs, value, self.stats.exp, self.is_dead())
 
         if self.n_steps % self.N == 0:
             self.agent.learn()
@@ -194,7 +202,7 @@ class Player(pygame.sprite.Sprite):
 
         self.get_current_state()
 
-        if self.done:
+        if self.is_dead():
             self.agent.learn()
 
         # Refresh objects based on input
@@ -207,5 +215,6 @@ class Player(pygame.sprite.Sprite):
         self.rect = self.animation.rect
 
         # Cooldowns and Regen
+        self.stats.health_recovery()
         self.stats.energy_recovery()
         self._input.cooldowns(self._input.combat.vulnerable)

@@ -1,9 +1,9 @@
 tank_stats = {
     'role_id': 1,
-    'health': 150,
-    'energy': 40,
-    'attack': 7,
-    'magic': 3,
+    'health': 1.5,
+    'energy': .4,
+    'attack': .7,
+    'magic': .3,
     'speed': 3
 }
 

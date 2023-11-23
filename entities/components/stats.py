@@ -42,6 +42,12 @@ class StatsHandler:
         else:
             self.energy = self.stats['energy']
 
+    def health_recovery(self):
+        if self.energy < self.stats['health']:
+            self.energy += 0.15
+        else:
+            self.energy = self.stats['energy']
+
     def get_value_by_index(self, index):
         return list(self.stats.values())[index]
 
