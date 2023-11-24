@@ -15,7 +15,7 @@ np.random.seed(1)
 T.manual_seed(1)
 
 n_episodes = 10000
-game_len = 20000
+game_len = 5000
 
 figure_file = 'plots/score.png'
 
@@ -68,12 +68,12 @@ for i in tqdm(range(n_episodes)):
         if avg_score[player.player_id] > best_score[player.player_id]:
             best_score[player.player_id] = avg_score[player.player_id]
             print(f"Saving models for agent {player.player_id}...")
-            player.agent.save_models(actr_chkpt = f"player_{player.player_id}_actor", crtc_chkpt = f"player_{player.player_id}_critic")
+            player.agent.save_models(
+                actr_chkpt=f"player_{player.player_id}_actor", crtc_chkpt=f"player_{player.player_id}_critic")
             print("Models saved ...\n")
 
         print(
             f"\nCumulative score for player {player.player_id}: {score_history[0][i]}\nAverage score for player {player.player_id}: {avg_score[player.player_id]}\nBest score for player {player.player_id}:                    {best_score[player.player_id]}")
-
 
 
 plt.plot(score_history[0])

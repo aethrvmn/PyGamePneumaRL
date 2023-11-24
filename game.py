@@ -12,7 +12,7 @@ class Game:
         pygame.init()
 
         self.screen = pygame.display.set_mode(
-            (WIDTH, HEIGHT), pygame.HIDDEN)
+            (WIDTH, HEIGHT))  # , pygame.HIDDEN)
 
         pygame.display.set_caption('Pneuma')
 
