@@ -82,7 +82,7 @@ class ActorNetwork(nn.Module):
         T.save(self.state_dict(), os.path.join(self.chkpt_dir, filename))
 
     def load_checkpoint(self, filename = 'actor_torch_ppo'):
-        self.load_state_dict(T.load(os.path.join(self.chkpt_dir, filename)))
+        self.load_state_dict(T.load(os.path.join(self.chkpt_dir, filename), map_location=self.device))
 
 
 class CriticNetwork(nn.Module):
@@ -114,4 +114,4 @@ class CriticNetwork(nn.Module):
         T.save(self.state_dict(), os.path.join(self.chkpt_dir, filename))
 
     def load_checkpoint(self, filename = 'critic_torch_ppo'):
-        self.load_state_dict(T.load(os.path.join(self.chkpt_dir, filename)))
+        self.load_state_dict(T.load(os.path.join(self.chkpt_dir, filename), map_location=self.device))

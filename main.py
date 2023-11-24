@@ -14,8 +14,8 @@ random.seed(1)
 np.random.seed(1)
 T.manual_seed(1)
 
-n_episodes = 1000
-game_len = 10000
+n_episodes = 10000
+game_len = 20000
 
 figure_file = 'plots/score.png'
 
