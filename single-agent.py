@@ -47,7 +47,6 @@ for i in tqdm(range(n_episodes)):
 
             for player in game.level.player_sprites:
                 if player.is_dead():
-                    agent_list[0] = player.agent
                     player.kill()
 
             # if (j == game_len-1 or game.level.done) and game.level.enemy_sprites != []:
@@ -55,13 +54,14 @@ for i in tqdm(range(n_episodes)):
             #         for enemy in game.level.enemy_sprites:
             #             player.stats.exp *= .95
 
+    agent_list[0] = game.level.player_sprites[0].agent
+
     for player in game.level.player_sprites:
-        if not player.is_dead():
-            agent_list[0] = player.agent
         exp_points = player.stats.exp
         score_history[player.player_id][i] = exp_points
         avg_score[player.player_id] = np.mean(
             score_history[player.player_id])
+
     if np.mean(avg_score) > np.mean(best_score):
         best_score = avg_score
         print("Saving models for agent...")
