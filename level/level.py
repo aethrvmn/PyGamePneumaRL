@@ -97,19 +97,43 @@ class Level:
                             elif col == '400':
                                 # Player Generation
                                 Player(
-                                    (x, y), [self.visible_sprites], self.obstacle_sprites, self.visible_sprites, self.attack_sprites, self.attackable_sprites, 'tank', player_id)
+                                    (x, y),
+                                    [self.visible_sprites],
+                                    self.obstacle_sprites,
+                                    self.visible_sprites,
+                                    self.attack_sprites,
+                                    self.attackable_sprites,
+                                    'tank',
+                                    player_id)
+
                                 player_id += 1
 
                             elif col == '401':
                                 # Player Generation
                                 Player(
-                                    (x, y), [self.visible_sprites], self.obstacle_sprites, self.visible_sprites, self.attack_sprites, self.attackable_sprites, 'warrior', player_id)
+                                    (x, y),
+                                    [self.visible_sprites],
+                                    self.obstacle_sprites,
+                                    self.visible_sprites,
+                                    self.attack_sprites,
+                                    self.attackable_sprites,
+                                    'warrior',
+                                    player_id)
+
                                 player_id += 1
 
                             elif col == '402':
                                 # Player Generation
                                 Player(
-                                    (x, y), [self.visible_sprites], self.obstacle_sprites, self.visible_sprites, self.attack_sprites, self.attackable_sprites, 'mage', player_id)
+                                    (x, y),
+                                    [self.visible_sprites],
+                                    self.obstacle_sprites,
+                                    self.visible_sprites,
+                                    self.attack_sprites,
+                                    self.attackable_sprites,
+                                    'mage',
+                                    player_id)
+
                                 player_id += 1
 
                             else:
@@ -120,11 +144,17 @@ class Level:
                                     monster_name = 'spirit'
                                 elif col == '392':
                                     monster_name = 'raccoon'
-                                else:
+                                elif col == ' 393':
                                     monster_name = 'squid'
 
-                                Enemy(monster_name, (x, y), [
-                                      self.visible_sprites, self.attackable_sprites], self.visible_sprites, self.obstacle_sprites)
+                                Enemy(monster_name,
+                                      (x, y),
+                                      [
+                                          self.visible_sprites,
+                                          self.attackable_sprites
+                                      ],
+                                      self.visible_sprites,
+                                      self.obstacle_sprites)
 
     def get_players_enemies(self):
         self.player_sprites = [sprite for sprite in self.visible_sprites.sprites(
@@ -172,9 +202,11 @@ class Level:
         if who == 'observer':
             self.visible_sprites.custom_draw(self.observer)
             self.ui.display(self.observer)
+        else:
+            self.visible_sprites.custom_draw(self.player)
+            self.ui.display(self.aaa)
 
         debug('v0.8')
-
 
         if not self.game_paused:
             # Update the game
@@ -194,5 +226,3 @@ class Level:
                 self.dead_players[player.player_id] = True
 
         self.done = True if self.dead_players.all() == 1 else False
-
-

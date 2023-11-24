@@ -31,9 +31,7 @@ class Agent:
         self.critic.load_checkpoint(crtc_chkpt)
 
     def choose_action(self, observation):
-        print(f"observation: {observation}")
         state = T.tensor(observation, dtype=T.float).to(self.actor.device)
-        print(f"state: {state}")
         dist = self.actor(state)
         value = self.critic(state)
         action = dist.sample()
