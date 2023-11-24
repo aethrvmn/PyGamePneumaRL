@@ -169,7 +169,7 @@ class Player(pygame.sprite.Sprite):
 
         try:
             self.agent.load_models(
-                actr_chkpt=f"player_{self.player_id}_actor", crtc_chkpt=f"player_{self.player_id}_critic")
+                actr_chkpt=f"player_actor", crtc_chkpt=f"player_critic")
             print("Models loaded ...\n")
 
         except FileNotFoundError:
