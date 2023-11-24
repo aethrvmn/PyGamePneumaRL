@@ -14,10 +14,10 @@ random.seed(1)
 np.random.seed(1)
 T.manual_seed(1)
 
-n_episodes = 10000
+n_episodes = 2000
 game_len = 5000
 
-figure_file = 'plots/score.png'
+figure_file = 'plots/scores_mp.png'
 
 game = Game()
 
@@ -34,9 +34,10 @@ for i in tqdm(range(n_episodes)):
         game.level.__init__(reset=True)
     # TODO: Make game.level.reset_map() so we don't pull out and load the agent every time (There is -definitevly- a better way)
         for player in game.level.player_sprites:
+
+            player.stats.exp = score_history[player.player_id][i-1]
             for agent in agent_list:
                 player.agent = agent_list[player.player_id]
-                player.stats.exp = score_history[player.player_id][i-1]
 
     agent_list = [0 for _ in range(game.max_num_players)]
 
@@ -55,8 +56,6 @@ for i in tqdm(range(n_episodes)):
             #     for player in game.level.player_sprites:
             #         for enemy in game.level.enemy_sprites:
             #             player.stats.exp *= .95
-        else:
-            break
 
     for player in game.level.player_sprites:
         if not player.is_dead():
@@ -73,10 +72,11 @@ for i in tqdm(range(n_episodes)):
             print("Models saved ...\n")
 
         print(
-            f"\nCumulative score for player {player.player_id}: {score_history[0][i]}\nAverage score for player {player.player_id}: {avg_score[player.player_id]}\nBest score for player {player.player_id}:                    {best_score[player.player_id]}")
+            f"\nCumulative score for player {player.player_id}: {score_history[0][i]}\nAverage score for player {player.player_id}: {avg_score[player.player_id]}\nBest score for player {player.player_id}: {best_score[player.player_id]}")
 
 
-plt.plot(score_history[0])
+plt.plot(score_history)
+plt.savefig(figure_file)
 
 game.quit()
 
