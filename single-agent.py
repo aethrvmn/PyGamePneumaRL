@@ -21,7 +21,7 @@ figure_file = 'plots/score_sp.png'
 
 game = Game()
 
-agent_list = [game.level.player_sprites[0].agent]
+agent = game.level.player_sprites[0].agent
 
 score_history = np.zeros(shape=(game.max_num_players, n_episodes))
 best_score = np.zeros(game.max_num_players)
@@ -35,9 +35,7 @@ for i in tqdm(range(n_episodes)):
 
     for player in game.level.player_sprites:
         player.stats.exp = score_history[player.player_id][i-1]
-        player.agent = agent_list[0]
-
-    agent_list = [game.level.player_sprites[0].agent]
+        player.agent = agent
 
     for j in range(game_len):
         if not game.level.done:
@@ -53,8 +51,6 @@ for i in tqdm(range(n_episodes)):
             #     for player in game.level.player_sprites:
             #         for enemy in game.level.enemy_sprites:
             #             player.stats.exp *= .95
-
-    agent_list[0] = game.level.player_sprites[0].agent
 
     for player in game.level.player_sprites:
         exp_points = player.stats.exp
