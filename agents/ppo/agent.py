@@ -22,17 +22,18 @@ class Agent:
     def remember(self, state, action, probs, vals, reward, done):
         self.memory.store_memory(state, action, probs, vals, reward, done)
 
-    def save_models(self, actr_chkpt = 'actor_ppo', crtc_chkpt = 'critic_ppo'):
+    def save_models(self, actr_chkpt='actor_ppo', crtc_chkpt='critic_ppo'):
         self.actor.save_checkpoint(actr_chkpt)
         self.critic.save_checkpoint(crtc_chkpt)
 
-    def load_models(self, actr_chkpt = 'actor_ppo', crtc_chkpt = 'critic_ppo'):
+    def load_models(self, actr_chkpt='actor_ppo', crtc_chkpt='critic_ppo'):
         self.actor.load_checkpoint(actr_chkpt)
         self.critic.load_checkpoint(crtc_chkpt)
 
     def choose_action(self, observation):
+        print(f"observation: {observation}")
         state = T.tensor(observation, dtype=T.float).to(self.actor.device)
-
+        print(f"state: {state}")
         dist = self.actor(state)
         value = self.critic(state)
         action = dist.sample()

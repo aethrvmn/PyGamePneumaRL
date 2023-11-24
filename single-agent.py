@@ -14,7 +14,7 @@ random.seed(1)
 np.random.seed(1)
 T.manual_seed(1)
 
-n_episodes = 2000
+n_episodes = 1000
 game_len = 5000
 
 figure_file = 'plots/score_sp.png'
@@ -37,7 +37,7 @@ for i in tqdm(range(n_episodes)):
         player.stats.exp = score_history[player.player_id][i-1]
         player.agent = agent
 
-    for j in range(game_len):
+    for j in tqdm(range(game_len)):
         if not game.level.done:
 
             game.run()

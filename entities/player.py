@@ -158,16 +158,20 @@ class Player(pygame.sprite.Sprite):
         self.num_features = len(self.state_features)
 
     def setup_agent(self):
-        print(f"Initializing Agent {self.player_id} ...")
+        print(f"Initializing agent on player {self.player_id} ...")
         self.agent = Agent(
             input_dims=len(self.state_features),
             n_actions=len(self._input.possible_actions),
             batch_size=5,
             n_epochs=4)
-        print(f" Agent initialized using {self.agent.actor.device}. Attempting to load models ...")
+        print(
+            f" Agent initialized using {self.agent.actor.device}. Attempting to load models ...")
+
         try:
-            self.agent.load_models(actr_chkpt = f"player_{self.player_id}_actor", crtc_chkpt = f"player_{self.player_id}_critic")
+            self.agent.load_models(
+                actr_chkpt=f"player_{self.player_id}_actor", crtc_chkpt=f"player_{self.player_id}_critic")
             print("Models loaded ...\n")
+
         except FileNotFoundError:
             print("FileNotFound for agent. Skipping loading...\n")
 
