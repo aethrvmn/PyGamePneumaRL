@@ -10,16 +10,16 @@ from os import environ
 environ['PYGAME_HIDE_SUPPORT_PROMPT'] = '1'
 
 
-random.seed(1)
 np.random.seed(1)
 T.manual_seed(1)
 
 n_episodes = 1000
 game_len = 5000
+n_players = 8
 
 figure_file = 'plots/score_sp.png'
 
-game = Game()
+game = Game(n_players)
 
 agent = game.level.player_sprites[0].agent
 
@@ -30,7 +30,7 @@ avg_score = np.zeros(game.max_num_players)
 for i in tqdm(range(n_episodes)):
     # TODO: Make game.level.reset_map() so we don't __init__ everything all the time (such a waste)
     if i != 0:
-        game.level.__init__(reset=True)
+        game.level.__init__(n_players, reset=True)
     # TODO: Make game.level.reset_map() so we don't pull out and load the agent every time (There is -definitevly- a better way)
 
     for player in game.level.player_sprites:
@@ -59,15 +59,20 @@ for i in tqdm(range(n_episodes)):
             score_history[player.player_id])
 
     if np.mean(avg_score) > np.mean(best_score):
+        print(
+            f"\nNew Best score: {np.mean(avg_score)}\
+            \nOld Best score: {np.mean(best_score)}")
         best_score = avg_score
         print("Saving models for agent...")
-        player.agent.save_models(
+        game.level.player_sprites[0].agent.save_models(
             actr_chkpt="player_actor", crtc_chkpt="player_critic")
         print("Models saved ...\n")
 
-    print(
-        f"\nAverage score: {np.mean(avg_score)}\nBest score: {np.mean(best_score)}")
 
+print("\nEpisodes done, saving models...")
+game.level.player_sprites[0].agent.save_models(
+    actr_chkpt="player_actor", crtc_chkpt="player_critic")
+print("Models saved ...\n")
 
 plt.plot(score_history)
 plt.savefig(figure_file)

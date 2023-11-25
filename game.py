@@ -7,7 +7,7 @@ from configs.system.window_config import WIDTH, HEIGHT, WATER_COLOR, FPS
 
 class Game:
 
-    def __init__(self):
+    def __init__(self, n_players):
 
         pygame.init()
 
@@ -20,7 +20,7 @@ class Game:
         pygame.display.set_icon(img)
         self.clock = pygame.time.Clock()
 
-        self.level = Level()
+        self.level = Level(n_players)
 
         self.max_num_players = len(self.level.player_sprites)
 

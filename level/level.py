@@ -21,7 +21,7 @@ from .camera import Camera
 
 class Level:
 
-    def __init__(self, reset=False):
+    def __init__(self, n_players, reset=False):
 
         # General Settings
         self.game_paused = False
@@ -37,7 +37,7 @@ class Level:
         self.attackable_sprites = pygame.sprite.Group()
 
         # Sprite setup and entity generation
-        self.create_map()
+        self.create_map(n_players)
         self.get_players_enemies()
         self.get_distance_direction()
         if not reset:
@@ -52,7 +52,7 @@ class Level:
         # UI setup
         self.ui = UI()
 
-    def create_map(self):
+    def create_map(self, n_players):
         player_id = 0
         script_dir = os.path.dirname(os.path.abspath(__file__))
         asset_path = os.path.join(
@@ -95,18 +95,19 @@ class Level:
                                     (x, y), [self.visible_sprites])
 
                             elif col == '400':
-                                # Player Generation
-                                Player(
-                                    (x, y),
-                                    [self.visible_sprites],
-                                    self.obstacle_sprites,
-                                    self.visible_sprites,
-                                    self.attack_sprites,
-                                    self.attackable_sprites,
-                                    'tank',
-                                    player_id)
+                                if choice([0, 1]) == 1 and player_id <= n_players:
+                                    # Player Generation
+                                    Player(
+                                        (x, y),
+                                        [self.visible_sprites],
+                                        self.obstacle_sprites,
+                                        self.visible_sprites,
+                                        self.attack_sprites,
+                                        self.attackable_sprites,
+                                        'tank',
+                                        player_id)
 
-                                player_id += 1
+                                    player_id += 1
 
                             elif col == '401':
                                 # Player Generation
