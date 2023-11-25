@@ -13,8 +13,8 @@ environ['PYGAME_HIDE_SUPPORT_PROMPT'] = '1'
 np.random.seed(1)
 T.manual_seed(1)
 
-n_episodes = 1000
-game_len = 5000
+n_episodes = 300
+game_len = 10000
 n_players = 8
 
 figure_file = 'plots/score_sp.png'
