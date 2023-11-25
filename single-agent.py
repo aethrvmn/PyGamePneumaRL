@@ -61,16 +61,22 @@ for i in tqdm(range(n_episodes)):
     if np.mean(avg_score) > np.mean(best_score):
         print(
             f"\nNew Best score: {np.mean(avg_score)}\
-            \nOld Best score: {np.mean(best_score)}")
+            \nOld Best score: {np.mean(best_score)}"
+        )
         best_score = avg_score
         print("Saving models for agent...")
-        game.level.player_sprites[0].agent.save_models(
+        agent.save_models(
             actr_chkpt="player_actor", crtc_chkpt="player_critic")
         print("Models saved ...\n")
+    else:
+        print(
+            f"Average score of round: {np.mean(avg_score)}\
+              \nBest score: {np.mean(best_score)}"
+        )
 
 
 print("\nEpisodes done, saving models...")
-game.level.player_sprites[0].agent.save_models(
+agent.save_models(
     actr_chkpt="player_actor", crtc_chkpt="player_critic")
 print("Models saved ...\n")
 
