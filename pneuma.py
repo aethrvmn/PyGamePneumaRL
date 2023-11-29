@@ -203,8 +203,10 @@ if __name__ == "__main__":
 
             # Check for new best score
             if player.stats.exp > best_score[player.player_id]:
-                print(f"\nNew best score:\t {player.stats.exp}\
-                        \nOld best score: \t {best_score[player.player_id]}")
+                print(f"\nNew best score for player {player.player_id}:\
+                          {player.stats.exp}\
+                        \nOld best score for player {player.player_id}: \
+                            {best_score[player.player_id]}")
 
                 best_score[player.player_id] = player.stats.exp
 
@@ -223,8 +225,7 @@ if __name__ == "__main__":
 
     # End of training session
     print("End of episodes.\
-        \n Exiting game...")
-    game.quit()
+        \nExiting game...")
 
     plt.figure()
     plt.title("Player Performance")
@@ -261,4 +262,4 @@ if __name__ == "__main__":
     for total in total_loss:
         plt.plot(total)
     plt.savefig(f"{figure_folder}/total_loss.png")
-    plt.show()
+    game.quit()

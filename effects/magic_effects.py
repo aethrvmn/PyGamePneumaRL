@@ -17,12 +17,12 @@ class MagicPlayer:
                 player.stats.health = player.stats.stats['health']
             self.animation_player.generate_particles(
                 'aura',
-                player.rect.center,
+                player.animation.rect.center,
                 groups)
 
             self.animation_player.generate_particles(
                 'heal',
-                player.rect.center + pygame.math.Vector2(0, -50),
+                player.animation.rect.center + pygame.math.Vector2(0, -50),
                 groups)
 
     def flame(self, player, cost, groups):
@@ -41,17 +41,17 @@ class MagicPlayer:
             for i in range(1, 6):
                 if direction.x:
                     offset_x = direction.x * i * TILESIZE
-                    x = player.rect.centerx + offset_x + \
+                    x = player.animation.rect.centerx + offset_x + \
                         randint(-TILESIZE // 3, TILESIZE // 3)
-                    y = player.rect.centery + \
+                    y = player.animation.rect.centery + \
                         randint(-TILESIZE // 3, TILESIZE // 3)
                     self.animation_player.generate_particles(
                         'flame', (x, y), groups)
                 else:
                     offset_y = direction.y * i * TILESIZE
-                    x = player.rect.centerx + \
+                    x = player.animation.rect.centerx + \
                         randint(-TILESIZE // 3, TILESIZE // 3)
-                    y = player.rect.centery + offset_y + \
+                    y = player.animation.rect.centery + offset_y + \
                         randint(-TILESIZE // 3, TILESIZE // 3)
                     self.animation_player.generate_particles(
                         'flame', (x, y), groups)

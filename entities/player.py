@@ -198,28 +198,33 @@ class Player(pygame.sprite.Sprite):
         else:
             return False
 
+    def agent_update(self):
+
+        # Get the current state
+        self.get_current_state()
+
+        # Choose action based on current state
+        action, probs, value\
+            = self.agent.choose_action(self.state_features)
+
+        # Apply chosen action
+        self._input.check_input(action,
+                                self.stats.speed,
+                                self.animation.hitbox,
+                                self.obstacle_sprites,
+                                self.animation.rect,
+                                self)
+
+        self.agent.remember(self.state_features, action,
+                            probs, value, self.stats.exp, self.is_dead())
+
+        self.get_current_state()
+
     def update(self):
 
         if not self.is_dead():
-            # Get the current state
-            self.get_current_state()
-            # Choose action based on current state
-            action, probs, value\
-                = self.agent.choose_action(self.state_features)
 
-            # Apply chosen action
-            self._input.check_input(action,
-                                    self.stats.speed,
-                                    self.animation.hitbox,
-                                    self.obstacle_sprites,
-                                    self.animation.rect,
-                                    self)
-
-            self.score = self.stats.exp
-            self.agent.remember(self.state_features, action,
-                                probs, value, self.stats.exp, self.is_dead())
-
-            self.get_current_state()
+            self.agent_update()
 
             # Cooldowns and Regen
             self.stats.health_recovery()
@@ -232,6 +237,4 @@ class Player(pygame.sprite.Sprite):
         self.get_status()
         self.animation.animate(
             self._input.status, self._input.combat.vulnerable)
-        self.image = self.animation.image
-        self.rect = self.animation.rect
         self._input.cooldowns(self._input.combat.vulnerable)
