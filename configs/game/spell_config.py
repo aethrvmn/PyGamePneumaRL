@@ -1,9 +1,22 @@
 import os
 
-script_dir = os.path.dirname(os.path.abspath(__file__))
-asset_path = os.path.join(
-    script_dir, '../..', 'assets')
+from utils.resource_loader import import_assets
+
 
 magic_data = {
-    'flame': {'strength': 5, 'cost': .020, 'graphic': f"{asset_path}/graphics/particles/flame/fire.png"},
-    'heal': {'strength': 20, 'cost': .010, 'graphic': f"{asset_path}/graphics/particles/heal/heal.png"}}
+    'flame': {'strength': 5, 'cost': .020, 'graphic': import_assets(
+        os.path.join('graphics',
+                     'particles',
+                     'flame',
+                     'fire.png')
+    )
+    },
+
+    'heal': {'strength': 20, 'cost': .010, 'graphic': import_assets(
+        os.path.join('graphics',
+                     'particles',
+                     'heal',
+                     'heal.png')
+    )
+    }
+}

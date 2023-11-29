@@ -161,3 +161,6 @@ cython_debug/
 
 # Mac bs
 .DS_store
+
+# Random stuff
+__pycache__/

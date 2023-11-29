@@ -1,4 +1,3 @@
-import os
 import pygame
 from random import randint
 
@@ -17,9 +16,14 @@ class MagicPlayer:
             if player.stats.health >= player.stats.stats['health']:
                 player.stats.health = player.stats.stats['health']
             self.animation_player.generate_particles(
-                'aura', player.rect.center, groups)
+                'aura',
+                player.rect.center,
+                groups)
+
             self.animation_player.generate_particles(
-                'heal', player.rect.center + pygame.math.Vector2(0, -50), groups)
+                'heal',
+                player.rect.center + pygame.math.Vector2(0, -50),
+                groups)
 
     def flame(self, player, cost, groups):
         if player.stats.energy >= cost:

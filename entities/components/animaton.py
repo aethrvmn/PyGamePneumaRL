@@ -2,7 +2,7 @@ import os
 import pygame
 from math import sin
 
-from utils.resource_loader import import_folder
+from utils.resource_loader import import_folder, import_assets
 
 from configs.system.window_config import HITBOX_OFFSET
 
@@ -17,40 +17,47 @@ class AnimationHandler:
         self.name = name
 
     def import_assets(self, position):
-        script_dir = os.path.dirname(os.path.abspath(__file__))
-        asset_path = os.path.join(
-            script_dir, '../..', 'assets', 'graphics')
+
+        # Import Graphic Assets
 
         if self.sprite_type == 'player':
-
-            character_path = f"{asset_path}/player"
-
-            # Import Graphic Assets
             self.image = pygame.image.load(
-                f"{character_path}/down/down_0.png").convert_alpha()
+                import_assets(os.path.join('graphics',
+                                           'player',
+                                           'down',
+                                           'down_0.png'))).convert_alpha()
+
             self.rect = self.image.get_rect(topleft=position)
             self.hitbox = self.rect.inflate(HITBOX_OFFSET[self.sprite_type])
 
             self.animations = {
-                'up': [], 'down': [], 'left': [], 'right': [],
-                'up_idle': [], 'down_idle': [], 'left_idle': [], 'right_idle': [],
-                'up_attack': [], 'down_attack': [], 'left_attack': [], 'right_attack': []
+                'up': [], 'down': [],
+                'left': [], 'right': [],
+                'up_idle': [], 'down_idle': [],
+                'left_idle': [], 'right_idle': [],
+                'up_attack': [], 'down_attack': [],
+                'left_attack': [], 'right_attack': []
             }
+
             for animation in self.animations.keys():
-                full_path = f"{character_path}/{animation}"
-                self.animations[animation] = import_folder(full_path)
+                self.animations[animation]\
+                    = import_folder(os.path.join('graphics',
+                                                 'player',
+                                                 animation
+                                                 ))
 
         elif self.sprite_type == 'enemy':
 
             self.status = 'idle'
 
-            character_path = f"{asset_path}/monsters/{self.name}"
-
             self.animations = {'idle': [], 'move': [], 'attack': []}
 
             for animation in self.animations.keys():
-                self.animations[animation] = import_folder(
-                    f"{character_path}/{animation}")
+                self.animations[animation]\
+                    = import_folder(os.path.join('graphics',
+                                                 'monsters',
+                                                 self.name,
+                                                 animation))
 
             self.image = self.animations[self.status][self.frame_index]
             self.rect = self.image.get_rect(topleft=position)

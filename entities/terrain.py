@@ -1,15 +1,26 @@
 import pygame
 
-from configs.system.window_config import *
+from configs.system.window_config import TILESIZE,\
+    HITBOX_OFFSET
 
 
-class Tile(pygame.sprite.Sprite):
+class Terrain(pygame.sprite.Sprite):
 
-    def __init__(self, position, groups, sprite_type, surface=pygame.Surface((TILESIZE, TILESIZE))):
+    def __init__(self,
+                 position,
+                 groups,
+                 sprite_type,
+                 surface=pygame.Surface((TILESIZE, TILESIZE))
+                 ):
+
         super().__init__(groups)
 
         self.sprite_type = sprite_type
+
+        self.position = position
+
         self.image = surface
+
         if sprite_type == 'object':
             # Offset
             self.rect = self.image.get_rect(

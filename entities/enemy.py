@@ -11,11 +11,12 @@ class Enemy(pygame.sprite.Sprite):
 
     def __init__(self, name, position, groups, visible_sprites, obstacle_sprites):
         super().__init__(groups)
+
         self.sprite_type = "enemy"
         self.name = name
+
         self.visible_sprites = visible_sprites
 
-        self.position = position
         # Setup Graphics
         self.animation_player = AnimationPlayer()
         self.animation = AnimationHandler(self.sprite_type, self.name)

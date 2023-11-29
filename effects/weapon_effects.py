@@ -1,22 +1,24 @@
 import os
 import pygame
 
+from utils.resource_loader import import_assets
+
 
 class Weapon(pygame.sprite.Sprite):
 
     def __init__(self, player, groups):
         super().__init__(groups)
 
-        script_dir = os.path.dirname(os.path.abspath(__file__))
-        asset_path = os.path.join(
-            script_dir, '..', 'assets')
-
         self.sprite_type = 'weapon'
         direction = player._input.status.split('_')[0]
 
         # Graphic
-        full_path = f"{asset_path}/graphics/weapons/{player._input.combat.weapon}/{direction}.png"
-        self.image = pygame.image.load(full_path).convert_alpha()
+        self.image = pygame.image.load(import_assets(os.path.join(
+            'graphics',
+            'weapons',
+            player._input.combat.weapon,
+            f"{direction}.png"))
+        ).convert_alpha()
 
         # Sprite Placement
         if direction == 'right':

@@ -8,49 +8,118 @@ from random import choice
 class AnimationPlayer:
     def __init__(self):
 
-        script_dir = os.path.dirname(os.path.abspath(__file__))
-        asset_path = os.path.join(
-            script_dir, '..', 'assets')
-
         self.frames = {
-            # magic
-            'flame': import_folder(f'{asset_path}/graphics/particles/flame/frames'),
-            'aura': import_folder(f'{asset_path}/graphics/particles/aura'),
-            'heal': import_folder(f'{asset_path}/graphics/particles/heal/frames'),
+            # Spells
+            'flame': import_folder(os.path.join('graphics',
+                                                'particles',
+                                                'flame',
+                                                'frames')),
 
-            # attacks
-            'claw': import_folder(f'{asset_path}/graphics/particles/claw'),
-            'slash': import_folder(f'{asset_path}/graphics/particles/slash'),
-            'sparkle': import_folder(f'{asset_path}/graphics/particles/sparkle'),
-            'leaf_attack': import_folder(f'{asset_path}/graphics/particles/leaf_attack'),
-            'thunder': import_folder(f'{asset_path}/graphics/particles/thunder'),
+            'aura': import_folder(os.path.join('graphics',
+                                               'particles',
+                                               'aura')),
 
-            # monster deaths
-            'squid': import_folder(f'{asset_path}/graphics/particles/smoke_orange'),
-            'raccoon': import_folder(f'{asset_path}/graphics/particles/raccoon'),
-            'spirit': import_folder(f'{asset_path}/graphics/particles/nova'),
-            'bamboo': import_folder(f'{asset_path}/graphics/particles/bamboo'),
+            'heal': import_folder(os.path.join('graphics',
+                                               'particles',
+                                               'heal',
+                                               'frames')),
 
-            # leafs
+            # Attacks
+            'claw': import_folder(os.path.join('graphics',
+                                               'particles',
+                                               'claw')),
+
+            'slash': import_folder(os.path.join('graphics',
+                                                'particles',
+                                                'slash')),
+
+            'sparkle': import_folder(os.path.join('graphics',
+                                                  'particles',
+                                                  'sparkle')),
+
+            'leaf_attack': import_folder(os.path.join('graphics',
+                                                      'particles',
+                                                      'leaf_attack')),
+            'thunder': import_folder(os.path.join('graphics',
+                                                  'particles',
+                                                  'thunder')),
+
+            # Monster Deaths
+            'squid': import_folder(os.path.join('graphics',
+                                                'particles',
+                                                'smoke_orange')),
+
+            'raccoon': import_folder(os.path.join('graphics',
+                                                  'particles',
+                                                  'raccoon')),
+
+            'spirit': import_folder(os.path.join('graphics',
+                                                 'particles',
+                                                 'nova')),
+
+            'bamboo': import_folder(os.path.join('graphics',
+                                                 'particles',
+                                                 'bamboo')),
+
+            # Leafs
             'leaf': (
-                import_folder(f'{asset_path}/graphics/particles/leaf1'),
-                import_folder(f'{asset_path}/graphics/particles/leaf2'),
-                import_folder(f'{asset_path}/graphics/particles/leaf3'),
-                import_folder(f'{asset_path}/graphics/particles/leaf4'),
-                import_folder(f'{asset_path}/graphics/particles/leaf5'),
-                import_folder(f'{asset_path}/graphics/particles/leaf6'),
-                self.reflect_images(import_folder(
-                    f'{asset_path}/graphics/particles/leaf1')),
-                self.reflect_images(import_folder(
-                    f'{asset_path}/graphics/particles/leaf2')),
-                self.reflect_images(import_folder(
-                    f'{asset_path}/graphics/particles/leaf3')),
-                self.reflect_images(import_folder(
-                    f'{asset_path}/graphics/particles/leaf4')),
-                self.reflect_images(import_folder(
-                    f'{asset_path}/graphics/particles/leaf5')),
-                self.reflect_images(import_folder(
-                    f'{asset_path}/graphics/particles/leaf6'))
+                import_folder(os.path.join('graphics',
+                                           'particles',
+                                           'leaf1')),
+
+                import_folder(os.path.join('graphics',
+                                           'particles',
+                                           'leaf2')),
+
+                import_folder(os.path.join('graphics',
+                                           'particles',
+                                           'leaf3')),
+
+                import_folder(os.path.join('graphics',
+                                           'particles',
+                                           'leaf4')),
+
+                import_folder(os.path.join('graphics',
+                                           'particles',
+                                           'leaf5')),
+
+                import_folder(os.path.join('graphics',
+                                           'particles',
+                                           'leaf6')),
+
+                self.reflect_images(
+                    import_folder(os.path.join('graphics',
+                                               'particles',
+                                               'leaf1'))),
+
+                self.reflect_images(
+                    import_folder(os.path.join('graphics',
+                                               'particles',
+                                               'leaf2'))),
+
+                self.reflect_images(
+                    import_folder(
+                        os.path.join('graphics',
+                                     'particles',
+                                     'leaf3'))),
+
+                self.reflect_images(
+                    import_folder(
+                        os.path.join('graphics',
+                                     'particles',
+                                     'leaf4'))),
+
+                self.reflect_images(
+                    import_folder(
+                        os.path.join('graphics',
+                                     'particles',
+                                     'leaf5'))),
+
+                self.reflect_images(
+                    import_folder(
+                        os.path.join('graphics',
+                                     'particles',
+                                     'leaf6')))
             )
         }
 

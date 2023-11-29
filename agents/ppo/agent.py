@@ -8,15 +8,19 @@ class Agent:
 
     def __init__(self, input_dims, n_actions, gamma=0.99, alpha=0.0003,
                  policy_clip=0.2, batch_size=64, N=2048, n_epochs=10,
-                 gae_lambda=0.95):
+                 gae_lambda=0.95, chkpt_dir='tmp/ppo'):
 
         self.gamma = gamma
         self.policy_clip = policy_clip
         self.n_epochs = n_epochs
         self.gae_lambda = gae_lambda
 
-        self.actor = ActorNetwork(input_dims, n_actions, alpha)
-        self.critic = CriticNetwork(input_dims, alpha)
+        self.actor = ActorNetwork(
+            input_dims, n_actions, alpha, chkpt_dir=chkpt_dir)
+
+        self.critic = CriticNetwork(
+            input_dims, alpha, chkpt_dir=chkpt_dir)
+
         self.memory = PPOMemory(batch_size)
 
     def remember(self, state, action, probs, vals, reward, done):
@@ -79,17 +83,17 @@ class Agent:
                 weighted_probs = advantage[batch] * prob_ratio
                 weighted_clipped_probs = T.clamp(
                     prob_ratio, 1-self.policy_clip, 1+self.policy_clip)*advantage[batch]
-                actor_loss = -T.min(weighted_probs,
-                                    weighted_clipped_probs).mean()
+                self.actor_loss = -T.min(weighted_probs,
+                                         weighted_clipped_probs).mean()
 
                 returns = advantage[batch] + values[batch]
-                critic_loss = (returns - critic_value)**2
-                critic_loss = critic_loss.mean()
+                self.critic_loss = (returns - critic_value)**2
+                self.critic_loss = self.critic_loss.mean()
 
-                total_loss = actor_loss + 0.5*critic_loss
+                self.total_loss = self.actor_loss + 0.5*self.critic_loss
                 self.actor.optimizer.zero_grad()
                 self.critic.optimizer.zero_grad()
-                total_loss.backward()
+                self.total_loss.backward()
                 self.actor.optimizer.step()
                 self.critic.optimizer.step()
 

@@ -38,9 +38,13 @@ class InputHandler:
         self.possible_actions = [0, 1, 2, 3, 4, 5]
         self.action = 10
 
-    def check_input(self, button, speed, hitbox, obstacle_sprites, rect, player):
-
-        self.action = 10
+    def check_input(self,
+                    button,
+                    speed,
+                    hitbox,
+                    obstacle_sprites,
+                    rect,
+                    player):
 
         if not self.attacking and self.can_move:
 
@@ -105,9 +109,13 @@ class InputHandler:
 
             # Rotating Weapons
             if button == 6 and self.can_rotate_weapon:
+
                 self.can_rotate_weapon = False
                 self.weapon_rotation_time = pygame.time.get_ticks()
-                if self.combat.weapon_index < len(list(weapon_data.keys())) - 1:
+
+                if self.combat.weapon_index\
+                        < len(list(weapon_data.keys())) - 1:
+
                     self.combat.weapon_index += 1
                 else:
                     self.combat.weapon_index = 0
@@ -131,23 +139,34 @@ class InputHandler:
         self.vulnerable = vulnerable
 
         if self.attacking:
-            if current_time - self.attack_time > self.attack_cooldown + weapon_data[self.combat.weapon]['cooldown']:
+            if current_time - self.attack_time\
+                > self.attack_cooldown\
+                    + weapon_data[self.combat.weapon]['cooldown']:
+
                 self.attacking = False
                 if self.combat.current_attack:
                     self.combat.delete_attack_sprite()
 
         if not self.can_rotate_weapon:
-            if current_time - self.weapon_rotation_time > self.rotate_attack_cooldown:
+            if current_time - self.weapon_rotation_time\
+                    > self.rotate_attack_cooldown:
+
                 self.can_rotate_weapon = True
 
         if not self.can_swap_magic:
-            if current_time - self.magic_swap_time > self.rotate_attack_cooldown:
+            if current_time - self.magic_swap_time\
+                    > self.rotate_attack_cooldown:
+
                 self.can_swap_magic = True
 
         if not vulnerable:
-            if current_time - self.combat.hurt_time >= self.combat.invulnerability_duration:
+            if current_time - self.combat.hurt_time\
+                    >= self.combat.invulnerability_duration:
+
                 self.combat.vulnerable = True
 
         if not self.can_move:
-            if current_time - self.move_time >= self.move_cooldown:
+            if current_time - self.move_time\
+                    >= self.move_cooldown:
+
                 self.can_move = True

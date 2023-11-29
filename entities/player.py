@@ -1,3 +1,4 @@
+import os
 import pygame
 import numpy as np
 from random import randint
@@ -15,66 +16,101 @@ from agents.ppo.agent import Agent
 
 
 class Player(pygame.sprite.Sprite):
-
     def __init__(self,
+                 player_id,
+                 role,
                  position,
                  groups,
                  obstacle_sprites,
                  visible_sprites,
                  attack_sprites,
-                 attackable_sprites,
-                 role,
-                 player_id):
-
+                 attackable_sprites
+                 ):
         super().__init__(groups)
 
-        # Setup Sprites
-        self.sprite_type = 'player'
-        self.status = 'down'
+        self.initial_position = position
         self.player_id = player_id
+        self.distance_direction_from_enemy = None
+
+        # Sprite Setup
+        self.sprite_type = "player"
+        self.obstacle_sprites = obstacle_sprites
         self.visible_sprites = visible_sprites
         self.attack_sprites = attack_sprites
-        self.obstacle_sprites = obstacle_sprites
         self.attackable_sprites = attackable_sprites
 
-        # Setup Graphics
+        # Graphics Setup
         self.animation_player = AnimationPlayer()
         self.animation = AnimationHandler(self.sprite_type)
         self.animation.import_assets(position)
-        self.image = self.animation.image
-        self.rect = self.animation.rect
-        # Setup Inputs
+        # Input Setup
         self._input = InputHandler(
-            self.sprite_type, self.animation_player)  # , self.status)
+            self.sprite_type, self.animation_player)
 
         # Setup Stats
         self.role = role
         self.stats = StatsHandler(self.sprite_type, self.role)
 
-        self.distance_direction_from_enemy = None
+    def setup_agent(self,
+                    gamma,
+                    alpha,
+                    policy_clip,
+                    batch_size,
+                    N,
+                    n_epochs,
+                    gae_lambda,
+                    chkpt_dir,
+                    no_load=False):
 
-        # Setup AI
-        self.score = 0
-        self.learn_iters = 0
-        self.n_steps = 0
-        self.N = 20
+        self.get_current_state()
+        self.agent = Agent(
+            input_dims=len(self.state_features),
+            n_actions=len(self._input.possible_actions),
+            gamma=gamma,
+            alpha=alpha,
+            policy_clip=policy_clip,
+            batch_size=batch_size,
+            N=N,
+            n_epochs=n_epochs,
+            gae_lambda=gae_lambda,
+            chkpt_dir=chkpt_dir
+        )
+        print(
+            f"\nAgent initialized on player {self.player_id} using {self.agent.actor.device}.")
+
+        if not no_load:
+            print("Attempting to load models ...")
+            try:
+                self.agent.load_models(
+                    actr_chkpt=f"A{self.player_id}",
+                    crtc_chkpt=f"C{self.player_id}"
+                )
+                print("Models loaded ...\n")
+
+            except FileNotFoundError:
+                print(
+                    f"FileNotFound for player {self.player_id}.\
+                    \nSkipping loading ...\n")
 
     def get_status(self):
-        if self._input.movement.direction.x == 0 and self._input.movement.direction.y == 0:
-            if 'idle' not in self.status and 'attack' not in self.status:
-                self.status += '_idle'
+        if self._input.movement.direction.x == 0\
+                and self._input.movement.direction.y == 0:
+
+            if 'idle' not in self._input.status and 'attack' not in self._input.status:
+                self._input.status += '_idle'
 
         if self._input.attacking:
             self._input.movement.direction.x = 0
             self._input.movement.direction.y = 0
-            if 'attack' not in self.status:
-                if 'idle' in self.status:
-                    self.status = self.status.replace('idle', 'attack')
+            if 'attack' not in self._input.status:
+                if 'idle' in self._input.status:
+                    self._input.status = self._input.status.replace(
+                        'idle', 'attack')
                 else:
-                    self.status += '_attack'
+                    self._input.status += '_attack'
         else:
-            if 'attack' in self.status:
-                self.status = self.status.replace('_attack', '')
+            if 'attack' in self._input.status:
+                self._input.status = self._input.status.replace('_attack', '')
 
     def attack_logic(self):
         if self.attack_sprites:
@@ -123,11 +159,12 @@ class Player(pygame.sprite.Sprite):
             2*np.exp(-nearest_dist**2),
             np.exp(-nearest_enemy.stats.health),
             -np.exp(-self.stats.health**2)
+            if not self.is_dead() > 0 else -1
         ]
 
         self.state_features = [
-            np.exp(-self.rect.center[0]),
-            np.exp(-self.rect.center[1]),
+            np.exp(-self.animation.rect.center[0]),
+            np.exp(-self.animation.rect.center[1]),
             self._input.movement.direction.x,
             self._input.movement.direction.y,
             self.stats.health/self.stats.stats['health'],
@@ -153,73 +190,48 @@ class Player(pygame.sprite.Sprite):
 
         self.state_features = np.array(self.state_features)
 
-    def get_max_num_states(self):
-        self.get_current_state()
-        self.num_features = len(self.state_features)
-
-    def setup_agent(self):
-        print(f"Initializing agent on player {self.player_id} ...")
-        self.agent = Agent(
-            input_dims=len(self.state_features),
-            n_actions=len(self._input.possible_actions),
-            batch_size=5,
-            n_epochs=4)
-        print(
-            f" Agent initialized using {self.agent.actor.device}. Attempting to load models ...")
-
-        try:
-            self.agent.load_models(
-                actr_chkpt=f"player_actor", crtc_chkpt=f"player_critic")
-            print("Models loaded ...\n")
-
-        except FileNotFoundError:
-            print("FileNotFound for agent. Skipping loading...\n")
-
     def is_dead(self):
         if self.stats.health <= 0:
+            self.stats.health = 0
+            self.animation.import_assets((3264, 448))
             return True
         else:
             return False
 
     def update(self):
 
-        # Get the current state
-        self.get_current_state()
-        # Choose action based on current state
-        action, probs, value = self.agent.choose_action(self.state_features)
+        if not self.is_dead():
+            # Get the current state
+            self.get_current_state()
+            # Choose action based on current state
+            action, probs, value\
+                = self.agent.choose_action(self.state_features)
 
-        self.n_steps += 1
-        # Apply chosen action
-        self._input.check_input(action,
-                                self.stats.speed,
-                                self.animation.hitbox,
-                                self.obstacle_sprites,
-                                self.animation.rect,
-                                self)
+            # Apply chosen action
+            self._input.check_input(action,
+                                    self.stats.speed,
+                                    self.animation.hitbox,
+                                    self.obstacle_sprites,
+                                    self.animation.rect,
+                                    self)
 
-        self.score = self.stats.exp
-        self.agent.remember(self.state_features, action,
-                            probs, value, self.stats.exp, self.is_dead())
+            self.score = self.stats.exp
+            self.agent.remember(self.state_features, action,
+                                probs, value, self.stats.exp, self.is_dead())
 
-        if self.n_steps % self.N == 0:
-            self.agent.learn()
-            self.learn_iters += 1
+            self.get_current_state()
 
-        self.get_current_state()
+            # Cooldowns and Regen
+            self.stats.health_recovery()
+            self.stats.energy_recovery()
 
-        # Refresh objects based on input
-        self.status = self._input.status
+        else:
+            self.stats.exp = max(0, self.stats.exp - .01)
 
-        # Animate
+        # Refresh player based on input and animate
         self.get_status()
-        self.animation.animate(self.status, self._input.combat.vulnerable)
+        self.animation.animate(
+            self._input.status, self._input.combat.vulnerable)
         self.image = self.animation.image
         self.rect = self.animation.rect
-
-        # Cooldowns and Regen
-        self.stats.health_recovery()
-        self.stats.energy_recovery()
         self._input.cooldowns(self._input.combat.vulnerable)
-
-        if self.is_dead():
-            self.stats.exp = max(-1, self.stats.exp - .5)
