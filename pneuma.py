@@ -223,6 +223,8 @@ if __name__ == "__main__":
                 print(f"\nScore this round for player {player.player_id}:\
                       {player.stats.exp}")
 
+
+
     # End of training session
     print("End of episodes.\
         \nExiting game...")

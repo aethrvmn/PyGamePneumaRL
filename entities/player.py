@@ -63,6 +63,7 @@ class Player(pygame.sprite.Sprite):
                     no_load=False):
 
         self.get_current_state()
+        self.num_features ==
         self.agent = Agent(
             input_dims=len(self.state_features),
             n_actions=len(self._input.possible_actions),
@@ -173,7 +174,7 @@ class Player(pygame.sprite.Sprite):
 
         enemy_states = []
 
-        for distance, direction, enemy in sorted_distances[:5]:
+        for distance, direction, enemy in self.distance_direction_from_enemy:
             enemy_states.extend([
                 np.exp(-distance),
                 direction[0],
