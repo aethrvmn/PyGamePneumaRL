@@ -63,9 +63,10 @@ class Player(pygame.sprite.Sprite):
                     no_load=False):
 
         self.get_current_state()
-        self.num_features ==
+        self.num_features = len(self.state_features)
+
         self.agent = Agent(
-            input_dims=len(self.state_features),
+            input_dims=self.num_features,
             n_actions=len(self._input.possible_actions),
             gamma=gamma,
             alpha=alpha,
