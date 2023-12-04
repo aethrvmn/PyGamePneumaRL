@@ -62,6 +62,7 @@ class Player(pygame.sprite.Sprite):
                     chkpt_dir,
                     no_load=False):
 
+        self.max_num_enemies = len(self.distance_direction_from_enemy)
         self.get_current_state()
         self.num_features = len(self.state_features)
 
@@ -158,9 +159,17 @@ class Player(pygame.sprite.Sprite):
 
         self.reward_features = [
             self.stats.exp,
+
             2*np.exp(-nearest_dist**2),
-            np.exp(-nearest_enemy.stats.health),
-            -np.exp(-self.stats.health**2)
+
+            1/(np.exp((nearest_enemy.stats.health -
+               nearest_enemy.stats.monster_info['health'])/nearest_enemy.stats.monster_info['health'])) - 1,
+
+            1/(np.exp((len(self.distance_direction_from_enemy) -
+               self.max_num_enemies)/self.max_num_enemies)) - 1,
+
+            1 - 1/(np.exp((self.stats.health -
+                   self.stats.stats['health'])/self.stats.stats['health']))
             if not self.is_dead() > 0 else -1
         ]
 
@@ -233,7 +242,7 @@ class Player(pygame.sprite.Sprite):
             self.stats.energy_recovery()
 
         else:
-            self.stats.exp = max(0, self.stats.exp - .01)
+            self.stats.exp = max(-1, self.stats.exp - .1)
 
         # Refresh player based on input and animate
         self.get_status()

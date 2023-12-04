@@ -1,4 +1,4 @@
-import os
+import random
 import argparse
 import torch as T
 import numpy as np
@@ -55,7 +55,7 @@ if __name__ == "__main__":
 
     parser.add_argument('--horizon',
                         type=int,
-                        default=200,
+                        default=2048,
                         help="The number of steps per update")
 
     parser.add_argument('--show_pg',
@@ -100,6 +100,7 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
 
+    random.seed(args.seed)
     np.random.seed(args.seed)
     T.manual_seed(args.seed)
 
@@ -219,12 +220,6 @@ if __name__ == "__main__":
 
                 print(f"Models saved to {chkpt_path}")
 
-            else:
-                print(f"\nScore this round for player {player.player_id}:\
-                      {player.stats.exp}")
-
-
-
     # End of training session
     print("End of episodes.\
         \nExiting game...")
@@ -264,4 +259,5 @@ if __name__ == "__main__":
     for total in total_loss:
         plt.plot(total)
     plt.savefig(f"{figure_folder}/total_loss.png")
+
     game.quit()
