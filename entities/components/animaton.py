@@ -45,6 +45,7 @@ class AnimationHandler:
                                                  'player',
                                                  animation
                                                  ))
+            print(f"hitbox: {self.hitbox}")
 
         elif self.sprite_type == 'enemy':
 

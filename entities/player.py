@@ -1,4 +1,3 @@
-import os
 import pygame
 import numpy as np
 from random import randint
@@ -154,16 +153,18 @@ class Player(pygame.sprite.Sprite):
             sorted_distances = np.zeros(self.num_features)
 
         nearest_dist, _, nearest_enemy = sorted_distances[0]
+        print(nearest_dist, nearest_enemy)
 
         self.action_features = [self._input.action]
 
         self.reward_features = [
             self.stats.exp,
 
-            2*np.exp(-nearest_dist**2),
+            10/nearest_dist if nearest_dist > 10 else 1,
 
             1/(np.exp((nearest_enemy.stats.health -
-               nearest_enemy.stats.monster_info['health'])/nearest_enemy.stats.monster_info['health'])) - 1,
+               nearest_enemy.stats.monster_info['health'])
+                      / nearest_enemy.stats.monster_info['health'])) - 1,
 
             1/(np.exp((len(self.distance_direction_from_enemy) -
                self.max_num_enemies)/self.max_num_enemies)) - 1,
@@ -186,11 +187,18 @@ class Player(pygame.sprite.Sprite):
 
         for distance, direction, enemy in self.distance_direction_from_enemy:
             enemy_states.extend([
-                np.exp(-distance),
+
+                10/distance if distance > 10 else 1,
+
                 direction[0],
+
                 direction[1],
-                enemy.stats.health/enemy.stats.monster_info['health'],
-                np.exp(-enemy.stats.exp**2),
+
+                1/(np.exp((nearest_enemy.stats.health -
+                           nearest_enemy.stats.monster_info['health'])
+                          / nearest_enemy.stats.monster_info['health'])) - 1,
+
+                enemy.stats.exp,
             ])
 
         self.state_features.extend(enemy_states)
