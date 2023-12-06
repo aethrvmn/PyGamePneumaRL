@@ -170,7 +170,6 @@ class Player(pygame.sprite.Sprite):
 
             1 - 1/(np.exp((self.stats.health -
                    self.stats.stats['health'])/self.stats.stats['health']))
-            if not self.is_dead() > 0 else -1
         ]
 
         self.state_features = [
