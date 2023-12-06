@@ -189,8 +189,11 @@ if __name__ == "__main__":
         # Gather information about the episode
         for player in game.level.player_sprites:
 
+            score = np.mean(player.reward_features)
+            print(player.reward_features)
+
             # Update score
-            score_history[player.player_id][episode] = player.stats.exp
+            score_history[player.player_id][episode] = np.mean(score)
 
             # Update actor/critic loss
             actor_loss[player.player_id][episode] = np.mean(
@@ -203,13 +206,13 @@ if __name__ == "__main__":
                 episode_total_loss)
 
             # Check for new best score
-            if player.stats.exp > best_score[player.player_id]:
+            if score > best_score[player.player_id]:
                 print(f"\nNew best score for player {player.player_id}:\
-                          {player.stats.exp}\
+                          {score}\
                         \nOld best score for player {player.player_id}: \
                             {best_score[player.player_id]}")
 
-                best_score[player.player_id] = player.stats.exp
+                best_score[player.player_id] = score
 
                 print(f"Saving models for player {player.player_id}...")
 
@@ -220,44 +223,48 @@ if __name__ == "__main__":
 
                 print(f"Models saved to {chkpt_path}")
 
+        plt.figure()
+        plt.title("Player Performance")
+        plt.xlabel("Episode")
+        plt.ylabel("Score")
+        plt.legend([f"Player {num}" for num in range(n_players)])
+        for player_score in score_history:
+            plt.plot(player_score)
+        plt.savefig(f"{figure_folder}/score.png")
+        plt.close()
+
+        plt.figure()
+        plt.suptitle("Actor Loss")
+        plt.xlabel("Episode")
+        plt.ylabel("Loss")
+        plt.legend([f"Agent {num}" for num in range(n_players)])
+        for actor in actor_loss:
+            plt.plot(actor)
+        plt.savefig(f"{figure_folder}/actor_loss.png")
+        plt.close()
+
+        plt.figure()
+        plt.suptitle("Critic Loss")
+        plt.xlabel("Episode")
+        plt.ylabel("Loss")
+        plt.legend([f"Agent {num}" for num in range(n_players)])
+        for critic in critic_loss:
+            plt.plot(critic)
+        plt.savefig(f"{figure_folder}/critic_loss.png")
+        plt.close()
+
+        plt.figure()
+        plt.suptitle("Total Loss")
+        plt.xlabel("Episode")
+        plt.ylabel("Loss")
+        plt.legend([f"Agent {num}" for num in range(n_players)])
+        for total in total_loss:
+            plt.plot(total)
+        plt.savefig(f"{figure_folder}/total_loss.png")
+        plt.close()
+
     # End of training session
     print("End of episodes.\
         \nExiting game...")
-
-    plt.figure()
-    plt.title("Player Performance")
-    plt.xlabel("Episode")
-    plt.ylabel("Score")
-    plt.legend([f"Player {num}" for num in range(n_players)])
-    for player_score in score_history:
-        plt.plot(player_score)
-    plt.savefig(f"{figure_folder}/score.png")
-
-    plt.figure()
-    plt.suptitle("Actor Loss")
-    plt.xlabel("Episode")
-    plt.ylabel("Loss")
-    plt.legend([f"Agent {num}" for num in range(n_players)])
-    for actor in actor_loss:
-        plt.plot(actor)
-    plt.savefig(f"{figure_folder}/actor_loss.png")
-
-    plt.figure()
-    plt.suptitle("Critic Loss")
-    plt.xlabel("Episode")
-    plt.ylabel("Loss")
-    plt.legend([f"Agent {num}" for num in range(n_players)])
-    for critic in critic_loss:
-        plt.plot(critic)
-    plt.savefig(f"{figure_folder}/critic_loss.png")
-
-    plt.figure()
-    plt.suptitle("Total Loss")
-    plt.xlabel("Episode")
-    plt.ylabel("Loss")
-    plt.legend([f"Agent {num}" for num in range(n_players)])
-    for total in total_loss:
-        plt.plot(total)
-    plt.savefig(f"{figure_folder}/total_loss.png")
 
     game.quit()

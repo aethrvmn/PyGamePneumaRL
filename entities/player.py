@@ -231,6 +231,8 @@ class Player(pygame.sprite.Sprite):
 
         self.get_current_state()
 
+        print(self.reward_features)
+
     def update(self):
 
         if not self.is_dead():

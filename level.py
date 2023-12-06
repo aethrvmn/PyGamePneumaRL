@@ -205,12 +205,17 @@ class Level:
                                       self.obstacle_sprites)
 
         for player in self.player_sprites:
+
             player.animation.import_assets(
                 choice(self.possible_player_locations))
+
             player.stats.health\
                 = player.stats.stats['health']
+
             player.stats.energy\
                 = player.stats.stats['energy']
+
+            player.stats.exp = 0
 
         self.get_entities()
         self.get_distance_direction()
