@@ -153,7 +153,6 @@ class Player(pygame.sprite.Sprite):
             sorted_distances = np.zeros(self.num_features)
 
         nearest_dist, _, nearest_enemy = sorted_distances[0]
-        print(nearest_dist, nearest_enemy)
 
         self.action_features = [self._input.action]
 
@@ -238,8 +237,6 @@ class Player(pygame.sprite.Sprite):
                             probs, value, self.stats.exp, self.is_dead())
 
         self.get_current_state()
-
-        print(self.reward_features)
 
     def update(self):
 

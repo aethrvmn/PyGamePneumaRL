@@ -190,7 +190,6 @@ if __name__ == "__main__":
         for player in game.level.player_sprites:
 
             score = np.mean(player.reward_features)
-            print(player.reward_features)
 
             # Update score
             score_history[player.player_id][episode] = np.mean(score)
