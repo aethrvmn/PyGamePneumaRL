@@ -215,7 +215,7 @@ class Level:
             player.stats.energy\
                 = player.stats.stats['energy']
 
-            player.stats.exp = 0
+            # player.stats.exp = 0
 
         self.get_entities()
         self.get_distance_direction()
