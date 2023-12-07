@@ -79,12 +79,16 @@ class Level:
 
                         # Generate unpassable terrain
                         if style == 'boundary':
-                            if col != '700':
+
+                            if col == '600':
+                                self.map_edge = (x, y)
+
+                            elif col != '700':
                                 Terrain((x, y),
                                         [self.obstacle_sprites,
                                             self.visible_sprites],
                                         'invisible')
-                            if col == '700':
+                            elif col == '700' and self.n_players > 1:
                                 print(f"Prison set at:{(x, y)}")
                         # Generate grass
                         if style == 'grass':
@@ -145,6 +149,7 @@ class Level:
                 player_id,
                 'tank',
                 choice(self.possible_player_locations),
+                self.map_edge,
                 [self.visible_sprites],
                 self.obstacle_sprites,
                 self.visible_sprites,
@@ -215,7 +220,7 @@ class Level:
             player.stats.energy\
                 = player.stats.stats['energy']
 
-            # player.stats.exp = 0
+            player.stats.exp = 0
 
         self.get_entities()
         self.get_distance_direction()
