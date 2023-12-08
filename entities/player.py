@@ -61,6 +61,7 @@ class Player(pygame.sprite.Sprite):
                     n_epochs,
                     gae_lambda,
                     chkpt_dir,
+                    entropy_coef,
                     no_load=False):
 
         self.max_num_enemies = len(self.distance_direction_from_enemy)
@@ -77,6 +78,7 @@ class Player(pygame.sprite.Sprite):
             N=N,
             n_epochs=n_epochs,
             gae_lambda=gae_lambda,
+            entropy_coef=entropy_coef,
             chkpt_dir=chkpt_dir
         )
         print(
@@ -150,7 +152,7 @@ class Player(pygame.sprite.Sprite):
 
         def fermi(x, a):
             # Used for rescaling features
-            return 1 / (np.exp(-(x - a)) + 1)
+            return 1 / (np.exp((x - a)) + 1)
 
         def maxwell(x, a):
             # Used for rescaling features
@@ -166,27 +168,32 @@ class Player(pygame.sprite.Sprite):
 
         self.action_features = [self._input.action]
 
-        self.reward_features = [
-            self.stats.exp,
+        # self.reward = [
+        #     np.log(1 + self.stats.exp),
+        #
+        #     fermi(nearest_dist, 50),
+        #
+        #     fermi(
+        #         nearest_enemy.stats.health,
+        #         nearest_enemy.stats.monster_info['health']
+        #     ),
+        #
+        #     maxwell(
+        #         len(self.distance_direction_from_enemy),
+        #         self.max_num_enemies
+        #     ) - 1,
+        #
+        #     - fermi(
+        #         self.stats.health,
+        #         self.stats.stats['health']
+        #     ),
+        # ]
 
-            fermi(nearest_dist, 10),
-
-            fermi(
-                nearest_enemy.stats.health,
-                nearest_enemy.stats.monster_info['health']
-            ),
-
-            maxwell(
-                len(self.distance_direction_from_enemy),
-                self.max_num_enemies
-            ) - 1,
-
-            - fermi(
-                self.stats.health,
-                self.stats.stats['health']
-            ),
-
-        ]
+        self.reward = self.stats.exp\
+            + self.stats.health/self.stats.stats['health'] - 1\
+            - nearest_dist/np.sqrt(np.sum(self.map_edge))\
+            - nearest_enemy.stats.health/nearest_enemy.stats.monster_info['health']\
+            - len(self.distance_direction_from_enemy)/self.max_num_enemies
 
         self.state_features = [
             self.animation.rect.center[0]/self.map_edge[0],
@@ -204,7 +211,7 @@ class Player(pygame.sprite.Sprite):
         for distance, direction, enemy in self.distance_direction_from_enemy:
             enemy_states.extend([
 
-                fermi(distance, 10),
+                distance/np.sqrt(np.sum(self.map_edge)),
 
                 direction[0],
 
@@ -256,16 +263,11 @@ class Player(pygame.sprite.Sprite):
 
     def update(self):
 
-        if not self.is_dead():
+        self.agent_update()
 
-            self.agent_update()
-
-            # Cooldowns and Regen
-            self.stats.health_recovery()
-            self.stats.energy_recovery()
-
-        else:
-            self.stats.exp = max(-1, self.stats.exp - .1)
+        # Cooldowns and Regen
+        self.stats.health_recovery()
+        self.stats.energy_recovery()
 
         # Refresh player based on input and animate
         self.get_status()

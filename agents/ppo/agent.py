@@ -8,12 +8,13 @@ class Agent:
 
     def __init__(self, input_dims, n_actions, gamma=0.99, alpha=0.0003,
                  policy_clip=0.2, batch_size=64, N=2048, n_epochs=10,
-                 gae_lambda=0.95, chkpt_dir='tmp/ppo'):
+                 gae_lambda=0.95, entropy_coef=0.001, chkpt_dir='tmp/ppo'):
 
         self.gamma = gamma
         self.policy_clip = policy_clip
         self.n_epochs = n_epochs
         self.gae_lambda = gae_lambda
+        self.entropy_coef = entropy_coef
 
         self.actor = ActorNetwork(
             input_dims, n_actions, alpha, chkpt_dir=chkpt_dir)
@@ -43,6 +44,8 @@ class Agent:
         probs = T.squeeze(dist.log_prob(action)).item()
         action = T.squeeze(action).item()
         value = T.squeeze(value).item()
+
+        self.entropy = dist.entropy().mean().item()
 
         return action, probs, value
 
@@ -81,8 +84,10 @@ class Agent:
                 new_probs = dist.log_prob(actions)
                 prob_ratio = new_probs.exp() / old_probs.exp()
                 weighted_probs = advantage[batch] * prob_ratio
+
                 weighted_clipped_probs = T.clamp(
                     prob_ratio, 1-self.policy_clip, 1+self.policy_clip)*advantage[batch]
+
                 self.actor_loss = -T.min(weighted_probs,
                                          weighted_clipped_probs).mean()
 
@@ -90,10 +95,27 @@ class Agent:
                 self.critic_loss = (returns - critic_value)**2
                 self.critic_loss = self.critic_loss.mean()
 
-                self.total_loss = self.actor_loss + 0.5*self.critic_loss
+                self.total_loss = self.actor_loss + 0.5 * \
+                    self.critic_loss - self.entropy_coef*self.entropy
+
                 self.actor.optimizer.zero_grad()
                 self.critic.optimizer.zero_grad()
                 self.total_loss.backward()
+
+                # Calculate the gradient norms for both networks
+                actor_grad_norm = T.nn.utils.clip_grad_norm_(
+                    self.actor.parameters(), max_norm=1)
+                critic_grad_norm = T.nn.utils.clip_grad_norm_(
+                    self.critic.parameters(), max_norm=1)
+
+                T.nn.utils.clip_grad_norm_(
+                    self.actor.parameters(), max_norm=1)
+                T.nn.utils.clip_grad_norm_(
+                    self.critic.parameters(), max_norm=1)
+                # Log or print the gradient norms
+                print(f"Actor Gradient Norm: {actor_grad_norm}")
+                print(f"Critic Gradient Norm: {critic_grad_norm}")
+
                 self.actor.optimizer.step()
                 self.critic.optimizer.step()
 

@@ -73,6 +73,11 @@ if __name__ == "__main__":
                         default=0.99,
                         help="The gamma parameter for PPO")
 
+    parser.add_argument('--entropy',
+                        type=float,
+                        default=0.001,
+                        help="The entropy coefficient")
+
     parser.add_argument('--alpha',
                         type=float,
                         default=0.0003,
@@ -119,6 +124,7 @@ if __name__ == "__main__":
 
     # Setup AI stuff
     score_history = np.zeros(shape=(n_players, n_episodes))
+
     best_score = np.zeros(n_players)
 
     actor_loss = np.zeros(shape=(n_players,
@@ -142,6 +148,7 @@ if __name__ == "__main__":
             N=args.horizon,
             n_epochs=args.n_epochs,
             gae_lambda=args.gae_lambda,
+            entropy_coef=args.entropy,
             chkpt_dir=chkpt_path,
             no_load=args.no_load
         )
@@ -189,7 +196,7 @@ if __name__ == "__main__":
         # Gather information about the episode
         for player in game.level.player_sprites:
 
-            score = np.mean(player.reward_features)
+            score = player.reward
 
             # Update score
             score_history[player.player_id][episode] = np.mean(score)
@@ -223,10 +230,10 @@ if __name__ == "__main__":
                 print(f"Models saved to {chkpt_path}")
 
         plt.figure()
-        plt.title("Player Performance")
+        plt.title("Agent Rewards")
         plt.xlabel("Episode")
         plt.ylabel("Score")
-        plt.legend([f"Player {num}" for num in range(n_players)])
+        plt.legend([f"Agent {num}" for num in range(n_players)])
         for player_score in score_history:
             plt.plot(player_score)
         plt.savefig(f"{figure_folder}/score.png")
