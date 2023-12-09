@@ -96,9 +96,9 @@ class CriticNetwork(nn.Module):
 
         self.critic = nn.Sequential(
             nn.Linear(input_dims, fc1_dims),
-            nn.ReLU(),
+            nn.LeakyReLU(),
             nn.Linear(fc1_dims, fc2_dims),
-            nn.ReLU(),
+            nn.LeakyReLU(),
             nn.Linear(fc2_dims, 1)
         )
 

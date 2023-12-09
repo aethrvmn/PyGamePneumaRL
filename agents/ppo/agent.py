@@ -102,16 +102,17 @@ class Agent:
                 self.critic.optimizer.zero_grad()
                 self.total_loss.backward()
 
+                T.nn.utils.clip_grad_norm_(
+                    self.actor.parameters(), max_norm=2)
+                T.nn.utils.clip_grad_norm_(
+                    self.critic.parameters(), max_norm=2)
+
                 # Calculate the gradient norms for both networks
                 actor_grad_norm = T.nn.utils.clip_grad_norm_(
                     self.actor.parameters(), max_norm=1)
                 critic_grad_norm = T.nn.utils.clip_grad_norm_(
                     self.critic.parameters(), max_norm=1)
 
-                T.nn.utils.clip_grad_norm_(
-                    self.actor.parameters(), max_norm=1)
-                T.nn.utils.clip_grad_norm_(
-                    self.critic.parameters(), max_norm=1)
                 # Log or print the gradient norms
                 print(f"Actor Gradient Norm: {actor_grad_norm}")
                 print(f"Critic Gradient Norm: {critic_grad_norm}")
