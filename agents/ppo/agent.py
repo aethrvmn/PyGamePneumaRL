@@ -104,14 +104,16 @@ class Agent:
 
                 T.nn.utils.clip_grad_norm_(
                     self.actor.parameters(), max_norm=2)
+
                 T.nn.utils.clip_grad_norm_(
                     self.critic.parameters(), max_norm=2)
 
                 # Calculate the gradient norms for both networks
                 actor_grad_norm = T.nn.utils.clip_grad_norm_(
-                    self.actor.parameters(), max_norm=1)
+                    self.actor.parameters(), max_norm=2)
+
                 critic_grad_norm = T.nn.utils.clip_grad_norm_(
-                    self.critic.parameters(), max_norm=1)
+                    self.critic.parameters(), max_norm=2)
 
                 # Log or print the gradient norms
                 print(f"Actor Gradient Norm: {actor_grad_norm}")
