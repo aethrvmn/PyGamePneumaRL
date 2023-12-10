@@ -213,7 +213,9 @@ if __name__ == "__main__":
 
             # Check for new best score
             if score > best_score[player.player_id]:
-                print(f"\nNew best score for player {player.player_id}:\
+                print(f"\nEpisode:\
+                          {episode}\
+                        \nNew best score for player {player.player_id}:\
                           {score}\
                         \nOld best score for player {player.player_id}: \
                             {best_score[player.player_id]}")

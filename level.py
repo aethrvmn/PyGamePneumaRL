@@ -310,7 +310,7 @@ class Level:
 
         for player in self.player_sprites:
             if player.is_dead():
-                print('Player dead')
+                print(f"\nPlayer {player.player_id} is dead")
                 player.stats.exp = -10
                 player.update()
                 self.dead_players[player.player_id] = player.is_dead()
