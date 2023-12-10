@@ -30,7 +30,7 @@ monster_data = {
                'notice_radius': 350},
 
     'bamboo': {'id': 4,
-               'health': 70,
+               'health': 50,
                'exp': 9,
                'attack': 20,
                'attack_type': 'leaf_attack',

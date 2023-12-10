@@ -59,9 +59,9 @@ class ActorNetwork(nn.Module):
 
         self.actor = nn.Sequential(
             nn.Linear(input_dim, fc1_dims),
-            nn.ReLU(),
+            nn.LeakyReLU(),
             nn.Linear(fc1_dims, fc2_dims),
-            nn.ReLU(),
+            nn.LeakyReLU(),
             nn.Linear(fc2_dims, output_dim),
             nn.Softmax(dim=-1)
         )

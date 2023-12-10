@@ -75,7 +75,7 @@ if __name__ == "__main__":
 
     parser.add_argument('--entropy',
                         type=float,
-                        default=0.001,
+                        default=0.01,
                         help="The entropy coefficient")
 
     parser.add_argument('--alpha',
@@ -139,13 +139,13 @@ if __name__ == "__main__":
     game = Game(show_pg=show_pygame, n_players=n_players)
 
     print("Initializing agents ...")
-    for player in game.level.player_sprites:
+    for player in tqdm(game.level.player_sprites,
+                       dynamic_ncols=True):
         player.setup_agent(
             gamma=args.gamma,
             alpha=args.alpha,
             policy_clip=args.policy_clip,
             batch_size=args.batch_size,
-            N=args.horizon,
             n_epochs=args.n_epochs,
             gae_lambda=args.gae_lambda,
             entropy_coef=args.entropy,
@@ -157,8 +157,10 @@ if __name__ == "__main__":
     for episode in tqdm(range(n_episodes),
                         dynamic_ncols=True):
 
-        # This handles agent continuity, as well as score persistence
         game.level.reset()
+
+        episode_reward = np.zeros(
+            shape=(n_players, episode_length))
 
         episode_actor_loss = np.zeros(
             shape=(n_players, learnings_per_episode))
@@ -177,8 +179,13 @@ if __name__ == "__main__":
 
             if not game.level.done:
                 game.run()
-                if step % horizon == 0:
-                    for player in game.level.player_sprites:
+
+                for player in game.level.player_sprites:
+
+                    episode_reward[player.player_id][step] = np.mean(
+                        player.reward)
+
+                    if (step % horizon == 0 and step != 0) or player.is_dead():
 
                         player.agent.learn()
 
@@ -196,10 +203,10 @@ if __name__ == "__main__":
         # Gather information about the episode
         for player in game.level.player_sprites:
 
-            score = player.reward
+            score = np.mean(episode_reward[player.player_id])
 
             # Update score
-            score_history[player.player_id][episode] = np.mean(score)
+            score_history[player.player_id][episode] = score
 
             # Update actor/critic loss
             actor_loss[player.player_id][episode] = np.mean(

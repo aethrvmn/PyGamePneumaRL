@@ -1,13 +1,15 @@
 import numpy as np
 import torch as T
 
+from tqdm import tqdm
+
 from .brain import ActorNetwork, CriticNetwork, PPOMemory
 
 
 class Agent:
 
     def __init__(self, input_dims, n_actions, gamma=0.99, alpha=0.0003,
-                 policy_clip=0.2, batch_size=64, N=2048, n_epochs=10,
+                 policy_clip=0.2, batch_size=64, n_epochs=10,
                  gae_lambda=0.95, entropy_coef=0.001, chkpt_dir='tmp/ppo'):
 
         self.gamma = gamma
@@ -50,7 +52,12 @@ class Agent:
         return action, probs, value
 
     def learn(self):
-        for _ in range(self.n_epochs):
+        for _ in tqdm(range(self.n_epochs),
+                      desc='Learning...',
+                      dynamic_ncols=True,
+                      leave=False,
+                      ascii=True):
+
             state_arr, action_arr, old_probs_arr, vals_arr, reward_arr, dones_arr, batches = self.memory.generate_batches()
 
             values = vals_arr
@@ -102,11 +109,11 @@ class Agent:
                 self.critic.optimizer.zero_grad()
                 self.total_loss.backward()
 
-                # T.nn.utils.clip_grad_norm_(
-                #     self.actor.parameters(), max_norm=2)
-                #
-                # T.nn.utils.clip_grad_norm_(
-                #     self.critic.parameters(), max_norm=2)
+                T.nn.utils.clip_grad_norm_(
+                    self.actor.parameters(), max_norm=2)
+
+                T.nn.utils.clip_grad_norm_(
+                    self.critic.parameters(), max_norm=2)
                 #
                 # # Calculate the gradient norms for both networks
                 # actor_grad_norm = T.nn.utils.clip_grad_norm_(

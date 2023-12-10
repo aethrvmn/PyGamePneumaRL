@@ -1,10 +1,10 @@
 tank_stats = {
     'role_id': 1,
     'health': 150,
-    'energy': 40,
+    'energy': 70,
     'attack': 10,
-    'magic': 3,
-    'speed': 3
+    'magic': 5,
+    'speed': 5
 }
 
 mage_stats = {

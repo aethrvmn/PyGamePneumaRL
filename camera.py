@@ -15,11 +15,6 @@ class Camera(pygame.sprite.Group):
         self.half_height = self.display_surface.get_size()[1] // 2
         self.offset = pygame.math.Vector2(100, 200)
 
-        # Creating the floor
-        image_path = import_assets(os.path.join('graphics',
-                                                'tilemap',
-                                                'ground.png'))
-
         self.floor_surf = pygame.image.load(
             import_assets(
                 os.path.join('graphics',
