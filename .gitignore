@@ -160,7 +160,7 @@ cython_debug/
 #.idea/
 
 # Mac bs
-.DS_store
+.DS_Store
 
 # Random stuff
 __pycache__/
