@@ -85,57 +85,48 @@ class Level:
 
                             elif col != '700':
                                 Terrain((x, y),
-                                        [self.obstacle_sprites,
-                                            self.visible_sprites],
+                                        [self.obstacle_sprites],
                                         'invisible')
                             elif col == '700' and self.n_players > 1:
                                 print(f"Prison set at:{(x, y)}")
                         # Generate grass
-                        # if style == 'grass':
-                        #     random_grass_image = choice(self.graphics['grass'])
-                        #
-                        #     Terrain((x, y), [
-                        #         self.visible_sprites,
-                        #         self.obstacle_sprites,
-                        #         self.attackable_sprites
-                        #     ],
-                        #         'grass',
-                        #         random_grass_image)
+                        if style == 'grass':
+                            random_grass_image = choice(self.graphics['grass'])
+
+                            Terrain((x, y), [
+                                self.visible_sprites,
+                                self.obstacle_sprites,
+                                self.attackable_sprites
+                            ],
+                                'grass',
+                                random_grass_image)
 
                         # Generate objects like trees and statues
-                        # if style == 'objects':
-                        #     surface = self.graphics['objects'][int(col)]
-                        #     Terrain((x, y), [
-                        #         self.visible_sprites,
-                        #         self.obstacle_sprites
-                        #     ],
-                        #         'object',
-                        #         surface)
+                        if style == 'objects':
+                            surface = self.graphics['objects'][int(col)]
+                            Terrain((x, y), [
+                                self.visible_sprites,
+                                self.obstacle_sprites
+                            ],
+                                'object',
+                                surface)
 
                         # Generate observer, players and monsters
                         if style == 'entities':
 
-                            # Generate observer
-                            if col == '500':
-                                self.observer = Observer(
-                                    (x, y),
-                                    [self.visible_sprites]
-                                )
-
                             # Generate player(s)
-                            # TODO: Make a way to generate players in random locations
-                            elif col == '400':
+                            if col == '400':
                                 self.possible_player_locations.append((x, y))
-                            # Monster generation
 
-                            else:
+                            # Monster generation
+                            elif col in ['390', '391', '392', '393']:
                                 if col == '390':
                                     monster_name = 'bamboo'
                                 elif col == '391':
                                     monster_name = 'spirit'
                                 elif col == '392':
                                     monster_name = 'raccoon'
-                                elif col == ' 393':
+                                elif col == '393':
                                     monster_name = 'squid'
                                 Enemy(name=monster_name,
                                       position=(x, y),
@@ -171,35 +162,29 @@ class Level:
                     if int(col) != -1:
                         x = col_index * TILESIZE
                         y = row_index * TILESIZE
-                        # # Regenerate grass
-                        # if style == 'grass':
-                        #     random_grass_image = choice(
-                        #         self.graphics['grass'])
-                        #
-                        #     Terrain((x, y), [
-                        #         self.visible_sprites,
-                        #         self.obstacle_sprites,
-                        #         self.attackable_sprites
-                        #     ],
-                        #         'grass',
-                        #         random_grass_image)
+                        # Regenerate grass
+                        if style == 'grass':
+                            random_grass_image = choice(
+                                self.graphics['grass'])
+
+                            Terrain((x, y), [
+                                self.visible_sprites,
+                                self.obstacle_sprites,
+                                self.attackable_sprites
+                            ],
+                                'grass',
+                                random_grass_image)
 
                         if style == 'entities':
 
-                            if col == '500':
-                                continue
-
-                            if col == '400':
-                                continue
-
-                            else:
+                            if col in ['390', '391', '392', '393']:
                                 if col == '390':
                                     monster_name = 'bamboo'
                                 elif col == '391':
                                     monster_name = 'spirit'
                                 elif col == '392':
                                     monster_name = 'raccoon'
-                                elif col == ' 393':
+                                elif col == '393':
                                     monster_name = 'squid'
 
                                 Enemy(monster_name,
@@ -287,12 +272,10 @@ class Level:
     def toggle_pause(self):
         self.paused = not self.paused
 
-    def run(self, who='observer', fps='v0.9'):
+    def run(self):
         # Draw the game
-        self.visible_sprites.custom_draw(self.observer)
-        self.ui.display(self.observer)
-
-        debug(f"{fps}")
+        self.visible_sprites.custom_draw()
+        self.ui.display()
 
         if not self.paused:
             # Update the game
@@ -310,7 +293,7 @@ class Level:
 
         for player in self.player_sprites:
             if player.is_dead():
-                print(f"\nPlayer {player.player_id} is dead")
+                print(f"\nPlayer {player.player_id} is dead\n")
                 player.stats.exp = -10
                 player.update()
                 self.dead_players[player.player_id] = player.is_dead()

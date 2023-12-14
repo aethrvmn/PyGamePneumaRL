@@ -27,4 +27,5 @@ class Terrain(pygame.sprite.Sprite):
                 topleft=(position[0], position[1] - TILESIZE))
         else:
             self.rect = self.image.get_rect(topleft=position)
+
         self.hitbox = self.rect.inflate(HITBOX_OFFSET[sprite_type])

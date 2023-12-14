@@ -11,9 +11,7 @@ class Camera(pygame.sprite.Group):
 
         # General Setup
         self.display_surface = pygame.display.get_surface()
-        self.half_width = self.display_surface.get_size()[0] // 2
-        self.half_height = self.display_surface.get_size()[1] // 2
-        self.offset = pygame.math.Vector2(100, 200)
+        self.display_size = self.display_surface.get_size()
 
         self.floor_surf = pygame.image.load(
             import_assets(
@@ -25,32 +23,45 @@ class Camera(pygame.sprite.Group):
 
         self.floor_rect = self.floor_surf.get_rect(topleft=(0, 0))
 
-    def custom_draw(self, entity):
+        self.calculate_scale()
 
-        self.sprite_type = entity.sprite_type
-        # Getting the offset
-        if hasattr(entity, 'animation'):
-            self.offset.x = entity.animation.rect.centerx - self.half_width
+    def calculate_scale(self):
+        map_width, map_height = self.floor_rect.size
+        screen_width, screen_height = self.display_size
 
-            self.offset.y = entity.animation.rect.centery - self.half_height
+        # Calculating the scale to fit the map on the screen
+        self.scale = min(screen_width / map_width, screen_height / map_height)
+        self.scaled_floor_surf = pygame.transform.scale(self.floor_surf,
+                                                        (int(map_width * self.scale),
+                                                         int(map_height * self.scale)))
+        self.scaled_floor_rect = self.scaled_floor_surf.get_rect()
 
-        else:
-            self.offset.x = entity.rect.centerx - self.half_width
+    def custom_draw(self):
+        # Drawing the scaled floor
+        self.display_surface.blit(
+            self.scaled_floor_surf, self.scaled_floor_rect.topleft)
 
-            self.offset.y = entity.rect.centery - self.half_height
-
-        # Drawing the floor
-        floor_offset_pos = self.floor_rect.topleft - self.offset
-        self.display_surface.blit(self.floor_surf, floor_offset_pos)
-
-        for sprite in sorted(self.sprites(),
-                             key=lambda sprite: sprite.animation.rect.centery
-                             if hasattr(sprite, 'animation')
-                             else sprite.rect.centery):
-
+        for sprite in sorted(self.sprites(), key=lambda sprite: sprite.rect.centery if not hasattr(sprite, 'animation') else sprite.animation.rect.centery):
+            # Check for sprites with 'animation' attribute
             if hasattr(sprite, 'animation'):
-                offset_pos = sprite.animation.rect.topleft - self.offset
-                self.display_surface.blit(sprite.animation.image, offset_pos)
+                scaled_sprite_image = pygame.transform.scale(sprite.animation.image,
+                                                             (int(sprite.animation.rect.width * self.scale),
+                                                              int(sprite.animation.rect.height * self.scale)))
+                scaled_position = (int(sprite.animation.rect.x * self.scale),
+                                   int(sprite.animation.rect.y * self.scale))
+        for sprite in sorted(self.sprites(), key=lambda sprite: sprite.rect.centery if not hasattr(sprite, 'animation') else sprite.animation.rect.centery):
+            # Check for sprites with 'animation' attribute
+            if hasattr(sprite, 'animation'):
+                scaled_sprite_image = pygame.transform.scale(sprite.animation.image,
+                                                             (int(sprite.animation.rect.width * self.scale),
+                                                              int(sprite.animation.rect.height * self.scale)))
+                scaled_position = (int(sprite.animation.rect.x * self.scale),
+                                   int(sprite.animation.rect.y * self.scale))
             else:
-                offset_pos = sprite.rect.topleft - self.offset
-                self.display_surface.blit(sprite.image, offset_pos)
+                scaled_sprite_image = pygame.transform.scale(sprite.image,
+                                                             (int(sprite.rect.width * self.scale),
+                                                              int(sprite.rect.height * self.scale)))
+                scaled_position = (int(sprite.rect.x * self.scale),
+                                   int(sprite.rect.y * self.scale))
+
+            self.display_surface.blit(scaled_sprite_image, scaled_position)

@@ -148,14 +148,6 @@ class Player(pygame.sprite.Sprite):
 
     def get_current_state(self):
 
-        def fermi(x, a):
-            # Used for rescaling features
-            return 1 / (np.exp((x - a)) + 1)
-
-        def maxwell(x, a):
-            # Used for rescaling features
-            return 1 / np.exp((x - a) / a)
-
         if self.distance_direction_from_enemy != []:
             sorted_distances = sorted(
                 self.distance_direction_from_enemy, key=lambda x: x[0])
@@ -166,32 +158,11 @@ class Player(pygame.sprite.Sprite):
 
         self.action_features = [self._input.action]
 
-        self.reward = [
-            np.log(1 + self.stats.exp) if self.stats.exp >= 0 else -10,
-
-            fermi(nearest_dist, 300),
-
-            fermi(
-                nearest_enemy.stats.health,
-                nearest_enemy.stats.monster_info['health']
-            ),
-
-            maxwell(
-                len(self.distance_direction_from_enemy),
-                self.max_num_enemies
-            ) - 1,
-
-            - fermi(
-                self.stats.health,
-                self.stats.stats['health']
-            )
-        ]
-
-        # self.reward = self.stats.exp\
-        #     + self.stats.health/self.stats.stats['health'] - 1\
-        #     - nearest_dist/np.sqrt(np.sum(self.map_edge))\
-        #     - nearest_enemy.stats.health/nearest_enemy.stats.monster_info['health']\
-        #     - 2*len(self.distance_direction_from_enemy)/self.max_num_enemies
+        self.reward = self.stats.exp\
+            + self.stats.health/self.stats.stats['health'] - 1\
+            - nearest_dist/np.sqrt(np.sum(self.map_edge))\
+            - nearest_enemy.stats.health/nearest_enemy.stats.monster_info['health']\
+            - 2*len(self.distance_direction_from_enemy)/self.max_num_enemies
 
         self.state_features = [
             self.animation.rect.center[0]/self.map_edge[0],
@@ -204,10 +175,8 @@ class Player(pygame.sprite.Sprite):
 
         ]
 
-        enemy_states = []
-
         for distance, direction, enemy in self.distance_direction_from_enemy:
-            enemy_states.extend([
+            self.state_features.extend([
 
                 distance/np.sqrt(np.sum(self.map_edge)),
 
@@ -215,13 +184,11 @@ class Player(pygame.sprite.Sprite):
 
                 direction[1],
 
-                nearest_enemy.stats.health /
-                nearest_enemy.stats.monster_info['health'],
+                enemy.stats.health /
+                enemy.stats.monster_info['health'],
 
                 enemy.stats.exp,
             ])
-
-        self.state_features.extend(enemy_states)
 
         if hasattr(self, 'num_features'):
             while len(self.state_features) < self.num_features:
@@ -255,7 +222,7 @@ class Player(pygame.sprite.Sprite):
                                 self)
 
         self.agent.remember(self.state_features, action,
-                            probs, value, self.stats.exp, self.is_dead())
+                            probs, value, self.reward, self.is_dead())
 
         self.get_current_state()
 

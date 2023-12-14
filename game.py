@@ -1,16 +1,13 @@
-import os
-
-os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = "hide"
-
-import sys
-import pygame
-
-from level import Level
-
 from configs.system.window_config import WIDTH,\
     HEIGHT,\
     WATER_COLOR,\
     FPS
+from level import Level
+import pygame
+import sys
+import os
+
+os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = "hide"
 
 
 class Game:
@@ -44,8 +41,6 @@ class Game:
 
     def run(self):
 
-        self.clock = pygame.time.Clock()
-
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 self.quit()
@@ -55,10 +50,9 @@ class Game:
 
         self.screen.fill(WATER_COLOR)
 
-        self.level.run('observer', self.clock.get_fps())
+        self.level.run()
 
         pygame.display.update()
-        self.clock.tick(FPS)
 
     def quit(self):
         pygame.quit()

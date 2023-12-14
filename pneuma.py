@@ -182,8 +182,7 @@ if __name__ == "__main__":
 
                 for player in game.level.player_sprites:
 
-                    episode_reward[player.player_id][step] = np.mean(
-                        player.reward)
+                    episode_reward[player.player_id][step] = player.reward
 
                     if (step % horizon == 0 and step != 0) or player.is_dead():
 
