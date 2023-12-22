@@ -1,6 +1,6 @@
 monster_data = {
     'squid': {'id': 1,
-              'health': 100,
+              'health': 1,
               'exp': 10,
               'attack': 50,
               'attack_type': 'slash',
@@ -10,7 +10,7 @@ monster_data = {
               'notice_radius': 360},
 
     'raccoon': {'id': 2,
-                'health': 300,
+                'health': 1,
                 'exp': 25,
                 'attack': 80,
                 'attack_type': 'claw',
@@ -20,7 +20,7 @@ monster_data = {
                 'notice_radius': 400},
 
     'spirit': {'id': 3,
-               'health': 80,
+               'health': 1,
                'exp': 11,
                'attack': 60,
                'attack_type': 'thunder',
@@ -30,7 +30,7 @@ monster_data = {
                'notice_radius': 350},
 
     'bamboo': {'id': 4,
-               'health': 50,
+               'health': 1,
                'exp': 9,
                'attack': 20,
                'attack_type': 'leaf_attack',

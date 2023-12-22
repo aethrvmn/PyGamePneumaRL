@@ -1,3 +1,4 @@
+import os
 import random
 import argparse
 import torch as T
@@ -103,6 +104,11 @@ if __name__ == "__main__":
                         default=0.95,
                         help="The lambda parameter of the GAE")
 
+    parser.add_argument('--no_training',
+                        default=False,
+                        action="store_true",
+                        help="Decides if the algorithm should train.")
+
     args = parser.parse_args()
 
     random.seed(args.seed)
@@ -113,10 +119,13 @@ if __name__ == "__main__":
     episode_length = args.ep_length
     n_players = args.n_players
 
-    chkpt_path = args.chkpt_path
-    figure_folder = args.figure_path
+    home_folder = os.path.dirname(os.path.abspath(__file__))
+
+    chkpt_path = os.path.join(home_folder, args.chkpt_path)
+    figure_path = os.path.join(home_folder, args.figure_path)
 
     horizon = args.horizon
+    no_training = args.no_training
     learnings_per_episode = int(episode_length/horizon)
     learn_iters = 0
 
@@ -184,7 +193,7 @@ if __name__ == "__main__":
 
                     episode_reward[player.player_id][step] = player.reward
 
-                    if (step % horizon == 0 and step != 0) or player.is_dead():
+                    if not no_training and ((step % horizon == 0 and step != 0) or player.is_dead()):
 
                         player.agent.learn()
 
@@ -244,7 +253,7 @@ if __name__ == "__main__":
         plt.legend([f"Agent {num}" for num in range(n_players)])
         for player_score in score_history:
             plt.plot(player_score)
-        plt.savefig(f"{figure_folder}/score.png")
+        plt.savefig(os.path.join(figure_path, 'score.png'))
         plt.close()
 
         plt.figure()
@@ -254,7 +263,7 @@ if __name__ == "__main__":
         plt.legend([f"Agent {num}" for num in range(n_players)])
         for actor in actor_loss:
             plt.plot(actor)
-        plt.savefig(f"{figure_folder}/actor_loss.png")
+        plt.savefig(os.path.join(figure_path, 'actor_loss.png'))
         plt.close()
 
         plt.figure()
@@ -264,7 +273,7 @@ if __name__ == "__main__":
         plt.legend([f"Agent {num}" for num in range(n_players)])
         for critic in critic_loss:
             plt.plot(critic)
-        plt.savefig(f"{figure_folder}/critic_loss.png")
+        plt.savefig(os.path.join(figure_path, 'critic_loss.png'))
         plt.close()
 
         plt.figure()
@@ -274,7 +283,7 @@ if __name__ == "__main__":
         plt.legend([f"Agent {num}" for num in range(n_players)])
         for total in total_loss:
             plt.plot(total)
-        plt.savefig(f"{figure_folder}/total_loss.png")
+        plt.savefig(os.path.join(figure_path, 'total_loss.png'))
         plt.close()
 
     # End of training session

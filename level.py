@@ -89,27 +89,27 @@ class Level:
                                         'invisible')
                             elif col == '700' and self.n_players > 1:
                                 print(f"Prison set at:{(x, y)}")
-                        # Generate grass
-                        if style == 'grass':
-                            random_grass_image = choice(self.graphics['grass'])
-
-                            Terrain((x, y), [
-                                self.visible_sprites,
-                                self.obstacle_sprites,
-                                self.attackable_sprites
-                            ],
-                                'grass',
-                                random_grass_image)
-
-                        # Generate objects like trees and statues
-                        if style == 'objects':
-                            surface = self.graphics['objects'][int(col)]
-                            Terrain((x, y), [
-                                self.visible_sprites,
-                                self.obstacle_sprites
-                            ],
-                                'object',
-                                surface)
+                        # # Generate grass
+                        # if style == 'grass':
+                        #     random_grass_image = choice(self.graphics['grass'])
+                        #
+                        #     Terrain((x, y), [
+                        #         self.visible_sprites,
+                        #         self.obstacle_sprites,
+                        #         self.attackable_sprites
+                        #     ],
+                        #         'grass',
+                        #         random_grass_image)
+                        #
+                        # # Generate objects like trees and statues
+                        # if style == 'objects':
+                        #     surface = self.graphics['objects'][int(col)]
+                        #     Terrain((x, y), [
+                        #         self.visible_sprites,
+                        #         self.obstacle_sprites
+                        #     ],
+                        #         'object',
+                        #         surface)
 
                         # Generate observer, players and monsters
                         if style == 'entities':
@@ -162,18 +162,18 @@ class Level:
                     if int(col) != -1:
                         x = col_index * TILESIZE
                         y = row_index * TILESIZE
-                        # Regenerate grass
-                        if style == 'grass':
-                            random_grass_image = choice(
-                                self.graphics['grass'])
-
-                            Terrain((x, y), [
-                                self.visible_sprites,
-                                self.obstacle_sprites,
-                                self.attackable_sprites
-                            ],
-                                'grass',
-                                random_grass_image)
+                        # # Regenerate grass
+                        # if style == 'grass':
+                        #     random_grass_image = choice(
+                        #         self.graphics['grass'])
+                        #
+                        #     Terrain((x, y), [
+                        #         self.visible_sprites,
+                        #         self.obstacle_sprites,
+                        #         self.attackable_sprites
+                        #     ],
+                        #         'grass',
+                        #         random_grass_image)
 
                         if style == 'entities':
 
