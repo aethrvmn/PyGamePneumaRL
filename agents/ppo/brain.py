@@ -52,7 +52,7 @@ class PPOMemory:
 
 class ActorNetwork(nn.Module):
 
-    def __init__(self, input_dim, output_dim, alpha, fc1_dims=256, fc2_dims=256, chkpt_dir='tmp/ppo'):
+    def __init__(self, input_dim, output_dim, alpha, fc1_dims=512, fc2_dims=512, chkpt_dir='tmp/ppo'):
         super(ActorNetwork, self).__init__()
 
         self.chkpt_dir = chkpt_dir
@@ -89,7 +89,7 @@ class ActorNetwork(nn.Module):
 
 class CriticNetwork(nn.Module):
 
-    def __init__(self, input_dims, alpha, fc1_dims=256, fc2_dims=256, chkpt_dir='tmp/ppo'):
+    def __init__(self, input_dims, alpha, fc1_dims=512, fc2_dims=512, chkpt_dir='tmp/ppo'):
         super(CriticNetwork, self).__init__()
 
         self.chkpt_dir = chkpt_dir

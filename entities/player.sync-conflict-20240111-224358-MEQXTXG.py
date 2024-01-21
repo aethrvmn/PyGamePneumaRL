@@ -146,6 +146,26 @@ class Player(pygame.sprite.Sprite):
         spell_damage = magic_data[self._input.combat.magic]['strength']
         return (base_damage + spell_damage)
 
+    def get_reward(self):
+
+        self.reward = 0
+
+        # Base reward on player exp
+        self.reward += self.stats.exp
+        print(f'Player exp added to reward: {self.stats.exp} -> {self.reward}')
+
+        # Add relative hp of player
+        self.reward += self.stats.health/self.stats.stats['health']
+        print(f"Player hp added to reward: {self.stats.health/self.stats.stats['health']} -> {self.reward}")
+
+        # Take into account distance of nearest enemy from player relative to the map length
+        self.reward -= self.nearest_dist/np.sqrt(np.sum(self.map_edge))
+        print(f'Relative distance of enemy: {self.nearest_dist/np.sqrt(np.sum(self.map_edge))} -> {self.reward}')
+
+        # Take into account nearest enemy relative health
+        self.reward -= self.nearest_enemy.stats.health/self.nearest_enemy.stats.monster_info['health']
+        print(f"Enemy hp added: {self.nearest_enemy.stats.health/self.nearest_enemy.stats.monster_info['health']} -> {self.reward}")
+
     def get_current_state(self):
 
         if self.distance_direction_from_enemy != []:
@@ -154,15 +174,11 @@ class Player(pygame.sprite.Sprite):
         else:
             sorted_distances = np.zeros(self.num_features)
 
-        nearest_dist, nearest_en_dir, nearest_enemy = sorted_distances[0]
+        self.nearest_dist, _, self.nearest_enemy = sorted_distances[0]
 
         self.action_features = [self._input.action]
-        if hasattr(self, 'state_features'):
-            self.old_state_features = self.state_features
 
-            self.reward = self.stats.exp\
-                + self.stats.health/self.stats.stats['health'] - 1\
-                - nearest_dist/np.sqrt(np.sum(self.map_edge))
+        self.get_reward()
 
         self.state_features = [
             self.animation.rect.center[0]/self.map_edge[0],
@@ -171,29 +187,24 @@ class Player(pygame.sprite.Sprite):
             self._input.movement.direction.y,
             self.stats.health/self.stats.stats['health'],
             self.stats.energy/self.stats.stats['energy'],
+            1 if 'attack' in self._input.status else 0,
+
         ]
 
-        self.state_features.extend([
-            nearest_dist/np.sqrt(np.sum(self.map_edge)),
-            nearest_en_dir[0],
-            nearest_en_dir[1],
-            nearest_enemy.stats.exp
-        ])
+        for distance, direction, enemy in self.distance_direction_from_enemy:
+            self.state_features.extend([
 
-        # for distance, direction, enemy in self.distance_direction_from_enemy:
-        #     self.state_features.extend([
-        #
-        #         distance/np.sqrt(np.sum(self.map_edge)),
-        #
-        #         direction[0],
-        #
-        #         direction[1],
-        #
-        #         enemy.stats.health /
-        #         enemy.stats.monster_info['health'],
-        #
-        #         enemy.stats.exp,
-        #     ])
+                distance/np.sqrt(np.sum(self.map_edge)),
+
+                direction[0],
+
+                direction[1],
+
+                enemy.stats.health /
+                enemy.stats.monster_info['health'],
+
+                enemy.stats.exp,
+            ])
 
         if hasattr(self, 'num_features'):
             while len(self.state_features) < self.num_features:

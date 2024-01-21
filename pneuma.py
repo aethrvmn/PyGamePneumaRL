@@ -86,17 +86,17 @@ if __name__ == "__main__":
 
     parser.add_argument('--policy_clip',
                         type=float,
-                        default=0.2,
+                        default=0.1,
                         help="The policy clip")
 
     parser.add_argument('--batch_size',
                         type=int,
-                        default=64,
+                        default=128,
                         help="The size of each batch")
 
     parser.add_argument('--n_epochs',
                         type=int,
-                        default=10,
+                        default=20,
                         help="The number of epochs")
 
     parser.add_argument('--gae_lambda',
