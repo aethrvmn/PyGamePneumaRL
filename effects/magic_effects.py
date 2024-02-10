@@ -1,7 +1,7 @@
 import pygame
 from random import randint
 
-from configs.system.window_config import TILESIZE
+from config.system.window import TILESIZE
 
 
 class MagicPlayer:

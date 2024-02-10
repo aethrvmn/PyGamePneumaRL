@@ -1,6 +1,6 @@
 import pygame
 
-from .components.animaton import AnimationHandler
+from .components.animation import AnimationHandler
 from .components.stats import StatsHandler
 from .components._input import InputHandler
 

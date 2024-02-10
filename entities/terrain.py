@@ -1,6 +1,6 @@
 import pygame
 
-from configs.system.window_config import TILESIZE,\
+from config.system.window import TILESIZE,\
     HITBOX_OFFSET
 
 

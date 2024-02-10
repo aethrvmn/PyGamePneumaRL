@@ -1,7 +1,7 @@
 import pygame
 
-from configs.game.weapon_config import weapon_data
-from configs.game.spell_config import magic_data
+from config.game.weapon_config import weapon_data
+from config.game.spell_config import magic_data
 
 from .ui_settings import UI_FONT,\
     UI_FONT_SIZE,\

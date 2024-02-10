@@ -2,16 +2,16 @@ import pygame
 import numpy as np
 from random import randint
 
-from configs.game.weapon_config import weapon_data
-from configs.game.spell_config import magic_data
+from config.game.weapon_config import weapon_data
+from config.game.spell_config import magic_data
 
 from .components.stats import StatsHandler
 from .components._input import InputHandler
-from .components.animaton import AnimationHandler
+from .components.animation import AnimationHandler
 
 from effects.particle_effects import AnimationPlayer
 
-from agents.ppo.agent import Agent
+from ml.ppo.agent import Agent
 
 
 class Player(pygame.sprite.Sprite):

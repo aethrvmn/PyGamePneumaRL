@@ -4,14 +4,13 @@ import numpy as np
 
 from random import choice
 
-from configs.system.window_config import TILESIZE
+from config.system.window import TILESIZE
 
 from utils.debug import debug
 from utils.resource_loader import import_csv_layout, import_folder
 
 from interface.ui import UI
 
-from entities.observer import Observer
 from entities.player import Player
 from entities.enemy import Enemy
 from entities.terrain import Terrain

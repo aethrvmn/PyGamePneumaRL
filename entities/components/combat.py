@@ -1,8 +1,8 @@
 from effects.weapon_effects import Weapon
 from effects.magic_effects import MagicPlayer
 
-from configs.game.weapon_config import weapon_data
-from configs.game.spell_config import magic_data
+from config.game.weapon_config import weapon_data
+from config.game.spell_config import magic_data
 
 
 class CombatHandler:

@@ -1,16 +1,19 @@
-from configs.system.window_config import WIDTH,\
+import os
+os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = "hide"
+
+from config.system.window import WIDTH,\
     HEIGHT,\
     WATER_COLOR,\
     FPS
 from level import Level
 import pygame
 import sys
-import os
-
-os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = "hide"
 
 
-class Game:
+
+
+
+class Pneuma:
 
     def __init__(self, show_pg=False, n_players=1,):
         print(f"Initializing Pneuma with {n_players} player(s).\

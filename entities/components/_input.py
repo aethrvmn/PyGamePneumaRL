@@ -1,8 +1,8 @@
 import pygame
 from random import randint, choice
 
-from configs.game.spell_config import magic_data
-from configs.game.weapon_config import weapon_data
+from config.game.spell_config import magic_data
+from config.game.weapon_config import weapon_data
 
 from .movement import MovementHandler
 from .combat import CombatHandler

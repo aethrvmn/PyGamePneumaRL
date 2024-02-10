@@ -1,5 +1,5 @@
-from configs.game.player_config import warrior_stats, mage_stats, tank_stats
-from configs.game.monster_config import monster_data
+from config.game.player_config import warrior_stats, mage_stats, tank_stats
+from config.game.monster_config import monster_data
 
 
 class StatsHandler:
