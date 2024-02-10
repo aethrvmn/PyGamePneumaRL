@@ -52,13 +52,15 @@ class PPOMemory:
 
 class ActorNetwork(nn.Module):
 
-    def __init__(self, input_dim, output_dim, alpha, fc1_dims=512, fc2_dims=512, chkpt_dir='tmp/ppo'):
+    def __init__(self, input_dim, output_dim, alpha, fc1_dims=1024, fc2_dims=1024, chkpt_dir='tmp/ppo'):
         super(ActorNetwork, self).__init__()
 
         self.chkpt_dir = chkpt_dir
 
         self.actor = nn.Sequential(
             nn.Linear(input_dim, fc1_dims),
+            nn.LeakyReLU(),
+            nn.Linear(fc1_dims, fc2_dims),
             nn.LeakyReLU(),
             nn.Linear(fc1_dims, fc2_dims),
             nn.LeakyReLU(),
@@ -89,13 +91,23 @@ class ActorNetwork(nn.Module):
 
 class CriticNetwork(nn.Module):
 
-    def __init__(self, input_dims, alpha, fc1_dims=512, fc2_dims=512, chkpt_dir='tmp/ppo'):
+    def __init__(self, input_dims, alpha, fc1_dims=4096, fc2_dims=4096, chkpt_dir='tmp/ppo'):
         super(CriticNetwork, self).__init__()
 
         self.chkpt_dir = chkpt_dir
 
         self.critic = nn.Sequential(
             nn.Linear(input_dims, fc1_dims),
+            nn.LeakyReLU(),
+            nn.Linear(fc1_dims, fc2_dims),
+            nn.LeakyReLU(),
+            nn.Linear(fc1_dims, fc2_dims),
+            nn.LeakyReLU(),
+            nn.Linear(fc1_dims, fc2_dims),
+            nn.LeakyReLU(),
+            nn.Linear(fc1_dims, fc2_dims),
+            nn.LeakyReLU(),
+            nn.Linear(fc1_dims, fc2_dims),
             nn.LeakyReLU(),
             nn.Linear(fc1_dims, fc2_dims),
             nn.LeakyReLU(),
