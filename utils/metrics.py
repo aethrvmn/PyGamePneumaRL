@@ -46,6 +46,13 @@ def plot_learning_curve(scores, num_players, figure_path):
     plt.savefig(os.path.join(figure_path, "avg_score.png"))
     plt.close()
 
+def plot_avg_time(time_steps, num_players, fig_path):
+
+    plt.figure()
+    plt.title("Average Time Steps per Episode")
+    for player in time_steps:
+        plt.plot(player)
+    plt.savefig(os.path.join(fig_path, 'avg_time.png'))
 
 def plot_score(scores, num_players, figure_path):
 

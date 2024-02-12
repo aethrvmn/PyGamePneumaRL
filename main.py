@@ -61,6 +61,8 @@ def main():
     advantage = np.zeros(shape=(parsed_args.n_agents,
                                 parsed_args.n_episodes))
 
+    time_alive = np.zeros(shape=(parsed_args.n_agents,
+                                 parsed_args.n_episodes))
     # score_history, best_score, actor_loss, critic_loss, total_loss, entropy, advantage  = metrics.generate(parsed_args)
     
     
@@ -127,6 +129,8 @@ def main():
 
                         learn_iters += 1
 
+
+
         # Gather information about the episode
         for player in game.level.player_sprites:
 
@@ -144,6 +148,8 @@ def main():
 
             total_loss[player.player_id][episode] = np.mean(
                 episode_total_loss)
+
+            time_alive[player.player_id][episode] = step
 
             # Check for new best score
             if score > best_score[player.player_id]:
@@ -174,7 +180,8 @@ def main():
         metrics.plot_parameter('entropy', entropy, parsed_args.n_agents, figure_path)
 
         metrics.plot_parameter('advantage', advantage, parsed_args.n_agents, figure_path)
-    
+
+        metrics.plot_avg_time(time_alive, parsed_args.n_agents, figure_path)    
     # End of training session
     print("End of episodes.\
         \nExiting game...")
