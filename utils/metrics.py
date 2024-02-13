@@ -3,34 +3,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
-def generate(parsed_args):
-
-    # Setup parameter monitoring
-    score_history = np.zeros(
-        shape=(parsed_args.n_agents, parsed_args.n_episodes))
-
-    best_score = np.zeros(parsed_args.n_agents)
-
-    actor_loss = np.zeros(shape=(parsed_args.n_agents,
-                                 parsed_args.n_episodes))
-
-    critic_loss = np.zeros(shape=(parsed_args.n_agents,
-                                  parsed_args.n_episodes))
-
-    total_loss = np.zeros(shape=(parsed_args.n_agents,
-                                 parsed_args.n_episodes))
-
-    entropy = np.zeros(shape=(parsed_args.n_agents,
-                              parsed_args.n_episodes))
-
-    advantage = np.zeros(shape=(parsed_args.n_agents,
-                                parsed_args.n_episodes))
-
-    return score_history, best_score, actor_loss,
-    critic_loss, total_loss, entropy,
-    advantage
-
-
 def plot_learning_curve(scores, num_players, figure_path):
 
     plt.figure()

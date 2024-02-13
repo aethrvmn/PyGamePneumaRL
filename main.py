@@ -80,7 +80,7 @@ def main():
             gae_lambda=parsed_args.gae_lambda,
             entropy_coef=parsed_args.entropy_coeff,
             chkpt_dir=chkpt_path,
-            no_load=True
+            load=parsed_args.load
         )
 
     # Episodes start
@@ -172,6 +172,8 @@ def main():
                 print(f"Models saved to {chkpt_path}")
 
         metrics.plot_learning_curve(score_history, parsed_args.n_agents, figure_path)
+
+        metrics.plot_score(score_history, parsed_args.n_agents, figure_path)
 
         metrics.plot_loss('actor', actor_loss, parsed_args.n_agents, figure_path)
 

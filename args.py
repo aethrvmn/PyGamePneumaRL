@@ -13,7 +13,7 @@ def parse_args():
     parser.add_argument('--no_seed',
                         default=False,
                         action="store_true",
-                        help="Set to True to run without a seed.")
+                        help="Set to run without a seed.")
 
     parser.add_argument('--seed',
                         type=int,
@@ -83,6 +83,11 @@ def parse_args():
                         action="store_true",
                         help="Set flag to disable learning. Useful for viewing trained agents interact in the environment.")
 
+    parser.add_argument('--load',
+                        type=int,
+                        default=None,
+                        help="Run id to load within chkpt_path")
+    
     parser.add_argument('--show_pg',
                         default=False,
                         action="store_true",

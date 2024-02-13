@@ -61,7 +61,7 @@ class Player(pygame.sprite.Sprite):
                     gae_lambda,
                     chkpt_dir,
                     entropy_coef,
-                    no_load=False):
+                    load=None):
 
         self.max_num_enemies = len(self.distance_direction_from_enemy)
         self.get_current_state()
@@ -82,12 +82,12 @@ class Player(pygame.sprite.Sprite):
         print(
             f"\nAgent initialized on player {self.player_id} using {self.agent.actor.device}.")
 
-        if not no_load:
+        if load:
             print("Attempting to load models ...")
             try:
                 self.agent.load_models(
-                    actr_chkpt=f"A{self.player_id}",
-                    crtc_chkpt=f"C{self.player_id}"
+                    actr_chkpt=f"run{load}/A{self.player_id}",
+                    crtc_chkpt=f"run{load}/C{self.player_id}"
                 )
                 print("Models loaded ...\n")
 
