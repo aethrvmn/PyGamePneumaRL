@@ -52,7 +52,7 @@ class PPOMemory:
 
 class ActorNetwork(nn.Module):
 
-    def __init__(self, input_dim, output_dim, alpha, fc1_dims=1024, fc2_dims=1024, chkpt_dir='tmp/ppo'):
+    def __init__(self, input_dim, output_dim, alpha, fc1_dims=512, fc2_dims=512, chkpt_dir='tmp'):
         super(ActorNetwork, self).__init__()
 
         self.chkpt_dir = chkpt_dir
@@ -68,7 +68,7 @@ class ActorNetwork(nn.Module):
             nn.Softmax(dim=-1)
         )
 
-        self.optimizer = optim.Adam(self.parameters(), lr=alpha, eps=1e-5)
+        self.optimizer = optim.Adam(self.parameters(), lr=alpha, betas=(0.9, 0.9), eps=1e-5)
 
         self.device = T.device('cuda:0' if T.cuda.is_available() else 'cpu')
 
@@ -80,18 +80,19 @@ class ActorNetwork(nn.Module):
 
         return dist
 
-    def save_checkpoint(self, filename='actor_torch_ppo'):
-        T.save(self.state_dict(), os.path.join(self.chkpt_dir, filename))
+    def save_checkpoint(self, filename):
+        T.save(self.state_dict(), os.path.join(filename))
 
-    def load_checkpoint(self, filename='actor_torch_ppo'):
+    def load_checkpoint(self, filename):
+        print(filename)
         self.load_state_dict(
-            T.load(os.path.join(self.chkpt_dir, filename),
+            T.load(os.path.join(filename),
                    map_location=self.device))
 
 
 class CriticNetwork(nn.Module):
 
-    def __init__(self, input_dims, alpha, fc1_dims=4096, fc2_dims=4096, chkpt_dir='tmp/ppo'):
+    def __init__(self, input_dims, alpha, fc1_dims=2048, fc2_dims=2048, chkpt_dir='tmp'):
         super(CriticNetwork, self).__init__()
 
         self.chkpt_dir = chkpt_dir
@@ -105,16 +106,16 @@ class CriticNetwork(nn.Module):
             nn.LeakyReLU(),
             nn.Linear(fc1_dims, fc2_dims),
             nn.LeakyReLU(),
-            nn.Linear(fc1_dims, fc2_dims),
-            nn.LeakyReLU(),
-            nn.Linear(fc1_dims, fc2_dims),
-            nn.LeakyReLU(),
+            # nn.Linear(fc1_dims, fc2_dims),
+            # nn.LeakyReLU(),
+            # nn.Linear(fc1_dims, fc2_dims),
+            # nn.LeakyReLU(),
             nn.Linear(fc1_dims, fc2_dims),
             nn.LeakyReLU(),
             nn.Linear(fc2_dims, 1)
         )
 
-        self.optimizer = optim.Adam(self.parameters(), lr=alpha, eps=1e-5)
+        self.optimizer = optim.Adam(self.parameters(), lr=alpha, betas=(0.9, 0.9), eps=1e-5)
 
         self.device = T.device('cuda:0' if T.cuda.is_available() else 'cpu')
 
@@ -124,10 +125,11 @@ class CriticNetwork(nn.Module):
         value = self.critic(state)
         return value
 
-    def save_checkpoint(self, filename='critic_torch_ppo'):
-        T.save(self.state_dict(), os.path.join(self.chkpt_dir, filename))
+    def save_checkpoint(self, filename):
+        T.save(self.state_dict(), os.path.join(filename))
 
-    def load_checkpoint(self, filename='critic_torch_ppo'):
+    def load_checkpoint(self, filename):
+        print(filename)
         self.load_state_dict(
-            T.load(os.path.join(self.chkpt_dir, filename),
+            T.load(os.path.join(filename),
                    map_location=self.device))

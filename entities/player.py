@@ -86,8 +86,8 @@ class Player(pygame.sprite.Sprite):
             print("Attempting to load models ...")
             try:
                 self.agent.load_models(
-                    actr_chkpt=f"run{load}/A{self.player_id}",
-                    crtc_chkpt=f"run{load}/C{self.player_id}"
+                    actr_chkpt=f"{chkpt_dir}/../run{load}/A{self.player_id}",
+                    crtc_chkpt=f"{chkpt_dir}/../run{load}/C{self.player_id}"
                 )
                 print("Models loaded ...\n")
 
@@ -160,9 +160,9 @@ class Player(pygame.sprite.Sprite):
         if hasattr(self, 'state_features'):
             self.old_state_features = self.state_features
 
-            self.reward = self.stats.exp\
-                + self.stats.health/self.stats.stats['health'] - 1\
-                - nearest_dist/np.sqrt(np.sum(self.map_edge))
+            self.reward = self.stats.exp
+                # + self.stats.health/self.stats.stats['health'] - 1\
+                # - nearest_dist/np.sqrt(np.sum(self.map_edge))
 
         self.state_features = [
             self.animation.rect.center[0]/self.map_edge[0],
@@ -173,27 +173,27 @@ class Player(pygame.sprite.Sprite):
             self.stats.energy/self.stats.stats['energy'],
         ]
 
-        self.state_features.extend([
-            nearest_dist/np.sqrt(np.sum(self.map_edge)),
-            nearest_en_dir[0],
-            nearest_en_dir[1],
-            nearest_enemy.stats.exp
-        ])
+        # self.state_features.extend([
+        #     nearest_dist/np.sqrt(np.sum(self.map_edge)),
+        #     nearest_en_dir[0],
+        #     nearest_en_dir[1],
+        #     nearest_enemy.stats.exp
+        # ])
 
-        # for distance, direction, enemy in self.distance_direction_from_enemy:
-        #     self.state_features.extend([
-        #
-        #         distance/np.sqrt(np.sum(self.map_edge)),
-        #
-        #         direction[0],
-        #
-        #         direction[1],
-        #
-        #         enemy.stats.health /
-        #         enemy.stats.monster_info['health'],
-        #
-        #         enemy.stats.exp,
-        #     ])
+         for distance, direction, enemy in sorted_distances[:5]:
+             self.state_features.extend([
+        
+                 distance/np.sqrt(np.sum(self.map_edge)),
+        
+                 direction[0],
+        
+                 direction[1],
+        
+                 enemy.stats.health /
+                 enemy.stats.monster_info['health'],
+        
+                 enemy.stats.exp,
+             ])
 
         if hasattr(self, 'num_features'):
             while len(self.state_features) < self.num_features:

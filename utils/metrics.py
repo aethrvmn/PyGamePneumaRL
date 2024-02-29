@@ -25,6 +25,7 @@ def plot_avg_time(time_steps, num_players, fig_path):
     for player in time_steps:
         plt.plot(player)
     plt.savefig(os.path.join(fig_path, 'avg_time.png'))
+    plt.close()
 
 def plot_score(scores, num_players, figure_path):
 
