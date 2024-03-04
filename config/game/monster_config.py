@@ -6,7 +6,7 @@ monster_data = {
               'attack_type': 'slash',
               'speed': 3,
               'knockback': 20,
-              'attack_radius': 1,
+              'attack_radius': 70,
               'notice_radius': 1},
 
     'raccoon': {'id': 2,
@@ -16,7 +16,7 @@ monster_data = {
                 'attack_type': 'claw',
                 'speed': 2,
                 'knockback': 10,
-                'attack_radius': 1,
+                'attack_radius': 70,
                 'notice_radius': 1},
 
     'spirit': {'id': 3,
@@ -26,7 +26,7 @@ monster_data = {
                'attack_type': 'thunder',
                'speed': 4,
                'knockback': 20,
-               'attack_radius': 1,
+               'attack_radius': 70,
                'notice_radius': 1},
 
     'bamboo': {'id': 4,
@@ -36,6 +36,6 @@ monster_data = {
                'attack_type': 'leaf_attack',
                'speed': 3,
                'knockback': 20,
-               'attack_radius': 1,
+               'attack_radius': 70,
                'notice_radius': 1}
 }

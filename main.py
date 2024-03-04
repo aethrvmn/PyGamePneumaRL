@@ -188,6 +188,13 @@ def main():
     print("End of episodes.\
         \nExiting game...")
 
+    # Save models
+    player.agent.save_models(
+        f"A{player.player_id}_end",
+        f"C{player.player_id}_end")
+
+    print(f"Models saved to {chkpt_path}")
+
     game.quit()
 
 if __name__ == '__main__':

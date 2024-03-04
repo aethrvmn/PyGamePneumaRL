@@ -35,7 +35,7 @@ class InputHandler:
         self.magic_swap_time = None
 
         # Setup Action Space
-        self.possible_actions = [0, 1, 2, 3, 4, 5]
+        self.possible_actions = [0, 1, 2, 3, 4]#, 5]
         self.action = 10
 
     def check_input(self,
