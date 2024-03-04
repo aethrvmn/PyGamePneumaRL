@@ -101,6 +101,12 @@ def main():
         episode_total_loss = np.zeros(
             shape=(n_agents, learnings_per_episode))
 
+        episode_entropy = np.zeros(
+            shape=(n_agents, learnings_per_episode))
+
+        episode_advantage = np.zeros(
+            shape=(n_agents, learnings_per_episode))
+
         # Main game loop
         for step in tqdm(range(episode_length),
                          leave=False,
@@ -127,6 +133,12 @@ def main():
                         episode_total_loss[player.player_id][learn_iters % learnings_per_episode]\
                             = player.agent.total_loss
 
+                        episode_entropy[player.player_id][learn_iters % learnings_per_episode]\
+                            = player.agent.entropy
+
+                        episode_advantage[player.player_id][learn_iters % learnings_per_episode]\
+                            = player.agent.advantage
+                        
                         learn_iters += 1
 
 
@@ -150,6 +162,12 @@ def main():
                 episode_total_loss)
 
             time_alive[player.player_id][episode] = step
+
+            entropy[player.player_id][episode] = np.mean(
+                episode_entropy)
+
+            advantage[player.player_id][episode] = np.mean(
+                episode_advantage)
 
             # Check for new best score
             if score > best_score[player.player_id]:
