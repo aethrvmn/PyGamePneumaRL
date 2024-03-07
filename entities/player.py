@@ -180,7 +180,7 @@ class Player(pygame.sprite.Sprite):
         #     nearest_enemy.stats.exp
         # ])
 
-         for distance, direction, enemy in sorted_distances[:5]:
+        for distance, direction, enemy in sorted_distances[:5]:
              self.state_features.extend([
         
                  distance/np.sqrt(np.sum(self.map_edge)),
