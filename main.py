@@ -26,6 +26,7 @@ def main():
 
     chkpt_path, figure_path = folder_struct.setup_dirs()
         
+    # Setup AI params
     n_episodes = parsed_args.n_episodes
     episode_length = parsed_args.ep_length
     n_agents = parsed_args.n_agents
@@ -37,8 +38,6 @@ def main():
     learn_iters = 0
 
     show_pygame = parsed_args.show_pg
-
-    # Setup AI metrics
 
     # Setup parameter monitoring
     score_history = np.zeros(
@@ -63,9 +62,6 @@ def main():
 
     time_alive = np.zeros(shape=(parsed_args.n_agents,
                                  parsed_args.n_episodes))
-    # score_history, best_score, actor_loss, critic_loss, total_loss, entropy, advantage  = metrics.generate(parsed_args)
-    
-    
     game = Pneuma(show_pg=show_pygame, n_players=parsed_args.n_agents)
 
     print("Initializing agents ...")
@@ -202,9 +198,10 @@ def main():
         metrics.plot_parameter('advantage', advantage, parsed_args.n_agents, figure_path)
 
         metrics.plot_avg_time(time_alive, parsed_args.n_agents, figure_path)    
+
     # End of training session
     print("End of episodes.\
-        \nExiting game...")
+        \n Saving models and exiting game...")
 
     # Save models
     player.agent.save_models(
