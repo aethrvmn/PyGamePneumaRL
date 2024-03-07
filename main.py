@@ -133,7 +133,7 @@ def main():
                             = player.agent.entropy
 
                         episode_advantage[player.player_id][learn_iters % learnings_per_episode]\
-                            = player.agent.advantage
+                            = player.agent.gae
                         
                         learn_iters += 1
 

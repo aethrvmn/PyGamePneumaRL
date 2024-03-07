@@ -61,7 +61,7 @@ class Agent:
             state_arr, action_arr, old_probs_arr, vals_arr, reward_arr, dones_arr, batches = self.memory.generate_batches()
 
             values = vals_arr
-            self.advantage = np.zeros(len(reward_arr), dtype=np.float64)
+            advantage = np.zeros(len(reward_arr), dtype=np.float64)
 
             for t in range(len(reward_arr)-1):
                 discount = 1
@@ -71,8 +71,9 @@ class Agent:
                         (reward_arr[k] + self.gamma*values[k+1]
                          * (1-int(dones_arr[k])) - values[k])
                     discount *= self.gamma * self.gae_lambda
-                self.advantage[t] = a_t
-            self.advantage = T.tensor(self.advantage).to(self.actor.device)
+                advantage[t] = a_t
+                self.gae = np.sum(advantage)
+            advantage = T.tensor(advantage).to(self.actor.device)
 
             values = T.tensor(values).to(self.actor.device)
 
@@ -90,15 +91,15 @@ class Agent:
 
                 new_probs = dist.log_prob(actions)
                 prob_ratio = new_probs.exp() / old_probs.exp()
-                weighted_probs = self.advantage[batch] * prob_ratio
+                weighted_probs = advantage[batch] * prob_ratio
 
                 weighted_clipped_probs = T.clamp(
-                    prob_ratio, 1-self.policy_clip, 1+self.policy_clip)*self.advantage[batch]
+                    prob_ratio, 1-self.policy_clip, 1+self.policy_clip)*advantage[batch]
 
                 self.actor_loss = -T.min(weighted_probs,
                                          weighted_clipped_probs).mean()
 
-                returns = self.advantage[batch] + values[batch]
+                returns = advantage[batch] + values[batch]
                 self.critic_loss = (returns - critic_value)**2
                 self.critic_loss = self.critic_loss.mean()
 
