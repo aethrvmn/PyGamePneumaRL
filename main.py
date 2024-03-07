@@ -185,17 +185,17 @@ def main():
 
                 print(f"Models saved to {chkpt_path}")
 
-        metrics.plot_learning_curve(score_history, parsed_args.n_agents, figure_path)
+        metrics.plot_learning_curve(score_history, parsed_args.n_agents, figure_path, n_episodes)
 
         metrics.plot_score(score_history, parsed_args.n_agents, figure_path)
 
-        metrics.plot_loss('actor', actor_loss, parsed_args.n_agents, figure_path)
+        metrics.plot_loss('actor', actor_loss, parsed_args.n_agents, figure_path, n_episodes)
 
-        metrics.plot_loss('critic', critic_loss, parsed_args.n_agents, figure_path)
+        metrics.plot_loss('critic', critic_loss, parsed_args.n_agents, figure_path, n_episodes)
 
-        metrics.plot_parameter('entropy', entropy, parsed_args.n_agents, figure_path)
+        metrics.plot_parameter('entropy', entropy, parsed_args.n_agents, figure_path, n_episodes)
 
-        metrics.plot_parameter('advantage', advantage, parsed_args.n_agents, figure_path)
+        metrics.plot_parameter('advantage', advantage, parsed_args.n_agents, figure_path, n_episodes)
 
         metrics.plot_avg_time(time_alive, parsed_args.n_agents, figure_path)    
 
