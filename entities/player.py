@@ -160,7 +160,7 @@ class Player(pygame.sprite.Sprite):
         if hasattr(self, 'state_features'):
             self.old_state_features = self.state_features
 
-            self.reward = self.stats.exp
+            self.reward = self.stats.exp\
                 + self.stats.health/self.stats.stats['health'] - 1
                 # - nearest_dist/np.sqrt(np.sum(self.map_edge))
 
