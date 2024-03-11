@@ -52,7 +52,7 @@ class PPOMemory:
 
 class ActorNetwork(nn.Module):
 
-    def __init__(self, input_dim, output_dim, alpha, fc1_dims=512, fc2_dims=512, chkpt_dir='tmp'):
+    def __init__(self, input_dim, output_dim, alpha, fc1_dims=1024, fc2_dims=1024, chkpt_dir='tmp'):
         super(ActorNetwork, self).__init__()
 
         self.chkpt_dir = chkpt_dir
@@ -92,7 +92,7 @@ class ActorNetwork(nn.Module):
 
 class CriticNetwork(nn.Module):
 
-    def __init__(self, input_dims, alpha, fc1_dims=2048, fc2_dims=2048, chkpt_dir='tmp'):
+    def __init__(self, input_dims, alpha, fc1_dims=4096, fc2_dims=4096, chkpt_dir='tmp'):
         super(CriticNetwork, self).__init__()
 
         self.chkpt_dir = chkpt_dir
@@ -106,10 +106,10 @@ class CriticNetwork(nn.Module):
             nn.LeakyReLU(),
             nn.Linear(fc1_dims, fc2_dims),
             nn.LeakyReLU(),
-            # nn.Linear(fc1_dims, fc2_dims),
-            # nn.LeakyReLU(),
-            # nn.Linear(fc1_dims, fc2_dims),
-            # nn.LeakyReLU(),
+            nn.Linear(fc1_dims, fc2_dims),
+            nn.LeakyReLU(),
+            nn.Linear(fc1_dims, fc2_dims),
+            nn.LeakyReLU(),
             nn.Linear(fc1_dims, fc2_dims),
             nn.LeakyReLU(),
             nn.Linear(fc2_dims, 1)
@@ -117,7 +117,7 @@ class CriticNetwork(nn.Module):
 
         self.optimizer = optim.Adam(self.parameters(), lr=alpha, betas=(0.9, 0.9), eps=1e-5)
 
-        self.device = T.device('cuda:0' if T.cuda.is_available() else 'cpu')
+        self.device = T.device('cuda:1' if T.cuda.is_available() else 'cpu')
 
         self.to(self.device)
 
