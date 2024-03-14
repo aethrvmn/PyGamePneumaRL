@@ -70,7 +70,7 @@ class ActorNetwork(nn.Module):
 
         self.optimizer = optim.Adam(self.parameters(), lr=alpha, betas=(0.9, 0.9), eps=1e-5)
 
-        self.device = T.device('cuda:0' if T.cuda.is_available() else 'cpu')
+        self.device = T.device('cuda' if T.cuda.is_available() else 'cpu')
 
         self.to(self.device)
 
@@ -117,7 +117,7 @@ class CriticNetwork(nn.Module):
 
         self.optimizer = optim.Adam(self.parameters(), lr=alpha, betas=(0.9, 0.9), eps=1e-5)
 
-        self.device = T.device('cuda:1' if T.cuda.is_available() else 'cpu')
+        self.device = T.device('cuda' if T.cuda.is_available() else 'cpu')
 
         self.to(self.device)
 
