@@ -1,8 +1,8 @@
 HPARAMS = {
 
-    "horizon": 2048,
-    "num_epochs": 15,
-    "batch_size": 128,
+    "horizon": 256,
+    "num_epochs": 10,
+    "batch_size": 15,
 
     "policy_clip": 0.1,
     "discount_factor": 0.99,

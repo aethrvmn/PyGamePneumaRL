@@ -23,12 +23,12 @@ def parse_args():
     # Define episodes and agents
     parser.add_argument('--n_episodes',
                         type=int,
-                        default=300,
+                        default=12000,
                         help="Number of episodes.")
 
     parser.add_argument('--ep_length',
                         type=int,
-                        default=5000,
+                        default=700,
                         help="Length of each episode.")
 
     parser.add_argument('--n_agents',
