@@ -161,7 +161,7 @@ class Player(pygame.sprite.Sprite):
             self.old_state_features = self.state_features
 
             self.reward = self.stats.exp\
-                + self.stats.health/self.stats.stats['health'] - 1
+                + self.stats.health/self.stats.stats['health']
                 # - nearest_dist/np.sqrt(np.sum(self.map_edge))
 
         self.state_features = [

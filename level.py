@@ -293,7 +293,6 @@ class Level:
         for player in self.player_sprites:
             if player.is_dead():
                 print(f"\nPlayer {player.player_id} is dead\n")
-                player.stats.exp = -10
                 self.dead_players[player.player_id] = player.is_dead()
 
         self.done = True if (self.dead_players.all() == 1
