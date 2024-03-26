@@ -116,7 +116,7 @@ def main():
 
                     episode_reward[player.player_id][step] = player.reward
 
-                    if not no_training and ((step % horizon == 0 and step != 0):
+                    if not no_training and (step % horizon == 0 and step != 0):
 
                         player.agent.learn()
 
