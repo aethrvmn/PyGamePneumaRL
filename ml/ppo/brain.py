@@ -59,11 +59,11 @@ class ActorNetwork(nn.Module):
 
         self.actor = nn.Sequential(
             nn.Linear(input_dim, fc1_dims),
-            nn.LeakyReLU(),
+            nn.Tanh(),
             nn.Linear(fc1_dims, fc2_dims),
-            nn.LeakyReLU(),
+            nn.Tanh(),
             nn.Linear(fc1_dims, fc2_dims),
-            nn.LeakyReLU(),
+            nn.Tanh(),
             nn.Linear(fc2_dims, output_dim),
             nn.Softmax(dim=-1)
         )
@@ -99,19 +99,19 @@ class CriticNetwork(nn.Module):
 
         self.critic = nn.Sequential(
             nn.Linear(input_dims, fc1_dims),
-            nn.LeakyReLU(),
+            nn.Tanh(),
             nn.Linear(fc1_dims, fc2_dims),
-            nn.LeakyReLU(),
+            nn.Tanh(),
             nn.Linear(fc1_dims, fc2_dims),
-            nn.LeakyReLU(),
+            nn.Tanh(),
             nn.Linear(fc1_dims, fc2_dims),
-            nn.LeakyReLU(),
+            nn.Tanh(),
             nn.Linear(fc1_dims, fc2_dims),
-            nn.LeakyReLU(),
+            nn.Tanh(),
             nn.Linear(fc1_dims, fc2_dims),
-            nn.LeakyReLU(),
+            nn.Tanh(),
             nn.Linear(fc1_dims, fc2_dims),
-            nn.LeakyReLU(),
+            nn.Tanh(),
             nn.Linear(fc2_dims, 1)
         )
 
