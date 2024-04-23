@@ -1,25 +1,27 @@
 import os
 import pygame
-from math import sin
 
-from utils.resource_loader import import_folder, import_assets
+from math import sin
 
 from config.system.window import HITBOX_OFFSET
 
+from effects.particle_effects import AnimationPlayer
 
-class AnimationHandler:
+from .stats import StatsHandler
 
-    def __init__(self, sprite_type, name=None):
+from utils.resource_loader import import_folder, import_assets
+
+
+class AnimationHandler(StatsHandler):
+
+    def __init__(self):
+
         self.frame_index = 0
         self.animation_speed = 0.15
 
-        self.sprite_type = sprite_type
-        self.name = name
-
     def import_assets(self, position):
 
-        # Import Graphic Assets
-
+        # Import graphic assets
         if self.sprite_type == 'player':
             self.image = pygame.image.load(
                 import_assets(os.path.join('graphics',
@@ -83,8 +85,8 @@ class AnimationHandler:
         else:
             self.image.set_alpha(255)
 
-    def trigger_death_particles(self, animation_player, position, particle_type, groups):
-        animation_player.generate_particles(
+    def trigger_death_particles(self, position, particle_type, groups):
+        AnimationPlayer().generate_particles(
             particle_type, position, groups)
 
     def wave_value(self):

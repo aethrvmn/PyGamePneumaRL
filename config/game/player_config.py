@@ -25,6 +25,15 @@ warrior_stats = {
     'speed': 5
 }
 
+base_stats = {
+    'role_id': 0,
+    'health': 150,
+    'energy': 70,
+    'attack': 10,
+    'magic': 5,
+    'speed': 5
+}
+
 max_stats = {
     'health': 300,
     'energy': 150,

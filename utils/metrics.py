@@ -13,7 +13,8 @@ def plot_learning_curve(scores, num_players, figure_path, n_episodes):
     for score in scores:
         running_avg = np.zeros(len(score))
         for i in range(len(score)):
-            running_avg[i] = np.mean(score[max(0, i-int(n_episodes/10)):(i+1)])
+            if score[i] != 0:
+                running_avg[i] = np.mean(score[max(0, i-int(n_episodes/10)):i+1])
         plt.plot(running_avg)
     plt.savefig(os.path.join(figure_path, "avg_score.png"))
     plt.close()
@@ -50,7 +51,8 @@ def plot_loss(nn_type, losses, num_players, figure_path, n_episodes):
     for loss in losses:
         running_avg = np.zeros(len(loss))
         for i in range(len(loss)):
-            running_avg[i] = np.mean(loss[max(0, i-int(n_episodes/10)):(i+1)])
+            if loss[i] != 0:
+                running_avg[i] = np.mean(loss[max(0, i-int(n_episodes/10)):(i+1)])
         plt.plot(running_avg)
     plt.savefig(os.path.join(figure_path, f"{nn_type}_loss.png"))
     plt.close()
@@ -66,7 +68,8 @@ def plot_parameter(name, parameter, num_players, figure_path, n_episodes):
     for param in parameter:
         running_avg = np.zeros(len(param))
         for i in range(len(param)):
-            running_avg[i] = np.mean(param[max(0, i-int(n_episodes/10)):(i+1)])
+            if param[i] != 0:
+                running_avg[i] = np.mean(param[max(0, i-int(n_episodes/10)):(i+1)])
         plt.plot(running_avg)
     plt.savefig(os.path.join(figure_path, f"{name}.png"))
     plt.close()

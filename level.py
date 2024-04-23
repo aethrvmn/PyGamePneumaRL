@@ -50,8 +50,6 @@ class Level:
 
         self.possible_player_locations = []
 
-        player_id = 0
-
         self.layouts = {
             'boundary': import_csv_layout(os.path.join('map',
                                                        'FloorBlocks.csv')),
@@ -195,16 +193,16 @@ class Level:
 
         for player in self.player_sprites:
 
-            player.animation.import_assets(
+            player.import_assets(
                 choice(self.possible_player_locations))
 
-            player.stats.health\
-                = player.stats.stats['health']
+            player.health\
+                = player.stats['health']
 
-            player.stats.energy\
-                = player.stats.stats['energy']
+            player.energy\
+                = player.stats['energy']
 
-            player.stats.exp = 0
+            player.exp = 0
 
         self.get_entities()
         self.get_distance_direction()
@@ -235,12 +233,12 @@ class Level:
         for player in self.player_sprites:
             if not player.is_dead():
                 player_vector = pygame.math.Vector2(
-                    player.animation.rect.center
+                    player.rect.center
                 )
 
                 for enemy in self.enemy_sprites:
                     enemy_vector = pygame.math.Vector2(
-                        enemy.animation.rect.center
+                        enemy.rect.center
                     )
                     distance\
                         = (player_vector - enemy_vector).magnitude()
@@ -261,12 +259,12 @@ class Level:
         for enemy in self.enemy_sprites:
             for distance, _, player in enemy.distance_direction_from_player:
 
-                if (distance < enemy.stats.attack_radius
-                        and player._input.combat.vulnerable):
+                if (distance < enemy.attack_radius
+                        and player.vulnerable):
 
-                    player.stats.health -= enemy.stats.attack
-                    player._input.combat.vulnerable = False
-                    player._input.combat.hurt_time = pygame.time.get_ticks()
+                    player.health -= enemy.attack
+                    player.vulnerable = False
+                    player.hurt_time = pygame.time.get_ticks()
 
     def toggle_pause(self):
         self.paused = not self.paused
@@ -279,7 +277,7 @@ class Level:
         if not self.paused:
             # Update the game
             for player in self.player_sprites:
-                if player.stats.health > 0:
+                if player.health > 0:
                     player.attack_logic()
 
             self.get_entities()

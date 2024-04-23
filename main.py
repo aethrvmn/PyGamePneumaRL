@@ -180,8 +180,9 @@ def main():
 
                 # Save models
                 player.agent.save_models(
-                    f"A{player.player_id}",
-                    f"C{player.player_id}")
+                   os.path.join(chkpt_path, f"A{player.player_id}"),
+                   os.path.join(chkpt_path, f"C{player.player_id}")
+                )
 
                 print(f"Models saved to {chkpt_path}")
 

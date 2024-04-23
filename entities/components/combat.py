@@ -1,18 +1,19 @@
-from effects.weapon_effects import Weapon
-from effects.magic_effects import MagicPlayer
-
 from config.game.weapon_config import weapon_data
 from config.game.spell_config import magic_data
+
+from effects.magic_effects import MagicPlayer
+from effects.particle_effects import AnimationPlayer
+from effects.weapon_effects import Weapon
+
+
 
 
 class CombatHandler:
 
-    def __init__(self, animation_player):
-
-        self.animation_player = animation_player
+    def __init__(self):
 
         # Setup Combat
-        self.magic_player = MagicPlayer(animation_player)
+        self.magic_player = MagicPlayer(AnimationPlayer())
         self.current_attack = None
 
         # Spell and Weapon Rotation
@@ -27,20 +28,20 @@ class CombatHandler:
         self.hurt_time = None
         self.invulnerability_duration = 300
 
-    def create_attack_sprite(self, player):
+    def create_attack_sprite(self):
         self.current_attack = Weapon(
-            player, [player.visible_sprites, player.attack_sprites])
+            self, [self.visible_sprites, self.attack_sprites])
 
     def delete_attack_sprite(self):
         if self.current_attack:
             self.current_attack.kill()
         self.current_attack = None
 
-    def create_magic_sprite(self, player, style, strength, cost):
+    def create_magic_sprite(self, style, strength, cost):
         if style == 'heal':
-            self.magic_player.heal(player, strength, cost, [
-                                   player.visible_sprites])
+            self.magic_player.heal(self, strength, cost, [
+                                   self.visible_sprites])
 
         if style == 'flame':
             self.magic_player.flame(
-                player, cost, [player.visible_sprites, player.attack_sprites])
+                self, cost, [self.visible_sprites, self.attack_sprites])

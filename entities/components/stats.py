@@ -1,19 +1,19 @@
-from config.game.player_config import warrior_stats, mage_stats, tank_stats
+from config.game.player_config import warrior_stats, mage_stats,  tank_stats
 from config.game.monster_config import monster_data
-
 
 class StatsHandler:
 
-    def __init__(self, sprite_type, role=None, monster_name=None):
+    def get_stats(self, sprite_type, role=None, monster_name=None):
 
         if sprite_type == 'player':
-
             if role == 'warrior':
                 self.stats = warrior_stats
             elif role == 'tank':
                 self.stats = tank_stats
             elif role == 'mage':
                 self.stats = mage_stats
+            else:
+                self.stats = base_stats
 
             self.role_id = self.stats['role_id']
             self.health = self.stats['health']
@@ -24,7 +24,6 @@ class StatsHandler:
             self.exp = 0
 
         if sprite_type == 'enemy':
-
             self.monster_info = monster_data[monster_name]
             self.monster_id = self.monster_info['id']
             self.health = self.monster_info['health']

@@ -1,36 +1,34 @@
 import pygame
 
-from .components.animation import AnimationHandler
-from .components.stats import StatsHandler
-from .components._input import InputHandler
+from .entity import Entity
 
 from effects.particle_effects import AnimationPlayer
 
 
-class Enemy(pygame.sprite.Sprite):
+class Enemy(Entity):
 
-    def __init__(self, name, position, groups, visible_sprites, obstacle_sprites):
-        super().__init__(groups)
+    def __init__(self,
+                 name,
+                 position,
+                 groups,
+                 visible_sprites,
+                 obstacle_sprites
+                 ):
 
-        self.sprite_type = "enemy"
+        super().__init__(groups=groups,
+                        visible_sprites=visible_sprites,
+                        obstacle_sprites=obstacle_sprites,
+                        attack_sprites=None,
+                        attackable_sprites=None)
+
+        # Setup stats
+        self.sprite_type = 'enemy'
         self.name = name
+        self.get_stats(self.sprite_type, monster_name=self.name)
 
-        self.visible_sprites = visible_sprites
-
-        # Setup Graphics
+        # Graphics Setup
         self.animation_player = AnimationPlayer()
-        self.animation = AnimationHandler(self.sprite_type, self.name)
-        self.animation.import_assets(position)
-        self.image = self.animation.image
-        self.rect = self.animation.rect
-
-        # Setup Inputs
-        self._input = InputHandler(
-            self.sprite_type, self.animation_player)
-
-        # Setup Stats
-        self.stats = StatsHandler(self.sprite_type, monster_name=self.name)
-        self.obstacle_sprites = obstacle_sprites
+        self.import_assets(position)
 
         self.distance_direction_from_player = None
 
@@ -38,49 +36,48 @@ class Enemy(pygame.sprite.Sprite):
         player_distance = sorted(
             self.distance_direction_from_player, key=lambda x: x[0])[0]
 
-        if player_distance[0] < self.stats.notice_radius and player_distance[0] >= self.stats.attack_radius:
-            self._input.movement.direction = player_distance[1]
-            self.animation.status = "move"
-            self._input.movement.move(
-                self.stats.speed, self.animation.hitbox, self.obstacle_sprites, self.animation.rect)
-        elif player_distance[0] <= self.stats.attack_radius:
-            self.animation.status = 'attack'
+        if player_distance[0] < self.notice_radius and player_distance[0] >= self.attack_radius:
+            self.direction = player_distance[1]
+            self.status = "move"
+            self.move(
+                self.speed, self.hitbox, self.obstacle_sprites, self.rect)
+        elif player_distance[0] <= self.attack_radius:
+            self.status = 'attack'
         else:
-            self.animation.status = 'idle'
+            self.status = 'idle'
 
     def add_exp(self, player):
-        player.stats.exp += self.stats.exp
+        player.exp += self.exp
 
     def check_death(self, player):
-        if self.stats.health <= 0:
+        if self.health <= 0:
             self.add_exp(player)
-            self.animation.trigger_death_particles(
-                self.animation_player, self.rect.center, self.name, self.visible_sprites)
+            self.trigger_death_particles(
+                self.rect.center, self.name, self.visible_sprites)
             self.kill()
 
     def get_damaged(self, player, attack_type):
-        if self._input.combat.vulnerable:
+        if self.vulnerable:
             for _, direction, attacking_player in self.distance_direction_from_player:
                 if attacking_player == player:
-                    self._input.movement.direction = -direction
-                    self._input.movement.move(
-                        self.stats.speed * self.stats.knockback, self.animation.hitbox, self.obstacle_sprites, self.animation.rect)
+                    self.direction = -direction
+                    self.move(
+                        self.speed * self.knockback, self.hitbox, self.obstacle_sprites, self.rect)
                     break
             if attack_type == 'weapon':
-                self.stats.health -= player.get_full_weapon_damage()
+                self.health -= player.get_full_weapon_damage()
             else:
-                self.stats.health -= player.get_full_magic_damage()
+                self.health -= player.get_full_magic_damage()
             self.check_death(player)
-            self._input.combat.hurt_time = pygame.time.get_ticks()
-            self._input.combat.vulnerable = False
+            self.hurt_time = pygame.time.get_ticks()
+            self.vulnerable = False
 
     def update(self):
 
         self.get_action()
 
-        self.animation.animate(self.animation.status,
-                               self._input.combat.vulnerable)
-        self.image = self.animation.image
-        self.rect = self.animation.rect
+        self.animate(self.status, self.vulnerable)
+        self.image = self.image
+        self.rect = self.rect
 
-        self._input.cooldowns(self._input.combat.vulnerable)
+        self.cooldowns(self.vulnerable)

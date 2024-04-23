@@ -3,8 +3,7 @@ import pygame
 
 class MovementHandler:
 
-    def __init__(self, sprite_type):
-
+    def __init__(self):
         self.direction = pygame.math.Vector2()
 
     def move(self, speed, hitbox, obstacle_sprites, rect):
