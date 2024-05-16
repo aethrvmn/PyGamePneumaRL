@@ -1,0 +1,100 @@
+[gd_scene load_steps=8 format=3 uid="uid://dh6xtqap2c2j4"]
+
+[ext_resource type="Texture2D" uid="uid://bpobfwslfc3qy" path="res://assets/graphics/weapons/sword/down.png" id="1_1yw4v"]
+[ext_resource type="Script" path="res://code/weapon.gd" id="1_utwve"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4n6kd"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_1yw4v")
+}],
+"loop": true,
+"name": &"down",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_iedax"]
+size = Vector2(51, 79)
+
+[sub_resource type="Animation" id="Animation_0n3f6"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_vwacy"]
+resource_name = "attack"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_sb3pq"]
+_data = {
+"RESET": SubResource("Animation_0n3f6"),
+"attack": SubResource("Animation_vwacy")
+}
+
+[node name="Weapon" type="Area2D"]
+collision_mask = 4
+script = ExtResource("1_utwve")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+visible = false
+sprite_frames = SubResource("SpriteFrames_4n6kd")
+animation = &"down"
+flip_h = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(10.5, -15.5)
+shape = SubResource("RectangleShape2D_iedax")
+disabled = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_sb3pq")
+}
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -1,0 +1,4 @@
+[gd_scene format=3 uid="uid://c1i0nirxfagfh"]
+
+[node name="Attack" type="Area2D"]
+collision_mask = 2

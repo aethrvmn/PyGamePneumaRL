@@ -1,0 +1,51 @@
+[gd_scene load_steps=3 format=3 uid="uid://bj4ap7bw0imhy"]
+
+[ext_resource type="FontFile" uid="uid://bbe5csaxy5g3c" path="res://assets/graphics/font/joystix.ttf" id="1_kqyoj"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0lqnv"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(1, 1, 1, 1)
+
+[node name="Camera" type="Camera2D"]
+
+[node name="ExpPanel" type="PanelContainer" parent="."]
+offset_left = 187.0
+offset_top = 227.0
+offset_right = 568.0
+offset_bottom = 316.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_0lqnv")
+
+[node name="ExpLabel" type="Label" parent="ExpPanel"]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_fonts/font = ExtResource("1_kqyoj")
+theme_override_font_sizes/font_size = 32
+text = "EXP POINTS
+ "
+horizontal_alignment = 1
+vertical_alignment = 1
+max_lines_visible = 2
+
+[node name="HPPanel" type="PanelContainer" parent="."]
+offset_left = -569.0
+offset_top = 223.0
+offset_right = -188.0
+offset_bottom = 318.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_0lqnv")
+
+[node name="HPLabel" type="Label" parent="HPPanel"]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_fonts/font = ExtResource("1_kqyoj")
+theme_override_font_sizes/font_size = 32
+text = "HEALTH
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+max_lines_visible = 2

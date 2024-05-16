@@ -1,0 +1,14 @@
+:job_id:01000000
+:actor_name:RolloutWorker
+waiting for remote GODOT connection on port 11012
+Godot Engine v4.2.2.stable.mono.official.15073afe3 - https://godotengine.org
+Your video card drivers seem not to support the required Vulkan version.
+
+If possible, consider updating your video card drivers or using the OpenGL 3 driver.
+
+You can enable the OpenGL 3 driver by starting the engine from the
+command line with the command:
+
+    "pneuma.x86_64" --rendering-driver opengl3
+
+If you recently updated your video card drivers, try rebooting.

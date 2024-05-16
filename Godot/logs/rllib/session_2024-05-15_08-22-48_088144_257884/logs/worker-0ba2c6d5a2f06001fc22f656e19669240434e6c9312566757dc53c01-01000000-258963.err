@@ -1,0 +1,5 @@
+:job_id:01000000
+:actor_name:PPO
+2024-05-15 08:22:52,212	WARNING deprecation.py:50 -- DeprecationWarning: `AlgorithmConfig.num_envs_per_worker` has been deprecated. Use `AlgorithmConfig.num_envs_per_env_runner` instead. This will raise an error in the future!
+2024-05-15 08:22:52,217	WARNING deprecation.py:50 -- DeprecationWarning: `WorkerSet(num_workers=... OR local_worker=...)` has been deprecated. Use `EnvRunnerGroup(num_env_runners=... AND local_env_runner=...)` instead. This will raise an error in the future!
+2024-05-15 08:22:52,217	WARNING deprecation.py:50 -- DeprecationWarning: `max_num_worker_restarts` has been deprecated. Use `AlgorithmConfig.max_num_env_runner_restarts` instead. This will raise an error in the future!

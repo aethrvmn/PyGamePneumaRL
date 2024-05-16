@@ -1,0 +1,696 @@
+[2024-05-15 09:05:00,574 I 12692 12692] (gcs_server) io_service_pool.cc:35: IOServicePool is running with 1 io_service.
+[2024-05-15 09:05:00,579 I 12692 12692] (gcs_server) event.cc:234: Set ray event level to warning
+[2024-05-15 09:05:00,579 I 12692 12692] (gcs_server) event.cc:342: Ray Event initialized for GCS
+[2024-05-15 09:05:00,579 I 12692 12692] (gcs_server) gcs_server.cc:74: GCS storage type is StorageType::IN_MEMORY
+[2024-05-15 09:05:00,581 I 12692 12692] (gcs_server) gcs_init_data.cc:42: Loading job table data.
+[2024-05-15 09:05:00,581 I 12692 12692] (gcs_server) gcs_init_data.cc:54: Loading node table data.
+[2024-05-15 09:05:00,581 I 12692 12692] (gcs_server) gcs_init_data.cc:80: Loading actor table data.
+[2024-05-15 09:05:00,581 I 12692 12692] (gcs_server) gcs_init_data.cc:93: Loading actor task spec table data.
+[2024-05-15 09:05:00,581 I 12692 12692] (gcs_server) gcs_init_data.cc:66: Loading placement group table data.
+[2024-05-15 09:05:00,581 I 12692 12692] (gcs_server) gcs_init_data.cc:46: Finished loading job table data, size = 0
+[2024-05-15 09:05:00,581 I 12692 12692] (gcs_server) gcs_init_data.cc:58: Finished loading node table data, size = 0
+[2024-05-15 09:05:00,581 I 12692 12692] (gcs_server) gcs_init_data.cc:84: Finished loading actor table data, size = 0
+[2024-05-15 09:05:00,581 I 12692 12692] (gcs_server) gcs_init_data.cc:97: Finished loading actor task spec table data, size = 0
+[2024-05-15 09:05:00,581 I 12692 12692] (gcs_server) gcs_init_data.cc:71: Finished loading placement group table data, size = 0
+[2024-05-15 09:05:00,581 I 12692 12692] (gcs_server) gcs_server.cc:162: No existing server cluster ID found. Generating new ID: f80091d542af94b49f72839a1f9e8e9b93d17c7c67f37f1c21fb29b2
+[2024-05-15 09:05:00,582 I 12692 12692] (gcs_server) gcs_server.cc:648: Autoscaler V2 enabled: 0
+[2024-05-15 09:05:00,583 I 12692 12692] (gcs_server) grpc_server.cc:134: GcsServer server started, listening on port 51730.
+[2024-05-15 09:05:00,610 I 12692 12692] (gcs_server) gcs_server.cc:250: GcsNodeManager: 
+- RegisterNode request count: 0
+- DrainNode request count: 0
+- GetAllNodeInfo request count: 0
+- GetInternalConfig request count: 0
+
+GcsActorManager: 
+- RegisterActor request count: 0
+- CreateActor request count: 0
+- GetActorInfo request count: 0
+- GetNamedActorInfo request count: 0
+- GetAllActorInfo request count: 0
+- KillActor request count: 0
+- ListNamedActors request count: 0
+- Registered actors count: 0
+- Destroyed actors count: 0
+- Named actors count: 0
+- Unresolved actors count: 0
+- Pending actors count: 0
+- Created actors count: 0
+- owners_: 0
+- actor_to_register_callbacks_: 0
+- actor_to_create_callbacks_: 0
+- sorted_destroyed_actor_list_: 0
+
+GcsResourceManager: 
+- GetAllAvailableResources request count0
+- GetAllResourceUsage request count: 0
+
+GcsPlacementGroupManager: 
+- CreatePlacementGroup request count: 0
+- RemovePlacementGroup request count: 0
+- GetPlacementGroup request count: 0
+- GetAllPlacementGroup request count: 0
+- WaitPlacementGroupUntilReady request count: 0
+- GetNamedPlacementGroup request count: 0
+- Scheduling pending placement group count: 0
+- Registered placement groups count: 0
+- Named placement group count: 0
+- Pending placement groups count: 0
+- Infeasible placement groups count: 0
+
+Publisher:
+
+[runtime env manager] ID to URIs table:
+[runtime env manager] URIs reference table:
+
+GcsTaskManager: 
+-Total num task events reported: 0
+-Total num status task events dropped: 0
+-Total num profile events dropped: 0
+-Current num of task events stored: 0
+-Total num of actor creation tasks: 0
+-Total num of actor tasks: 0
+-Total num of normal tasks: 0
+-Total num of driver tasks: 0
+
+
+[2024-05-15 09:05:00,610 I 12692 12692] (gcs_server) gcs_server.cc:844: Event stats:
+
+
+Global stats: 21 total (10 active)
+Queueing time: mean = 4.170 ms, max = 29.578 ms, min = 1.000 us, total = 87.561 ms
+Execution time:  mean = 1.419 ms, total = 29.795 ms
+Event stats:
+	InternalKVGcsService.grpc_client.InternalKVPut - 6 total (6 active), Execution time: mean = 0.000 s, total = 0.000 s, Queueing time: mean = 0.000 s, max = -0.000 s, min = 9223372036.855 s, total = 0.000 s
+	GcsInMemoryStore.GetAll - 5 total (0 active), Execution time: mean = 4.124 us, total = 20.620 us, Queueing time: mean = 20.528 us, max = 39.821 us, min = 15.100 us, total = 102.642 us
+	PeriodicalRunner.RunFnPeriodically - 4 total (2 active, 1 running), Execution time: mean = 710.000 ns, total = 2.840 us, Queueing time: mean = 14.707 ms, max = 29.578 ms, min = 29.251 ms, total = 58.829 ms
+	GcsInMemoryStore.Put - 3 total (0 active), Execution time: mean = 9.922 ms, total = 29.767 ms, Queueing time: mean = 9.543 ms, max = 28.625 ms, min = 1.000 us, total = 28.628 ms
+	GcsInMemoryStore.Get - 1 total (0 active), Execution time: mean = 5.240 us, total = 5.240 us, Queueing time: mean = 1.300 us, max = 1.300 us, min = 1.300 us, total = 1.300 us
+	RayletLoadPulled - 1 total (1 active), Execution time: mean = 0.000 s, total = 0.000 s, Queueing time: mean = 0.000 s, max = -0.000 s, min = 9223372036.855 s, total = 0.000 s
+	ClusterResourceManager.ResetRemoteNodeView - 1 total (1 active), Execution time: mean = 0.000 s, total = 0.000 s, Queueing time: mean = 0.000 s, max = -0.000 s, min = 9223372036.855 s, total = 0.000 s
+
+
+[2024-05-15 09:05:00,610 I 12692 12692] (gcs_server) gcs_server.cc:845: GcsTaskManager Event stats:
+
+
+Global stats: 2 total (1 active)
+Queueing time: mean = 32.815 us, max = 65.630 us, min = 65.630 us, total = 65.630 us
+Execution time:  mean = 11.830 us, total = 23.660 us
+Event stats:
+	PeriodicalRunner.RunFnPeriodically - 1 total (0 active), Execution time: mean = 23.660 us, total = 23.660 us, Queueing time: mean = 65.630 us, max = 65.630 us, min = 65.630 us, total = 65.630 us
+	GcsTaskManager.GcJobSummary - 1 total (1 active), Execution time: mean = 0.000 s, total = 0.000 s, Queueing time: mean = 0.000 s, max = -0.000 s, min = 9223372036.855 s, total = 0.000 s
+
+
+[2024-05-15 09:05:01,983 I 12692 12692] (gcs_server) gcs_node_manager.cc:55: Registering node info, node id = 2808763200e5fb675aeed4f2c3a8a8a50b290dfd4d83a5db793b0691, address = 192.168.1.56, node name = 192.168.1.56
+[2024-05-15 09:05:01,983 I 12692 12692] (gcs_server) gcs_node_manager.cc:61: Finished registering node info, node id = 2808763200e5fb675aeed4f2c3a8a8a50b290dfd4d83a5db793b0691, address = 192.168.1.56, node name = 192.168.1.56
+[2024-05-15 09:05:01,983 I 12692 12692] (gcs_server) gcs_placement_group_manager.cc:797: A new node: 2808763200e5fb675aeed4f2c3a8a8a50b290dfd4d83a5db793b0691 registered, will try to reschedule all the infeasible placement groups.
+[2024-05-15 09:05:02,568 I 12692 12692] (gcs_server) gcs_job_manager.cc:42: Adding job, job id = 01000000, driver pid = 12647
+[2024-05-15 09:05:02,568 I 12692 12692] (gcs_server) gcs_job_manager.cc:57: Finished adding job, job id = 01000000, driver pid = 12647
+[2024-05-15 09:05:02,610 I 12692 12692] (gcs_server) gcs_placement_group_manager.cc:432: Registering placement group, placement group id = 656f9c54c57685dae4b6a63a81d401000000, name = , strategy = 0
+[2024-05-15 09:05:02,610 I 12692 12692] (gcs_server) gcs_placement_group_manager.cc:436: Finished registering placement group, placement group id = 656f9c54c57685dae4b6a63a81d401000000, name = , strategy = 0
+[2024-05-15 09:05:02,611 I 12692 12692] (gcs_server) gcs_placement_group_scheduler.cc:185: Preparing resource from node 2808763200e5fb675aeed4f2c3a8a8a50b290dfd4d83a5db793b0691 for bundles: {placement group id={656f9c54c57685dae4b6a63a81d401000000}, bundle index={0}},{placement group id={656f9c54c57685dae4b6a63a81d401000000}, bundle index={1}},{placement group id={656f9c54c57685dae4b6a63a81d401000000}, bundle index={2}},{placement group id={656f9c54c57685dae4b6a63a81d401000000}, bundle index={3}},{placement group id={656f9c54c57685dae4b6a63a81d401000000}, bundle index={4}},
+[2024-05-15 09:05:02,612 I 12692 12692] (gcs_server) gcs_placement_group_scheduler.cc:195: Finished leasing resource from 2808763200e5fb675aeed4f2c3a8a8a50b290dfd4d83a5db793b0691 for bundles: {placement group id={656f9c54c57685dae4b6a63a81d401000000}, bundle index={0}},{placement group id={656f9c54c57685dae4b6a63a81d401000000}, bundle index={1}},{placement group id={656f9c54c57685dae4b6a63a81d401000000}, bundle index={2}},{placement group id={656f9c54c57685dae4b6a63a81d401000000}, bundle index={3}},{placement group id={656f9c54c57685dae4b6a63a81d401000000}, bundle index={4}},
+[2024-05-15 09:05:02,612 I 12692 12692] (gcs_server) gcs_placement_group_scheduler.cc:213: Committing resource to a node 2808763200e5fb675aeed4f2c3a8a8a50b290dfd4d83a5db793b0691 for bundles: {placement group id={656f9c54c57685dae4b6a63a81d401000000}, bundle index={0}},{placement group id={656f9c54c57685dae4b6a63a81d401000000}, bundle index={1}},{placement group id={656f9c54c57685dae4b6a63a81d401000000}, bundle index={2}},{placement group id={656f9c54c57685dae4b6a63a81d401000000}, bundle index={3}},{placement group id={656f9c54c57685dae4b6a63a81d401000000}, bundle index={4}},
+[2024-05-15 09:05:02,612 I 12692 12692] (gcs_server) gcs_placement_group_scheduler.cc:220: Finished committing resource to 2808763200e5fb675aeed4f2c3a8a8a50b290dfd4d83a5db793b0691 for bundles: {placement group id={656f9c54c57685dae4b6a63a81d401000000}, bundle index={0}},{placement group id={656f9c54c57685dae4b6a63a81d401000000}, bundle index={1}},{placement group id={656f9c54c57685dae4b6a63a81d401000000}, bundle index={2}},{placement group id={656f9c54c57685dae4b6a63a81d401000000}, bundle index={3}},{placement group id={656f9c54c57685dae4b6a63a81d401000000}, bundle index={4}},
+[2024-05-15 09:05:02,612 I 12692 12692] (gcs_server) gcs_placement_group_manager.cc:321: Successfully created placement group , id: 656f9c54c57685dae4b6a63a81d401000000
+[2024-05-15 09:05:02,795 I 12692 12692] (gcs_server) gcs_actor_manager.cc:262: Registering actor, job id = 01000000, actor id = 0b0450d90a301440d0afa9f001000000
+[2024-05-15 09:05:02,795 I 12692 12692] (gcs_server) gcs_actor_manager.cc:268: Registered actor, job id = 01000000, actor id = 0b0450d90a301440d0afa9f001000000
+[2024-05-15 09:05:02,796 I 12692 12692] (gcs_server) gcs_actor_manager.cc:287: Creating actor, job id = 01000000, actor id = 0b0450d90a301440d0afa9f001000000
+[2024-05-15 09:05:02,796 I 12692 12692] (gcs_server) gcs_actor_scheduler.cc:312: Start leasing worker from node 2808763200e5fb675aeed4f2c3a8a8a50b290dfd4d83a5db793b0691 for actor 0b0450d90a301440d0afa9f001000000, job id = 01000000
+[2024-05-15 09:05:03,202 I 12692 12692] (gcs_server) gcs_actor_scheduler.cc:633: Finished leasing worker from 2808763200e5fb675aeed4f2c3a8a8a50b290dfd4d83a5db793b0691 for actor 0b0450d90a301440d0afa9f001000000, job id = 01000000
+[2024-05-15 09:05:03,202 I 12692 12692] (gcs_server) gcs_actor_scheduler.cc:447: Start creating actor 0b0450d90a301440d0afa9f001000000 on worker 88aa07750bd7c12dafbb7815838b15c7992641795664ee3b029e7c76 at node 2808763200e5fb675aeed4f2c3a8a8a50b290dfd4d83a5db793b0691, job id = 01000000
+[2024-05-15 09:05:04,755 I 12692 12692] (gcs_server) gcs_actor_manager.cc:262: Registering actor, job id = 01000000, actor id = cf76be01afb9954787ceb84801000000
+[2024-05-15 09:05:04,756 I 12692 12692] (gcs_server) gcs_actor_manager.cc:268: Registered actor, job id = 01000000, actor id = cf76be01afb9954787ceb84801000000
+[2024-05-15 09:05:04,756 I 12692 12692] (gcs_server) gcs_actor_manager.cc:287: Creating actor, job id = 01000000, actor id = cf76be01afb9954787ceb84801000000
+[2024-05-15 09:05:04,756 I 12692 12692] (gcs_server) gcs_actor_scheduler.cc:312: Start leasing worker from node 2808763200e5fb675aeed4f2c3a8a8a50b290dfd4d83a5db793b0691 for actor cf76be01afb9954787ceb84801000000, job id = 01000000
+[2024-05-15 09:05:04,756 I 12692 12692] (gcs_server) gcs_actor_manager.cc:262: Registering actor, job id = 01000000, actor id = 64110d8601f56bf14e9797c501000000
+[2024-05-15 09:05:04,757 I 12692 12692] (gcs_server) gcs_actor_manager.cc:268: Registered actor, job id = 01000000, actor id = 64110d8601f56bf14e9797c501000000
+[2024-05-15 09:05:04,757 I 12692 12692] (gcs_server) gcs_actor_manager.cc:287: Creating actor, job id = 01000000, actor id = 64110d8601f56bf14e9797c501000000
+[2024-05-15 09:05:04,757 I 12692 12692] (gcs_server) gcs_actor_scheduler.cc:312: Start leasing worker from node 2808763200e5fb675aeed4f2c3a8a8a50b290dfd4d83a5db793b0691 for actor 64110d8601f56bf14e9797c501000000, job id = 01000000
+[2024-05-15 09:05:04,758 I 12692 12692] (gcs_server) gcs_actor_manager.cc:262: Registering actor, job id = 01000000, actor id = 6c1e2f8e5911cf8ba4dcac5b01000000
+[2024-05-15 09:05:04,758 I 12692 12692] (gcs_server) gcs_actor_manager.cc:268: Registered actor, job id = 01000000, actor id = 6c1e2f8e5911cf8ba4dcac5b01000000
+[2024-05-15 09:05:04,758 I 12692 12692] (gcs_server) gcs_actor_manager.cc:287: Creating actor, job id = 01000000, actor id = 6c1e2f8e5911cf8ba4dcac5b01000000
+[2024-05-15 09:05:04,758 I 12692 12692] (gcs_server) gcs_actor_scheduler.cc:312: Start leasing worker from node 2808763200e5fb675aeed4f2c3a8a8a50b290dfd4d83a5db793b0691 for actor 6c1e2f8e5911cf8ba4dcac5b01000000, job id = 01000000
+[2024-05-15 09:05:04,759 I 12692 12692] (gcs_server) gcs_actor_manager.cc:262: Registering actor, job id = 01000000, actor id = 79760d3ce8052092d662e89401000000
+[2024-05-15 09:05:04,759 I 12692 12692] (gcs_server) gcs_actor_manager.cc:268: Registered actor, job id = 01000000, actor id = 79760d3ce8052092d662e89401000000
+[2024-05-15 09:05:04,759 I 12692 12692] (gcs_server) gcs_actor_manager.cc:287: Creating actor, job id = 01000000, actor id = 79760d3ce8052092d662e89401000000
+[2024-05-15 09:05:04,759 I 12692 12692] (gcs_server) gcs_actor_scheduler.cc:312: Start leasing worker from node 2808763200e5fb675aeed4f2c3a8a8a50b290dfd4d83a5db793b0691 for actor 79760d3ce8052092d662e89401000000, job id = 01000000
+[2024-05-15 09:05:05,180 I 12692 12692] (gcs_server) gcs_actor_scheduler.cc:633: Finished leasing worker from 2808763200e5fb675aeed4f2c3a8a8a50b290dfd4d83a5db793b0691 for actor cf76be01afb9954787ceb84801000000, job id = 01000000
+[2024-05-15 09:05:05,181 I 12692 12692] (gcs_server) gcs_actor_scheduler.cc:447: Start creating actor cf76be01afb9954787ceb84801000000 on worker 6edeb2bc45590aa290c046f72cb5570a133031f0fa08412f23f2528a at node 2808763200e5fb675aeed4f2c3a8a8a50b290dfd4d83a5db793b0691, job id = 01000000
+[2024-05-15 09:05:05,183 I 12692 12692] (gcs_server) gcs_actor_scheduler.cc:633: Finished leasing worker from 2808763200e5fb675aeed4f2c3a8a8a50b290dfd4d83a5db793b0691 for actor 6c1e2f8e5911cf8ba4dcac5b01000000, job id = 01000000
+[2024-05-15 09:05:05,183 I 12692 12692] (gcs_server) gcs_actor_scheduler.cc:447: Start creating actor 6c1e2f8e5911cf8ba4dcac5b01000000 on worker cd64a88e73d60e90bea69d93f771cc429cb8accd2441e342cb915a91 at node 2808763200e5fb675aeed4f2c3a8a8a50b290dfd4d83a5db793b0691, job id = 01000000
+[2024-05-15 09:05:05,231 I 12692 12692] (gcs_server) gcs_actor_scheduler.cc:633: Finished leasing worker from 2808763200e5fb675aeed4f2c3a8a8a50b290dfd4d83a5db793b0691 for actor 79760d3ce8052092d662e89401000000, job id = 01000000
+[2024-05-15 09:05:05,232 I 12692 12692] (gcs_server) gcs_actor_scheduler.cc:447: Start creating actor 79760d3ce8052092d662e89401000000 on worker 5f80103a7fc6da866dac6d9a1f8048732e7c48f9a9b01d7546969c38 at node 2808763200e5fb675aeed4f2c3a8a8a50b290dfd4d83a5db793b0691, job id = 01000000
+[2024-05-15 09:05:05,282 I 12692 12692] (gcs_server) gcs_actor_scheduler.cc:633: Finished leasing worker from 2808763200e5fb675aeed4f2c3a8a8a50b290dfd4d83a5db793b0691 for actor 64110d8601f56bf14e9797c501000000, job id = 01000000
+[2024-05-15 09:05:05,282 I 12692 12692] (gcs_server) gcs_actor_scheduler.cc:447: Start creating actor 64110d8601f56bf14e9797c501000000 on worker 7abd3065dca4325130aae9b5fed632b86b1f3673140c122382f8f4ed at node 2808763200e5fb675aeed4f2c3a8a8a50b290dfd4d83a5db793b0691, job id = 01000000
+[2024-05-15 09:05:10,591 W 12692 12713] (gcs_server) metric_exporter.cc:105: [1] Export metrics to agent failed: GrpcUnavailable: RPC Error message: failed to connect to all addresses; last error: UNKNOWN: ipv4:127.0.0.1:62660: Failed to connect to remote host: Connection refused; RPC Error details: . This won't affect Ray, but you can lose metrics from the cluster.
+[2024-05-15 09:06:00,611 I 12692 12692] (gcs_server) gcs_server.cc:250: GcsNodeManager: 
+- RegisterNode request count: 1
+- DrainNode request count: 0
+- GetAllNodeInfo request count: 31
+- GetInternalConfig request count: 1
+
+GcsActorManager: 
+- RegisterActor request count: 5
+- CreateActor request count: 5
+- GetActorInfo request count: 5
+- GetNamedActorInfo request count: 0
+- GetAllActorInfo request count: 0
+- KillActor request count: 0
+- ListNamedActors request count: 0
+- Registered actors count: 5
+- Destroyed actors count: 0
+- Named actors count: 0
+- Unresolved actors count: 0
+- Pending actors count: 0
+- Created actors count: 0
+- owners_: 1
+- actor_to_register_callbacks_: 0
+- actor_to_create_callbacks_: 5
+- sorted_destroyed_actor_list_: 0
+
+GcsResourceManager: 
+- GetAllAvailableResources request count0
+- GetAllResourceUsage request count: 12
+
+GcsPlacementGroupManager: 
+- CreatePlacementGroup request count: 1
+- RemovePlacementGroup request count: 0
+- GetPlacementGroup request count: 5
+- GetAllPlacementGroup request count: 0
+- WaitPlacementGroupUntilReady request count: 0
+- GetNamedPlacementGroup request count: 0
+- Scheduling pending placement group count: 1
+- Registered placement groups count: 1
+- Named placement group count: 0
+- Pending placement groups count: 0
+- Infeasible placement groups count: 0
+
+Publisher:
+GCS_NODE_INFO_CHANNEL
+- cumulative published messages: 1
+- cumulative published bytes: 557
+- current buffered bytes: 0
+RAY_LOG_CHANNEL
+- cumulative published messages: 21
+- cumulative published bytes: 23269
+- current buffered bytes: 853
+GCS_ACTOR_CHANNEL
+- cumulative published messages: 10
+- cumulative published bytes: 5864
+- current buffered bytes: 1328
+GCS_WORKER_DELTA_CHANNEL
+- cumulative published messages: 5
+- cumulative published bytes: 485
+- current buffered bytes: 97
+GCS_JOB_CHANNEL
+- cumulative published messages: 1
+- cumulative published bytes: 279
+- current buffered bytes: 279
+
+[runtime env manager] ID to URIs table:
+[runtime env manager] URIs reference table:
+
+GcsTaskManager: 
+-Total num task events reported: 23
+-Total num status task events dropped: 0
+-Total num profile events dropped: 0
+-Current num of task events stored: 12
+-Total num of actor creation tasks: 5
+-Total num of actor tasks: 5
+-Total num of normal tasks: 1
+-Total num of driver tasks: 1
+
+
+[2024-05-15 09:06:00,611 I 12692 12692] (gcs_server) gcs_server.cc:844: Event stats:
+
+
+Global stats: 1383 total (19 active)
+Queueing time: mean = 75.156 us, max = 29.578 ms, min = -0.000 s, total = 103.940 ms
+Execution time:  mean = 1.746 ms, total = 2.415 s
+Event stats:
+	GcsInMemoryStore.Put - 191 total (0 active), Execution time: mean = 175.900 us, total = 33.597 ms, Queueing time: mean = 158.811 us, max = 28.625 ms, min = 540.000 ns, total = 30.333 ms
+	InternalKVGcsService.grpc_server.InternalKVPut - 145 total (0 active), Execution time: mean = 150.208 us, total = 21.780 ms, Queueing time: mean = 0.000 s, max = -0.000 s, min = 9223372036.855 s, total = 0.000 s
+	InternalKVGcsService.grpc_server.InternalKVPut.HandleRequestImpl - 145 total (0 active), Execution time: mean = 7.502 us, total = 1.088 ms, Queueing time: mean = 48.142 us, max = 322.193 us, min = 900.000 ns, total = 6.981 ms
+	GcsInMemoryStore.Get - 85 total (0 active), Execution time: mean = 21.017 us, total = 1.786 ms, Queueing time: mean = 5.391 us, max = 274.798 us, min = 570.000 ns, total = 458.205 us
+	InternalKVGcsService.grpc_server.InternalKVGet.HandleRequestImpl - 78 total (0 active), Execution time: mean = 10.044 us, total = 783.409 us, Queueing time: mean = 10.235 us, max = 87.590 us, min = 4.380 us, total = 798.305 us
+	InternalKVGcsService.grpc_server.InternalKVGet - 78 total (0 active), Execution time: mean = 116.124 us, total = 9.058 ms, Queueing time: mean = 0.000 s, max = -0.000 s, min = 9223372036.855 s, total = 0.000 s
+	InternalKVGcsService.grpc_client.InternalKVPut - 72 total (0 active), Execution time: mean = 439.657 us, total = 31.655 ms, Queueing time: mean = 0.000 s, max = -0.000 s, min = 9223372036.855 s, total = 0.000 s
+	InternalKVGcsService.grpc_client.InternalKVPut.OnReplyReceived - 72 total (0 active), Execution time: mean = 4.300 us, total = 309.574 us, Queueing time: mean = 12.588 us, max = 32.699 us, min = 4.990 us, total = 906.331 us
+	RayletLoadPulled - 60 total (1 active), Execution time: mean = 85.206 us, total = 5.112 ms, Queueing time: mean = 21.618 us, max = 673.207 us, min = -0.000 s, total = 1.297 ms
+	NodeManagerService.grpc_client.GetResourceLoad - 58 total (0 active), Execution time: mean = 382.663 us, total = 22.194 ms, Queueing time: mean = 0.000 s, max = -0.000 s, min = 9223372036.855 s, total = 0.000 s
+	NodeManagerService.grpc_client.GetResourceLoad.OnReplyReceived - 58 total (0 active), Execution time: mean = 26.139 us, total = 1.516 ms, Queueing time: mean = 10.960 us, max = 52.640 us, min = 4.640 us, total = 635.677 us
+	NodeInfoGcsService.grpc_server.GetAllNodeInfo - 31 total (0 active), Execution time: mean = 97.298 us, total = 3.016 ms, Queueing time: mean = 0.000 s, max = -0.000 s, min = 9223372036.855 s, total = 0.000 s
+	NodeInfoGcsService.grpc_server.GetAllNodeInfo.HandleRequestImpl - 31 total (0 active), Execution time: mean = 12.556 us, total = 389.246 us, Queueing time: mean = 10.092 us, max = 54.680 us, min = 4.710 us, total = 312.857 us
+	NodeInfoGcsService.grpc_server.CheckAlive - 24 total (0 active), Execution time: mean = 102.376 us, total = 2.457 ms, Queueing time: mean = 0.000 s, max = -0.000 s, min = 9223372036.855 s, total = 0.000 s
+	NodeInfoGcsService.grpc_server.CheckAlive.HandleRequestImpl - 24 total (0 active), Execution time: mean = 6.262 us, total = 150.297 us, Queueing time: mean = 11.301 us, max = 18.500 us, min = 7.710 us, total = 271.215 us
+	ClusterResourceManager.ResetRemoteNodeView - 20 total (1 active), Execution time: mean = 2.986 us, total = 59.729 us, Queueing time: mean = 10.474 us, max = 44.818 us, min = -0.000 s, total = 209.489 us
+	HealthCheck - 18 total (0 active), Execution time: mean = 2.805 us, total = 50.490 us, Queueing time: mean = 11.451 us, max = 23.970 us, min = 7.740 us, total = 206.125 us
+	WorkerInfoGcsService.grpc_server.AddWorkerInfo.HandleRequestImpl - 18 total (0 active), Execution time: mean = 14.958 us, total = 269.238 us, Queueing time: mean = 12.243 us, max = 49.120 us, min = 5.200 us, total = 220.378 us
+	WorkerInfoGcsService.grpc_server.AddWorkerInfo - 18 total (0 active), Execution time: mean = 106.928 us, total = 1.925 ms, Queueing time: mean = 0.000 s, max = -0.000 s, min = 9223372036.855 s, total = 0.000 s
+	NodeResourceInfoGcsService.grpc_server.GetAllResourceUsage - 12 total (0 active), Execution time: mean = 152.279 us, total = 1.827 ms, Queueing time: mean = 0.000 s, max = -0.000 s, min = 9223372036.855 s, total = 0.000 s
+	NodeResourceInfoGcsService.grpc_server.GetAllResourceUsage.HandleRequestImpl - 12 total (0 active), Execution time: mean = 31.195 us, total = 374.341 us, Queueing time: mean = 14.813 us, max = 38.549 us, min = 6.700 us, total = 177.758 us
+	NodeInfoGcsService.grpc_server.GetClusterId - 8 total (0 active), Execution time: mean = 930.015 us, total = 7.440 ms, Queueing time: mean = 0.000 s, max = -0.000 s, min = 9223372036.855 s, total = 0.000 s
+	NodeInfoGcsService.grpc_server.GetClusterId.HandleRequestImpl - 8 total (0 active), Execution time: mean = 20.247 us, total = 161.980 us, Queueing time: mean = 19.156 us, max = 72.530 us, min = 8.320 us, total = 153.250 us
+	GcsInMemoryStore.GetAll - 7 total (0 active), Execution time: mean = 5.057 us, total = 35.400 us, Queueing time: mean = 15.167 us, max = 39.821 us, min = 1.470 us, total = 106.172 us
+	GCSServer.deadline_timer.debug_state_dump - 6 total (1 active), Execution time: mean = 467.784 us, total = 2.807 ms, Queueing time: mean = 8.311 us, max = 13.255 us, min = 6.554 us, total = 49.865 us
+	ActorInfoGcsService.grpc_server.RegisterActor - 5 total (0 active), Execution time: mean = 340.253 us, total = 1.701 ms, Queueing time: mean = 0.000 s, max = -0.000 s, min = 9223372036.855 s, total = 0.000 s
+	PlacementGroupInfoGcsService.grpc_server.GetPlacementGroup.HandleRequestImpl - 5 total (0 active), Execution time: mean = 10.690 us, total = 53.448 us, Queueing time: mean = 157.395 us, max = 414.269 us, min = 5.390 us, total = 786.974 us
+	GcsResourceManager::Update - 5 total (0 active), Execution time: mean = 43.813 us, total = 219.067 us, Queueing time: mean = 8.998 us, max = 11.619 us, min = 7.240 us, total = 44.989 us
+	ActorInfoGcsService.grpc_server.RegisterActor.HandleRequestImpl - 5 total (0 active), Execution time: mean = 228.000 us, total = 1.140 ms, Queueing time: mean = 8.000 us, max = 9.150 us, min = 7.050 us, total = 39.999 us
+	ActorInfoGcsService.grpc_server.GetActorInfo.HandleRequestImpl - 5 total (0 active), Execution time: mean = 5.532 us, total = 27.659 us, Queueing time: mean = 28.326 us, max = 88.800 us, min = 4.760 us, total = 141.628 us
+	ActorInfoGcsService.grpc_server.CreateActor - 5 total (5 active), Execution time: mean = 0.000 s, total = 0.000 s, Queueing time: mean = 0.000 s, max = -0.000 s, min = 9223372036.855 s, total = 0.000 s
+	CoreWorkerService.grpc_client.PushTask - 5 total (5 active), Execution time: mean = 0.000 s, total = 0.000 s, Queueing time: mean = 0.000 s, max = -0.000 s, min = 9223372036.855 s, total = 0.000 s
+	CoreWorkerService.grpc_client.WaitForActorOutOfScope - 5 total (5 active), Execution time: mean = 0.000 s, total = 0.000 s, Queueing time: mean = 0.000 s, max = -0.000 s, min = 9223372036.855 s, total = 0.000 s
+	WorkerInfoGcsService.grpc_server.ReportWorkerFailure - 5 total (0 active), Execution time: mean = 700.382 us, total = 3.502 ms, Queueing time: mean = 0.000 s, max = -0.000 s, min = 9223372036.855 s, total = 0.000 s
+	NodeManagerService.grpc_client.RequestWorkerLease.OnReplyReceived - 5 total (0 active), Execution time: mean = 154.424 us, total = 772.120 us, Queueing time: mean = 7.308 us, max = 8.910 us, min = 6.120 us, total = 36.540 us
+	ActorInfoGcsService.grpc_server.GetActorInfo - 5 total (0 active), Execution time: mean = 88.440 us, total = 442.199 us, Queueing time: mean = 0.000 s, max = -0.000 s, min = 9223372036.855 s, total = 0.000 s
+	NodeManagerService.grpc_client.RequestWorkerLease - 5 total (0 active), Execution time: mean = 450.525 ms, total = 2.253 s, Queueing time: mean = 0.000 s, max = -0.000 s, min = 9223372036.855 s, total = 0.000 s
+	ActorInfoGcsService.grpc_server.CreateActor.HandleRequestImpl - 5 total (0 active), Execution time: mean = 136.665 us, total = 683.327 us, Queueing time: mean = 7.626 us, max = 10.129 us, min = 5.900 us, total = 38.129 us
+	WorkerInfoGcsService.grpc_server.ReportWorkerFailure.HandleRequestImpl - 5 total (0 active), Execution time: mean = 21.929 us, total = 109.646 us, Queueing time: mean = 124.327 us, max = 514.508 us, min = 10.880 us, total = 621.633 us
+	PlacementGroupInfoGcsService.grpc_server.GetPlacementGroup - 5 total (0 active), Execution time: mean = 219.332 us, total = 1.097 ms, Queueing time: mean = 0.000 s, max = -0.000 s, min = 9223372036.855 s, total = 0.000 s
+	PeriodicalRunner.RunFnPeriodically - 4 total (0 active), Execution time: mean = 56.263 us, total = 225.050 us, Queueing time: mean = 14.740 ms, max = 29.578 ms, min = 12.341 us, total = 58.962 ms
+	NodeInfoGcsService.grpc_server.GetInternalConfig - 1 total (0 active), Execution time: mean = 84.119 us, total = 84.119 us, Queueing time: mean = 0.000 s, max = -0.000 s, min = 9223372036.855 s, total = 0.000 s
+	PlacementGroupInfoGcsService.grpc_server.CreatePlacementGroup.HandleRequestImpl - 1 total (0 active), Execution time: mean = 103.350 us, total = 103.350 us, Queueing time: mean = 7.670 us, max = 7.670 us, min = 7.670 us, total = 7.670 us
+	NodeManagerService.grpc_client.CommitBundleResources.OnReplyReceived - 1 total (0 active), Execution time: mean = 48.040 us, total = 48.040 us, Queueing time: mean = 6.410 us, max = 6.410 us, min = 6.410 us, total = 6.410 us
+	NodeInfoGcsService.grpc_server.GetInternalConfig.HandleRequestImpl - 1 total (0 active), Execution time: mean = 6.580 us, total = 6.580 us, Queueing time: mean = 10.119 us, max = 10.119 us, min = 10.119 us, total = 10.119 us
+	InternalKVGcsService.grpc_server.InternalKVDel.HandleRequestImpl - 1 total (0 active), Execution time: mean = 11.950 us, total = 11.950 us, Queueing time: mean = 4.570 us, max = 4.570 us, min = 4.570 us, total = 4.570 us
+	InternalKVGcsService.grpc_server.InternalKVExists.HandleRequestImpl - 1 total (0 active), Execution time: mean = 9.770 us, total = 9.770 us, Queueing time: mean = 8.310 us, max = 8.310 us, min = 8.310 us, total = 8.310 us
+	InternalKVGcsService.grpc_server.InternalKVDel - 1 total (0 active), Execution time: mean = 50.110 us, total = 50.110 us, Queueing time: mean = 0.000 s, max = -0.000 s, min = 9223372036.855 s, total = 0.000 s
+	GcsPlacementGroupManager.SchedulePendingPlacementGroups - 1 total (0 active), Execution time: mean = 80.000 ns, total = 80.000 ns, Queueing time: mean = 73.960 us, max = 73.960 us, min = 73.960 us, total = 73.960 us
+	InternalKVGcsService.grpc_server.InternalKVExists - 1 total (0 active), Execution time: mean = 66.770 us, total = 66.770 us, Queueing time: mean = 0.000 s, max = -0.000 s, min = 9223372036.855 s, total = 0.000 s
+	GCSServer.deadline_timer.debug_state_event_stats_print - 1 total (1 active, 1 running), Execution time: mean = 0.000 s, total = 0.000 s, Queueing time: mean = 0.000 s, max = -0.000 s, min = 9223372036.855 s, total = 0.000 s
+	NodeManagerService.grpc_client.PrepareBundleResources - 1 total (0 active), Execution time: mean = 890.288 us, total = 890.288 us, Queueing time: mean = 0.000 s, max = -0.000 s, min = 9223372036.855 s, total = 0.000 s
+	GcsInMemoryStore.Exists - 1 total (0 active), Execution time: mean = 2.410 us, total = 2.410 us, Queueing time: mean = 1.000 us, max = 1.000 us, min = 1.000 us, total = 1.000 us
+	JobInfoGcsService.grpc_server.GetNextJobID - 1 total (0 active), Execution time: mean = 73.200 us, total = 73.200 us, Queueing time: mean = 0.000 s, max = -0.000 s, min = 9223372036.855 s, total = 0.000 s
+	PlacementGroupInfoGcsService.grpc_server.CreatePlacementGroup - 1 total (0 active), Execution time: mean = 192.409 us, total = 192.409 us, Queueing time: mean = 0.000 s, max = -0.000 s, min = 9223372036.855 s, total = 0.000 s
+	JobInfoGcsService.grpc_server.AddJob - 1 total (0 active), Execution time: mean = 158.430 us, total = 158.430 us, Queueing time: mean = 0.000 s, max = -0.000 s, min = 9223372036.855 s, total = 0.000 s
+	JobInfoGcsService.grpc_server.AddJob.HandleRequestImpl - 1 total (0 active), Execution time: mean = 52.330 us, total = 52.330 us, Queueing time: mean = 8.230 us, max = 8.230 us, min = 8.230 us, total = 8.230 us
+	NodeManagerService.grpc_client.CommitBundleResources - 1 total (0 active), Execution time: mean = 373.380 us, total = 373.380 us, Queueing time: mean = 0.000 s, max = -0.000 s, min = 9223372036.855 s, total = 0.000 s
+	JobInfoGcsService.grpc_server.GetAllJobInfo.HandleRequestImpl - 1 total (0 active), Execution time: mean = 5.530 us, total = 5.530 us, Queueing time: mean = 5.890 us, max = 5.890 us, min = 5.890 us, total = 5.890 us
+	GcsHealthCheckManager::AddNode - 1 total (0 active), Execution time: mean = 5.460 us, total = 5.460 us, Queueing time: mean = 140.000 ns, max = 140.000 ns, min = 140.000 ns, total = 140.000 ns
+	NodeManagerService.grpc_client.PrepareBundleResources.OnReplyReceived - 1 total (0 active), Execution time: mean = 40.400 us, total = 40.400 us, Queueing time: mean = 6.230 us, max = 6.230 us, min = 6.230 us, total = 6.230 us
+	NodeInfoGcsService.grpc_server.RegisterNode.HandleRequestImpl - 1 total (0 active), Execution time: mean = 68.850 us, total = 68.850 us, Queueing time: mean = 11.870 us, max = 11.870 us, min = 11.870 us, total = 11.870 us
+	NodeInfoGcsService.grpc_server.RegisterNode - 1 total (0 active), Execution time: mean = 297.979 us, total = 297.979 us, Queueing time: mean = 0.000 s, max = -0.000 s, min = 9223372036.855 s, total = 0.000 s
+	GcsInMemoryStore.Delete - 1 total (0 active), Execution time: mean = 2.120 us, total = 2.120 us, Queueing time: mean = 1.060 us, max = 1.060 us, min = 1.060 us, total = 1.060 us
+	JobInfoGcsService.grpc_server.GetAllJobInfo - 1 total (0 active), Execution time: mean = 108.050 us, total = 108.050 us, Queueing time: mean = 0.000 s, max = -0.000 s, min = 9223372036.855 s, total = 0.000 s
+	JobInfoGcsService.grpc_server.GetNextJobID.HandleRequestImpl - 1 total (0 active), Execution time: mean = 5.860 us, total = 5.860 us, Queueing time: mean = 7.190 us, max = 7.190 us, min = 7.190 us, total = 7.190 us
+
+
+[2024-05-15 09:06:00,611 I 12692 12692] (gcs_server) gcs_server.cc:845: GcsTaskManager Event stats:
+
+
+Global stats: 1552 total (1 active)
+Queueing time: mean = 6.006 us, max = 65.630 us, min = 5.550 us, total = 9.321 ms
+Execution time:  mean = 51.059 us, total = 79.243 ms
+Event stats:
+	TaskInfoGcsService.grpc_server.AddTaskEventData.HandleRequestImpl - 769 total (0 active), Execution time: mean = 7.755 us, total = 5.964 ms, Queueing time: mean = 11.815 us, max = 63.708 us, min = 5.550 us, total = 9.086 ms
+	TaskInfoGcsService.grpc_server.AddTaskEventData - 769 total (0 active), Execution time: mean = 95.184 us, total = 73.197 ms, Queueing time: mean = 0.000 s, max = -0.000 s, min = 9223372036.855 s, total = 0.000 s
+	GcsTaskManager.GcJobSummary - 13 total (1 active), Execution time: mean = 4.561 us, total = 59.297 us, Queueing time: mean = 13.041 us, max = 17.003 us, min = 8.947 us, total = 169.534 us
+	PeriodicalRunner.RunFnPeriodically - 1 total (0 active), Execution time: mean = 23.660 us, total = 23.660 us, Queueing time: mean = 65.630 us, max = 65.630 us, min = 65.630 us, total = 65.630 us
+
+
+[2024-05-15 09:06:06,921 I 12692 12692] (gcs_server) gcs_actor_scheduler.cc:484: Finished actor creation task for actor cf76be01afb9954787ceb84801000000 on worker 6edeb2bc45590aa290c046f72cb5570a133031f0fa08412f23f2528a at node 2808763200e5fb675aeed4f2c3a8a8a50b290dfd4d83a5db793b0691, job id = 01000000
+[2024-05-15 09:06:06,921 I 12692 12692] (gcs_server) gcs_actor_manager.cc:1280: Failed to create an actor due to the application failure, actor id = cf76be01afb9954787ceb84801000000, job id = 01000000
+[2024-05-15 09:06:06,921 I 12692 12692] (gcs_server) gcs_actor_manager.cc:303: Finished creating actor, job id = 01000000, actor id = cf76be01afb9954787ceb84801000000, status = CreationTaskError: User exception:
+er()
+                      ^^^^^^^^^^^^^^^^^^^^
+  File "/home/valapeos/.cache/pypoetry/virtualenvs/pneumarl-4s6AwDM4-py3.11/lib/python3.11/site-packages/godot_rl/core/godot_env.py", line 317, in _start_server
+    connection, client_address = sock.accept()
+                                 ^^^^^^^^^^^^^
+  File "/nix/store/glfr70gi7hfaj50mwj2431p8bg60fhqw-python3-3.11.9/lib/python3.11/socket.py", line 294, in accept
+    fd, addr = self._accept()
+               ^^^^^^^^^^^^^^
+TimeoutError: timed out
+
+System error:
+CreationTaskError: Exception raised from an actor init method. Traceback: The actor died because of an error raised in its creation task, [36mray::RolloutWorker.__init__()[39m (pid=13721, ip=192.168.1.56, actor_id=cf76be01afb9954787ceb84801000000, repr=<ray.rllib.evaluation.rollout_worker.RolloutWorker object at 0x7fd32a36abd0>)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/valapeos/.cache/pypoetry/virtualenvs/pneumarl-4s6AwDM4-py3.11/lib/python3.11/site-packages/ray/rllib/evaluation/rollout_worker.py", line 407, in __init__
+    self.env = env_creator(copy.deepcopy(self.env_context))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/valapeos/Projects/pneumarl/rllib_example.py", line 48, in env_creator
+    return RayVectorGodotEnv(config=env_config, port=port, seed=seed)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/valapeos/.cache/pypoetry/virtualenvs/pneumarl-4s6AwDM4-py3.11/lib/python3.11/site-packages/godot_rl/wrappers/ray_wrapper.py", line 22, in __init__
+    self._env = GodotEnv(
+                ^^^^^^^^^
+  File "/home/valapeos/.cache/pypoetry/virtualenvs/pneumarl-4s6AwDM4-py3.11/lib/python3.11/site-packages/godot_rl/core/godot_env.py", line 59, in __init__
+    self.connection = self._start_server()
+                      ^^^^^^^^^^^^^^^^^^^^
+  File "/home/valapeos/.cache/pypoetry/virtualenvs/pneumarl-4s6AwDM4-py3.11/lib/python3.11/site-packages/godot_rl/core/godot_env.py", line 317, in _start_server
+    connection, client_address = sock.accept()
+                                 ^^^^^^^^^^^^^
+  File "/nix/store/glfr70gi7hfaj50mwj2431p8bg60fhqw-python3-3.11.9/lib/python3.11/socket.py", line 294, in accept
+    fd, addr = self._accept()
+               ^^^^^^^^^^^^^^
+TimeoutError: timed out
+[2024-05-15 09:06:06,928 W 12692 12692] (gcs_server) gcs_worker_manager.cc:55: Reporting worker exit, worker id = 6edeb2bc45590aa290c046f72cb5570a133031f0fa08412f23f2528a, node id = 2808763200e5fb675aeed4f2c3a8a8a50b290dfd4d83a5db793b0691, address = 192.168.1.56, exit_type = USER_ERROR, exit_detail = Worker exits because there was an exception in the initialization method (e.g., __init__). Fix the exceptions from the initialization to resolve the issue. Exception raised from an actor init method. Traceback: The actor died because of an error raised in its creation task, [36mray::RolloutWorker.__init__()[39m (pid=13721, ip=192.168.1.56, actor_id=cf76be01afb9954787ceb84801000000, repr=<ray.rllib.evaluation.rollout_worker.RolloutWorker object at 0x7fd32a36abd0>)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/valapeos/.cache/pypoetry/virtualenvs/pneumarl-4s6AwDM4-py3.11/lib/python3.11/site-packages/ray/rllib/evaluation/rollout_worker.py", line 407, in __init__
+    self.env = env_creator(copy.deepcopy(self.env_context))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/valapeos/Projects/pneumarl/rllib_example.py", line 48, in env_creator
+    return RayVectorGodotEnv(config=env_config, port=port, seed=seed)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/valapeos/.cache/pypoetry/virtualenvs/pneumarl-4s6AwDM4-py3.11/lib/python3.11/site-packages/godot_rl/wrappers/ray_wrapper.py", line 22, in __init__
+    self._env = GodotEnv(
+                ^^^^^^^^^
+  File "/home/valapeos/.cache/pypoetry/virtualenvs/pneumarl-4s6AwDM4-py3.11/lib/python3.11/site-packages/godot_rl/core/godot_env.py", line 59, in __init__
+    self.connection = self._start_server()
+                      ^^^^^^^^^^^^^^^^^^^^
+  File "/home/valapeos/.cache/pypoetry/virtualenvs/pneumarl-4s6AwDM4-py3.11/lib/python3.11/site-packages/godot_rl/core/godot_env.py", line 317, in _start_server
+    connection, client_address = sock.accept()
+                                 ^^^^^^^^^^^^^
+  File "/nix/store/glfr70gi7hfaj50mwj2431p8bg60fhqw-python3-3.11.9/lib/python3.11/socket.py", line 294, in accept
+    fd, addr = self._accept()
+               ^^^^^^^^^^^^^^
+TimeoutError: timed out. Unintentional worker failures have been reported. If there are lots of this logs, that might indicate there are unexpected failures in the cluster.
+[2024-05-15 09:06:06,928 W 12692 12692] (gcs_server) gcs_actor_manager.cc:970: Worker 6edeb2bc45590aa290c046f72cb5570a133031f0fa08412f23f2528a on node 2808763200e5fb675aeed4f2c3a8a8a50b290dfd4d83a5db793b0691 exits, type=USER_ERROR, has creation_task_exception = 1
+[2024-05-15 09:06:06,929 I 12692 12692] (gcs_server) gcs_actor_manager.cc:1167: Actor cf76be01afb9954787ceb84801000000 is failed on worker 6edeb2bc45590aa290c046f72cb5570a133031f0fa08412f23f2528a at node 2808763200e5fb675aeed4f2c3a8a8a50b290dfd4d83a5db793b0691, need_reschedule = 0, death context type = CreationTaskFailureContext, remaining_restarts = 0, job id = 01000000
+[2024-05-15 09:06:06,933 I 12692 12692] (gcs_server) gcs_actor_scheduler.cc:484: Finished actor creation task for actor 6c1e2f8e5911cf8ba4dcac5b01000000 on worker cd64a88e73d60e90bea69d93f771cc429cb8accd2441e342cb915a91 at node 2808763200e5fb675aeed4f2c3a8a8a50b290dfd4d83a5db793b0691, job id = 01000000
+[2024-05-15 09:06:06,933 I 12692 12692] (gcs_server) gcs_actor_manager.cc:1280: Failed to create an actor due to the application failure, actor id = 6c1e2f8e5911cf8ba4dcac5b01000000, job id = 01000000
+[2024-05-15 09:06:06,933 I 12692 12692] (gcs_server) gcs_actor_manager.cc:303: Finished creating actor, job id = 01000000, actor id = 6c1e2f8e5911cf8ba4dcac5b01000000, status = CreationTaskError: User exception:
+er()
+                      ^^^^^^^^^^^^^^^^^^^^
+  File "/home/valapeos/.cache/pypoetry/virtualenvs/pneumarl-4s6AwDM4-py3.11/lib/python3.11/site-packages/godot_rl/core/godot_env.py", line 317, in _start_server
+    connection, client_address = sock.accept()
+                                 ^^^^^^^^^^^^^
+  File "/nix/store/glfr70gi7hfaj50mwj2431p8bg60fhqw-python3-3.11.9/lib/python3.11/socket.py", line 294, in accept
+    fd, addr = self._accept()
+               ^^^^^^^^^^^^^^
+TimeoutError: timed out
+
+System error:
+CreationTaskError: Exception raised from an actor init method. Traceback: The actor died because of an error raised in its creation task, [36mray::RolloutWorker.__init__()[39m (pid=13723, ip=192.168.1.56, actor_id=6c1e2f8e5911cf8ba4dcac5b01000000, repr=<ray.rllib.evaluation.rollout_worker.RolloutWorker object at 0x7f8dd32043d0>)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/valapeos/.cache/pypoetry/virtualenvs/pneumarl-4s6AwDM4-py3.11/lib/python3.11/site-packages/ray/rllib/evaluation/rollout_worker.py", line 407, in __init__
+    self.env = env_creator(copy.deepcopy(self.env_context))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/valapeos/Projects/pneumarl/rllib_example.py", line 48, in env_creator
+    return RayVectorGodotEnv(config=env_config, port=port, seed=seed)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/valapeos/.cache/pypoetry/virtualenvs/pneumarl-4s6AwDM4-py3.11/lib/python3.11/site-packages/godot_rl/wrappers/ray_wrapper.py", line 22, in __init__
+    self._env = GodotEnv(
+                ^^^^^^^^^
+  File "/home/valapeos/.cache/pypoetry/virtualenvs/pneumarl-4s6AwDM4-py3.11/lib/python3.11/site-packages/godot_rl/core/godot_env.py", line 59, in __init__
+    self.connection = self._start_server()
+                      ^^^^^^^^^^^^^^^^^^^^
+  File "/home/valapeos/.cache/pypoetry/virtualenvs/pneumarl-4s6AwDM4-py3.11/lib/python3.11/site-packages/godot_rl/core/godot_env.py", line 317, in _start_server
+    connection, client_address = sock.accept()
+                                 ^^^^^^^^^^^^^
+  File "/nix/store/glfr70gi7hfaj50mwj2431p8bg60fhqw-python3-3.11.9/lib/python3.11/socket.py", line 294, in accept
+    fd, addr = self._accept()
+               ^^^^^^^^^^^^^^
+TimeoutError: timed out
+[2024-05-15 09:06:06,938 W 12692 12692] (gcs_server) gcs_worker_manager.cc:55: Reporting worker exit, worker id = cd64a88e73d60e90bea69d93f771cc429cb8accd2441e342cb915a91, node id = 2808763200e5fb675aeed4f2c3a8a8a50b290dfd4d83a5db793b0691, address = 192.168.1.56, exit_type = USER_ERROR, exit_detail = Worker exits because there was an exception in the initialization method (e.g., __init__). Fix the exceptions from the initialization to resolve the issue. Exception raised from an actor init method. Traceback: The actor died because of an error raised in its creation task, [36mray::RolloutWorker.__init__()[39m (pid=13723, ip=192.168.1.56, actor_id=6c1e2f8e5911cf8ba4dcac5b01000000, repr=<ray.rllib.evaluation.rollout_worker.RolloutWorker object at 0x7f8dd32043d0>)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/valapeos/.cache/pypoetry/virtualenvs/pneumarl-4s6AwDM4-py3.11/lib/python3.11/site-packages/ray/rllib/evaluation/rollout_worker.py", line 407, in __init__
+    self.env = env_creator(copy.deepcopy(self.env_context))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/valapeos/Projects/pneumarl/rllib_example.py", line 48, in env_creator
+    return RayVectorGodotEnv(config=env_config, port=port, seed=seed)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/valapeos/.cache/pypoetry/virtualenvs/pneumarl-4s6AwDM4-py3.11/lib/python3.11/site-packages/godot_rl/wrappers/ray_wrapper.py", line 22, in __init__
+    self._env = GodotEnv(
+                ^^^^^^^^^
+  File "/home/valapeos/.cache/pypoetry/virtualenvs/pneumarl-4s6AwDM4-py3.11/lib/python3.11/site-packages/godot_rl/core/godot_env.py", line 59, in __init__
+    self.connection = self._start_server()
+                      ^^^^^^^^^^^^^^^^^^^^
+  File "/home/valapeos/.cache/pypoetry/virtualenvs/pneumarl-4s6AwDM4-py3.11/lib/python3.11/site-packages/godot_rl/core/godot_env.py", line 317, in _start_server
+    connection, client_address = sock.accept()
+                                 ^^^^^^^^^^^^^
+  File "/nix/store/glfr70gi7hfaj50mwj2431p8bg60fhqw-python3-3.11.9/lib/python3.11/socket.py", line 294, in accept
+    fd, addr = self._accept()
+               ^^^^^^^^^^^^^^
+TimeoutError: timed out. Unintentional worker failures have been reported. If there are lots of this logs, that might indicate there are unexpected failures in the cluster.
+[2024-05-15 09:06:06,938 W 12692 12692] (gcs_server) gcs_actor_manager.cc:970: Worker cd64a88e73d60e90bea69d93f771cc429cb8accd2441e342cb915a91 on node 2808763200e5fb675aeed4f2c3a8a8a50b290dfd4d83a5db793b0691 exits, type=USER_ERROR, has creation_task_exception = 1
+[2024-05-15 09:06:06,938 I 12692 12692] (gcs_server) gcs_actor_manager.cc:1167: Actor 6c1e2f8e5911cf8ba4dcac5b01000000 is failed on worker cd64a88e73d60e90bea69d93f771cc429cb8accd2441e342cb915a91 at node 2808763200e5fb675aeed4f2c3a8a8a50b290dfd4d83a5db793b0691, need_reschedule = 0, death context type = CreationTaskFailureContext, remaining_restarts = 0, job id = 01000000
+[2024-05-15 09:06:06,967 I 12692 12692] (gcs_server) gcs_actor_scheduler.cc:484: Finished actor creation task for actor 79760d3ce8052092d662e89401000000 on worker 5f80103a7fc6da866dac6d9a1f8048732e7c48f9a9b01d7546969c38 at node 2808763200e5fb675aeed4f2c3a8a8a50b290dfd4d83a5db793b0691, job id = 01000000
+[2024-05-15 09:06:06,967 I 12692 12692] (gcs_server) gcs_actor_manager.cc:1280: Failed to create an actor due to the application failure, actor id = 79760d3ce8052092d662e89401000000, job id = 01000000
+[2024-05-15 09:06:06,967 I 12692 12692] (gcs_server) gcs_actor_manager.cc:303: Finished creating actor, job id = 01000000, actor id = 79760d3ce8052092d662e89401000000, status = CreationTaskError: User exception:
+er()
+                      ^^^^^^^^^^^^^^^^^^^^
+  File "/home/valapeos/.cache/pypoetry/virtualenvs/pneumarl-4s6AwDM4-py3.11/lib/python3.11/site-packages/godot_rl/core/godot_env.py", line 317, in _start_server
+    connection, client_address = sock.accept()
+                                 ^^^^^^^^^^^^^
+  File "/nix/store/glfr70gi7hfaj50mwj2431p8bg60fhqw-python3-3.11.9/lib/python3.11/socket.py", line 294, in accept
+    fd, addr = self._accept()
+               ^^^^^^^^^^^^^^
+TimeoutError: timed out
+
+System error:
+CreationTaskError: Exception raised from an actor init method. Traceback: The actor died because of an error raised in its creation task, [36mray::RolloutWorker.__init__()[39m (pid=13724, ip=192.168.1.56, actor_id=79760d3ce8052092d662e89401000000, repr=<ray.rllib.evaluation.rollout_worker.RolloutWorker object at 0x7f6d4fb09490>)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/valapeos/.cache/pypoetry/virtualenvs/pneumarl-4s6AwDM4-py3.11/lib/python3.11/site-packages/ray/rllib/evaluation/rollout_worker.py", line 407, in __init__
+    self.env = env_creator(copy.deepcopy(self.env_context))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/valapeos/Projects/pneumarl/rllib_example.py", line 48, in env_creator
+    return RayVectorGodotEnv(config=env_config, port=port, seed=seed)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/valapeos/.cache/pypoetry/virtualenvs/pneumarl-4s6AwDM4-py3.11/lib/python3.11/site-packages/godot_rl/wrappers/ray_wrapper.py", line 22, in __init__
+    self._env = GodotEnv(
+                ^^^^^^^^^
+  File "/home/valapeos/.cache/pypoetry/virtualenvs/pneumarl-4s6AwDM4-py3.11/lib/python3.11/site-packages/godot_rl/core/godot_env.py", line 59, in __init__
+    self.connection = self._start_server()
+                      ^^^^^^^^^^^^^^^^^^^^
+  File "/home/valapeos/.cache/pypoetry/virtualenvs/pneumarl-4s6AwDM4-py3.11/lib/python3.11/site-packages/godot_rl/core/godot_env.py", line 317, in _start_server
+    connection, client_address = sock.accept()
+                                 ^^^^^^^^^^^^^
+  File "/nix/store/glfr70gi7hfaj50mwj2431p8bg60fhqw-python3-3.11.9/lib/python3.11/socket.py", line 294, in accept
+    fd, addr = self._accept()
+               ^^^^^^^^^^^^^^
+TimeoutError: timed out
+[2024-05-15 09:06:06,972 W 12692 12692] (gcs_server) gcs_worker_manager.cc:55: Reporting worker exit, worker id = 5f80103a7fc6da866dac6d9a1f8048732e7c48f9a9b01d7546969c38, node id = 2808763200e5fb675aeed4f2c3a8a8a50b290dfd4d83a5db793b0691, address = 192.168.1.56, exit_type = USER_ERROR, exit_detail = Worker exits because there was an exception in the initialization method (e.g., __init__). Fix the exceptions from the initialization to resolve the issue. Exception raised from an actor init method. Traceback: The actor died because of an error raised in its creation task, [36mray::RolloutWorker.__init__()[39m (pid=13724, ip=192.168.1.56, actor_id=79760d3ce8052092d662e89401000000, repr=<ray.rllib.evaluation.rollout_worker.RolloutWorker object at 0x7f6d4fb09490>)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/valapeos/.cache/pypoetry/virtualenvs/pneumarl-4s6AwDM4-py3.11/lib/python3.11/site-packages/ray/rllib/evaluation/rollout_worker.py", line 407, in __init__
+    self.env = env_creator(copy.deepcopy(self.env_context))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/valapeos/Projects/pneumarl/rllib_example.py", line 48, in env_creator
+    return RayVectorGodotEnv(config=env_config, port=port, seed=seed)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/valapeos/.cache/pypoetry/virtualenvs/pneumarl-4s6AwDM4-py3.11/lib/python3.11/site-packages/godot_rl/wrappers/ray_wrapper.py", line 22, in __init__
+    self._env = GodotEnv(
+                ^^^^^^^^^
+  File "/home/valapeos/.cache/pypoetry/virtualenvs/pneumarl-4s6AwDM4-py3.11/lib/python3.11/site-packages/godot_rl/core/godot_env.py", line 59, in __init__
+    self.connection = self._start_server()
+                      ^^^^^^^^^^^^^^^^^^^^
+  File "/home/valapeos/.cache/pypoetry/virtualenvs/pneumarl-4s6AwDM4-py3.11/lib/python3.11/site-packages/godot_rl/core/godot_env.py", line 317, in _start_server
+    connection, client_address = sock.accept()
+                                 ^^^^^^^^^^^^^
+  File "/nix/store/glfr70gi7hfaj50mwj2431p8bg60fhqw-python3-3.11.9/lib/python3.11/socket.py", line 294, in accept
+    fd, addr = self._accept()
+               ^^^^^^^^^^^^^^
+TimeoutError: timed out. Unintentional worker failures have been reported. If there are lots of this logs, that might indicate there are unexpected failures in the cluster.
+[2024-05-15 09:06:06,972 W 12692 12692] (gcs_server) gcs_actor_manager.cc:970: Worker 5f80103a7fc6da866dac6d9a1f8048732e7c48f9a9b01d7546969c38 on node 2808763200e5fb675aeed4f2c3a8a8a50b290dfd4d83a5db793b0691 exits, type=USER_ERROR, has creation_task_exception = 1
+[2024-05-15 09:06:06,972 I 12692 12692] (gcs_server) gcs_actor_manager.cc:1167: Actor 79760d3ce8052092d662e89401000000 is failed on worker 5f80103a7fc6da866dac6d9a1f8048732e7c48f9a9b01d7546969c38 at node 2808763200e5fb675aeed4f2c3a8a8a50b290dfd4d83a5db793b0691, need_reschedule = 0, death context type = CreationTaskFailureContext, remaining_restarts = 0, job id = 01000000
+[2024-05-15 09:06:07,036 I 12692 12692] (gcs_server) gcs_actor_scheduler.cc:484: Finished actor creation task for actor 64110d8601f56bf14e9797c501000000 on worker 7abd3065dca4325130aae9b5fed632b86b1f3673140c122382f8f4ed at node 2808763200e5fb675aeed4f2c3a8a8a50b290dfd4d83a5db793b0691, job id = 01000000
+[2024-05-15 09:06:07,036 I 12692 12692] (gcs_server) gcs_actor_manager.cc:1280: Failed to create an actor due to the application failure, actor id = 64110d8601f56bf14e9797c501000000, job id = 01000000
+[2024-05-15 09:06:07,036 I 12692 12692] (gcs_server) gcs_actor_manager.cc:303: Finished creating actor, job id = 01000000, actor id = 64110d8601f56bf14e9797c501000000, status = CreationTaskError: User exception:
+er()
+                      ^^^^^^^^^^^^^^^^^^^^
+  File "/home/valapeos/.cache/pypoetry/virtualenvs/pneumarl-4s6AwDM4-py3.11/lib/python3.11/site-packages/godot_rl/core/godot_env.py", line 317, in _start_server
+    connection, client_address = sock.accept()
+                                 ^^^^^^^^^^^^^
+  File "/nix/store/glfr70gi7hfaj50mwj2431p8bg60fhqw-python3-3.11.9/lib/python3.11/socket.py", line 294, in accept
+    fd, addr = self._accept()
+               ^^^^^^^^^^^^^^
+TimeoutError: timed out
+
+System error:
+CreationTaskError: Exception raised from an actor init method. Traceback: The actor died because of an error raised in its creation task, [36mray::RolloutWorker.__init__()[39m (pid=13722, ip=192.168.1.56, actor_id=64110d8601f56bf14e9797c501000000, repr=<ray.rllib.evaluation.rollout_worker.RolloutWorker object at 0x7fd9bed37cd0>)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/valapeos/.cache/pypoetry/virtualenvs/pneumarl-4s6AwDM4-py3.11/lib/python3.11/site-packages/ray/rllib/evaluation/rollout_worker.py", line 407, in __init__
+    self.env = env_creator(copy.deepcopy(self.env_context))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/valapeos/Projects/pneumarl/rllib_example.py", line 48, in env_creator
+    return RayVectorGodotEnv(config=env_config, port=port, seed=seed)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/valapeos/.cache/pypoetry/virtualenvs/pneumarl-4s6AwDM4-py3.11/lib/python3.11/site-packages/godot_rl/wrappers/ray_wrapper.py", line 22, in __init__
+    self._env = GodotEnv(
+                ^^^^^^^^^
+  File "/home/valapeos/.cache/pypoetry/virtualenvs/pneumarl-4s6AwDM4-py3.11/lib/python3.11/site-packages/godot_rl/core/godot_env.py", line 59, in __init__
+    self.connection = self._start_server()
+                      ^^^^^^^^^^^^^^^^^^^^
+  File "/home/valapeos/.cache/pypoetry/virtualenvs/pneumarl-4s6AwDM4-py3.11/lib/python3.11/site-packages/godot_rl/core/godot_env.py", line 317, in _start_server
+    connection, client_address = sock.accept()
+                                 ^^^^^^^^^^^^^
+  File "/nix/store/glfr70gi7hfaj50mwj2431p8bg60fhqw-python3-3.11.9/lib/python3.11/socket.py", line 294, in accept
+    fd, addr = self._accept()
+               ^^^^^^^^^^^^^^
+TimeoutError: timed out
+[2024-05-15 09:06:07,044 W 12692 12692] (gcs_server) gcs_worker_manager.cc:55: Reporting worker exit, worker id = 7abd3065dca4325130aae9b5fed632b86b1f3673140c122382f8f4ed, node id = 2808763200e5fb675aeed4f2c3a8a8a50b290dfd4d83a5db793b0691, address = 192.168.1.56, exit_type = USER_ERROR, exit_detail = Worker exits because there was an exception in the initialization method (e.g., __init__). Fix the exceptions from the initialization to resolve the issue. Exception raised from an actor init method. Traceback: The actor died because of an error raised in its creation task, [36mray::RolloutWorker.__init__()[39m (pid=13722, ip=192.168.1.56, actor_id=64110d8601f56bf14e9797c501000000, repr=<ray.rllib.evaluation.rollout_worker.RolloutWorker object at 0x7fd9bed37cd0>)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/valapeos/.cache/pypoetry/virtualenvs/pneumarl-4s6AwDM4-py3.11/lib/python3.11/site-packages/ray/rllib/evaluation/rollout_worker.py", line 407, in __init__
+    self.env = env_creator(copy.deepcopy(self.env_context))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/valapeos/Projects/pneumarl/rllib_example.py", line 48, in env_creator
+    return RayVectorGodotEnv(config=env_config, port=port, seed=seed)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/valapeos/.cache/pypoetry/virtualenvs/pneumarl-4s6AwDM4-py3.11/lib/python3.11/site-packages/godot_rl/wrappers/ray_wrapper.py", line 22, in __init__
+    self._env = GodotEnv(
+                ^^^^^^^^^
+  File "/home/valapeos/.cache/pypoetry/virtualenvs/pneumarl-4s6AwDM4-py3.11/lib/python3.11/site-packages/godot_rl/core/godot_env.py", line 59, in __init__
+    self.connection = self._start_server()
+                      ^^^^^^^^^^^^^^^^^^^^
+  File "/home/valapeos/.cache/pypoetry/virtualenvs/pneumarl-4s6AwDM4-py3.11/lib/python3.11/site-packages/godot_rl/core/godot_env.py", line 317, in _start_server
+    connection, client_address = sock.accept()
+                                 ^^^^^^^^^^^^^
+  File "/nix/store/glfr70gi7hfaj50mwj2431p8bg60fhqw-python3-3.11.9/lib/python3.11/socket.py", line 294, in accept
+    fd, addr = self._accept()
+               ^^^^^^^^^^^^^^
+TimeoutError: timed out. Unintentional worker failures have been reported. If there are lots of this logs, that might indicate there are unexpected failures in the cluster.
+[2024-05-15 09:06:07,044 W 12692 12692] (gcs_server) gcs_actor_manager.cc:970: Worker 7abd3065dca4325130aae9b5fed632b86b1f3673140c122382f8f4ed on node 2808763200e5fb675aeed4f2c3a8a8a50b290dfd4d83a5db793b0691 exits, type=USER_ERROR, has creation_task_exception = 1
+[2024-05-15 09:06:07,044 I 12692 12692] (gcs_server) gcs_actor_manager.cc:1167: Actor 64110d8601f56bf14e9797c501000000 is failed on worker 7abd3065dca4325130aae9b5fed632b86b1f3673140c122382f8f4ed at node 2808763200e5fb675aeed4f2c3a8a8a50b290dfd4d83a5db793b0691, need_reschedule = 0, death context type = CreationTaskFailureContext, remaining_restarts = 0, job id = 01000000
+[2024-05-15 09:06:07,180 I 12692 12692] (gcs_server) gcs_actor_manager.cc:798: Actor 64110d8601f56bf14e9797c501000000 is out of scope, destroying actor, job id = 01000000
+[2024-05-15 09:06:07,180 I 12692 12692] (gcs_server) gcs_actor_manager.cc:816: Destroying actor, actor id = 64110d8601f56bf14e9797c501000000, job id = 01000000
+[2024-05-15 09:06:07,180 I 12692 12692] (gcs_server) gcs_actor_manager.cc:798: Actor 6c1e2f8e5911cf8ba4dcac5b01000000 is out of scope, destroying actor, job id = 01000000
+[2024-05-15 09:06:07,180 I 12692 12692] (gcs_server) gcs_actor_manager.cc:816: Destroying actor, actor id = 6c1e2f8e5911cf8ba4dcac5b01000000, job id = 01000000
+[2024-05-15 09:06:07,180 I 12692 12692] (gcs_server) gcs_actor_manager.cc:798: Actor 79760d3ce8052092d662e89401000000 is out of scope, destroying actor, job id = 01000000
+[2024-05-15 09:06:07,180 I 12692 12692] (gcs_server) gcs_actor_manager.cc:816: Destroying actor, actor id = 79760d3ce8052092d662e89401000000, job id = 01000000
+[2024-05-15 09:06:07,180 I 12692 12692] (gcs_server) gcs_actor_manager.cc:798: Actor cf76be01afb9954787ceb84801000000 is out of scope, destroying actor, job id = 01000000
+[2024-05-15 09:06:07,180 I 12692 12692] (gcs_server) gcs_actor_manager.cc:816: Destroying actor, actor id = cf76be01afb9954787ceb84801000000, job id = 01000000
+[2024-05-15 09:06:07,180 I 12692 12692] (gcs_server) gcs_actor_scheduler.cc:484: Finished actor creation task for actor 0b0450d90a301440d0afa9f001000000 on worker 88aa07750bd7c12dafbb7815838b15c7992641795664ee3b029e7c76 at node 2808763200e5fb675aeed4f2c3a8a8a50b290dfd4d83a5db793b0691, job id = 01000000
+[2024-05-15 09:06:07,180 I 12692 12692] (gcs_server) gcs_actor_manager.cc:1280: Failed to create an actor due to the application failure, actor id = 0b0450d90a301440d0afa9f001000000, job id = 01000000
+[2024-05-15 09:06:07,180 I 12692 12692] (gcs_server) gcs_actor_manager.cc:303: Finished creating actor, job id = 01000000, actor id = 0b0450d90a301440d0afa9f001000000, status = CreationTaskError: User exception:
+elf.config))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/valapeos/.cache/pypoetry/virtualenvs/pneumarl-4s6AwDM4-py3.11/lib/python3.11/site-packages/ray/rllib/algorithms/algorithm.py", line 640, in setup
+    self.workers = EnvRunnerGroup(
+                   ^^^^^^^^^^^^^^^
+  File "/home/valapeos/.cache/pypoetry/virtualenvs/pneumarl-4s6AwDM4-py3.11/lib/python3.11/site-packages/ray/rllib/env/env_runner_group.py", line 191, in __init__
+    raise e.args[0].args[2]
+TimeoutError: timed out
+
+System error:
+CreationTaskError: Exception raised from an actor init method. Traceback: The actor died because of an error raised in its creation task, [36mray::PPO.__init__()[39m (pid=13649, ip=192.168.1.56, actor_id=0b0450d90a301440d0afa9f001000000, repr=PPO)
+  File "/home/valapeos/.cache/pypoetry/virtualenvs/pneumarl-4s6AwDM4-py3.11/lib/python3.11/site-packages/ray/rllib/env/env_runner_group.py", line 239, in _setup
+    self.add_workers(
+  File "/home/valapeos/.cache/pypoetry/virtualenvs/pneumarl-4s6AwDM4-py3.11/lib/python3.11/site-packages/ray/rllib/env/env_runner_group.py", line 754, in add_workers
+    raise result.get()
+  File "/home/valapeos/.cache/pypoetry/virtualenvs/pneumarl-4s6AwDM4-py3.11/lib/python3.11/site-packages/ray/rllib/utils/actor_manager.py", line 497, in _fetch_result
+    result = ray.get(r)
+             ^^^^^^^^^^
+           ^^^^^^^^^^^^^^^^^^^
+           ^^^^^^^^^^^^^^^^^^^^^
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ray.exceptions.ActorDiedError: The actor died because of an error raised in its creation task, [36mray::RolloutWorker.__init__()[39m (pid=13721, ip=192.168.1.56, actor_id=cf76be01afb9954787ceb84801000000, repr=<ray.rllib.evaluation.rollout_worker.RolloutWorker object at 0x7fd32a36abd0>)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/valapeos/.cache/pypoetry/virtualenvs/pneumarl-4s6AwDM4-py3.11/lib/python3.11/site-packages/ray/rllib/evaluation/rollout_worker.py", line 407, in __init__
+    self.env = env_creator(copy.deepcopy(self.env_context))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/valapeos/Projects/pneumarl/rllib_example.py", line 48, in env_creator
+    return RayVectorGodotEnv(config=env_config, port=port, seed=seed)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/valapeos/.cache/pypoetry/virtualenvs/pneumarl-4s6AwDM4-py3.11/lib/python3.11/site-packages/godot_rl/wrappers/ray_wrapper.py", line 22, in __init__
+    self._env = GodotEnv(
+                ^^^^^^^^^
+  File "/home/valapeos/.cache/pypoetry/virtualenvs/pneumarl-4s6AwDM4-py3.11/lib/python3.11/site-packages/godot_rl/core/godot_env.py", line 59, in __init__
+    self.connection = self._start_server()
+                      ^^^^^^^^^^^^^^^^^^^^
+  File "/home/valapeos/.cache/pypoetry/virtualenvs/pneumarl-4s6AwDM4-py3.11/lib/python3.11/site-packages/godot_rl/core/godot_env.py", line 317, in _start_server
+    connection, client_address = sock.accept()
+                                 ^^^^^^^^^^^^^
+  File "/nix/store/glfr70gi7hfaj50mwj2431p8bg60fhqw-python3-3.11.9/lib/python3.11/socket.py", line 294, in accept
+    fd, addr = self._accept()
+               ^^^^^^^^^^^^^^
+TimeoutError: timed out
+
+During handling of the above exception, another exception occurred:
+
+[36mray::PPO.__init__()[39m (pid=13649, ip=192.168.1.56, actor_id=0b0450d90a301440d0afa9f001000000, repr=PPO)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/valapeos/.cache/pypoetry/virtualenvs/pneumarl-4s6AwDM4-py3.11/lib/python3.11/site-packages/ray/rllib/algorithms/algorithm.py", line 554, in __init__
+    super().__init__(
+  File "/home/valapeos/.cache/pypoetry/virtualenvs/pneumarl-4s6AwDM4-py3.11/lib/python3.11/site-packages/ray/tune/trainable/trainable.py", line 158, in __init__
+    self.setup(copy.deepcopy(self.config))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/valapeos/.cache/pypoetry/virtualenvs/pneumarl-4s6AwDM4-py3.11/lib/python3.11/site-packages/ray/rllib/algorithms/algorithm.py", line 640, in setup
+    self.workers = EnvRunnerGroup(
+                   ^^^^^^^^^^^^^^^
+  File "/home/valapeos/.cache/pypoetry/virtualenvs/pneumarl-4s6AwDM4-py3.11/lib/python3.11/site-packages/ray/rllib/env/env_runner_group.py", line 191, in __init__
+    raise e.args[0].args[2]
+TimeoutError: timed out
+[2024-05-15 09:06:07,189 W 12692 12692] (gcs_server) gcs_worker_manager.cc:55: Reporting worker exit, worker id = 88aa07750bd7c12dafbb7815838b15c7992641795664ee3b029e7c76, node id = 2808763200e5fb675aeed4f2c3a8a8a50b290dfd4d83a5db793b0691, address = 192.168.1.56, exit_type = USER_ERROR, exit_detail = Worker exits because there was an exception in the initialization method (e.g., __init__). Fix the exceptions from the initialization to resolve the issue. Exception raised from an actor init method. Traceback: The actor died because of an error raised in its creation task, [36mray::PPO.__init__()[39m (pid=13649, ip=192.168.1.56, actor_id=0b0450d90a301440d0afa9f001000000, repr=PPO)
+  File "/home/valapeos/.cache/pypoetry/virtualenvs/pneumarl-4s6AwDM4-py3.11/lib/python3.11/site-packages/ray/rllib/env/env_runner_group.py", line 239, in _setup
+    self.add_workers(
+  File "/home/valapeos/.cache/pypoetry/virtualenvs/pneumarl-4s6AwDM4-py3.11/lib/python3.11/site-packages/ray/rllib/env/env_runner_group.py", line 754, in add_workers
+    raise result.get()
+  File "/home/valapeos/.cache/pypoetry/virtualenvs/pneumarl-4s6AwDM4-py3.11/lib/python3.11/site-packages/ray/rllib/utils/actor_manager.py", line 497, in _fetch_result
+    result = ray.get(r)
+             ^^^^^^^^^^
+           ^^^^^^^^^^^^^^^^^^^
+           ^^^^^^^^^^^^^^^^^^^^^
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ray.exceptions.ActorDiedError: The actor died because of an error raised in its creation task, [36mray::RolloutWorker.__init__()[39m (pid=13721, ip=192.168.1.56, actor_id=cf76be01afb9954787ceb84801000000, repr=<ray.rllib.evaluation.rollout_worker.RolloutWorker object at 0x7fd32a36abd0>)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/valapeos/.cache/pypoetry/virtualenvs/pneumarl-4s6AwDM4-py3.11/lib/python3.11/site-packages/ray/rllib/evaluation/rollout_worker.py", line 407, in __init__
+    self.env = env_creator(copy.deepcopy(self.env_context))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/valapeos/Projects/pneumarl/rllib_example.py", line 48, in env_creator
+    return RayVectorGodotEnv(config=env_config, port=port, seed=seed)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/valapeos/.cache/pypoetry/virtualenvs/pneumarl-4s6AwDM4-py3.11/lib/python3.11/site-packages/godot_rl/wrappers/ray_wrapper.py", line 22, in __init__
+    self._env = GodotEnv(
+                ^^^^^^^^^
+  File "/home/valapeos/.cache/pypoetry/virtualenvs/pneumarl-4s6AwDM4-py3.11/lib/python3.11/site-packages/godot_rl/core/godot_env.py", line 59, in __init__
+    self.connection = self._start_server()
+                      ^^^^^^^^^^^^^^^^^^^^
+  File "/home/valapeos/.cache/pypoetry/virtualenvs/pneumarl-4s6AwDM4-py3.11/lib/python3.11/site-packages/godot_rl/core/godot_env.py", line 317, in _start_server
+    connection, client_address = sock.accept()
+                                 ^^^^^^^^^^^^^
+  File "/nix/store/glfr70gi7hfaj50mwj2431p8bg60fhqw-python3-3.11.9/lib/python3.11/socket.py", line 294, in accept
+    fd, addr = self._accept()
+               ^^^^^^^^^^^^^^
+TimeoutError: timed out
+
+During handling of the above exception, another exception occurred:
+
+[36mray::PPO.__init__()[39m (pid=13649, ip=192.168.1.56, actor_id=0b0450d90a301440d0afa9f001000000, repr=PPO)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/valapeos/.cache/pypoetry/virtualenvs/pneumarl-4s6AwDM4-py3.11/lib/python3.11/site-packages/ray/rllib/algorithms/algorithm.py", line 554, in __init__
+    super().__init__(
+  File "/home/valapeos/.cache/pypoetry/virtualenvs/pneumarl-4s6AwDM4-py3.11/lib/python3.11/site-packages/ray/tune/trainable/trainable.py", line 158, in __init__
+    self.setup(copy.deepcopy(self.config))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/valapeos/.cache/pypoetry/virtualenvs/pneumarl-4s6AwDM4-py3.11/lib/python3.11/site-packages/ray/rllib/algorithms/algorithm.py", line 640, in setup
+    self.workers = EnvRunnerGroup(
+                   ^^^^^^^^^^^^^^^
+  File "/home/valapeos/.cache/pypoetry/virtualenvs/pneumarl-4s6AwDM4-py3.11/lib/python3.11/site-packages/ray/rllib/env/env_runner_group.py", line 191, in __init__
+    raise e.args[0].args[2]
+TimeoutError: timed out. Unintentional worker failures have been reported. If there are lots of this logs, that might indicate there are unexpected failures in the cluster.
+[2024-05-15 09:06:07,189 W 12692 12692] (gcs_server) gcs_actor_manager.cc:970: Worker 88aa07750bd7c12dafbb7815838b15c7992641795664ee3b029e7c76 on node 2808763200e5fb675aeed4f2c3a8a8a50b290dfd4d83a5db793b0691 exits, type=USER_ERROR, has creation_task_exception = 1
+[2024-05-15 09:06:07,189 I 12692 12692] (gcs_server) gcs_actor_manager.cc:1167: Actor 0b0450d90a301440d0afa9f001000000 is failed on worker 88aa07750bd7c12dafbb7815838b15c7992641795664ee3b029e7c76 at node 2808763200e5fb675aeed4f2c3a8a8a50b290dfd4d83a5db793b0691, need_reschedule = 0, death context type = CreationTaskFailureContext, remaining_restarts = 0, job id = 01000000
+[2024-05-15 09:06:07,190 I 12692 12692] (gcs_server) gcs_placement_group_scheduler.cc:607: Cancelling all committed bundles of a placement group, id is 656f9c54c57685dae4b6a63a81d401000000
+[2024-05-15 09:06:07,191 I 12692 12692] (gcs_server) gcs_placement_group_manager.cc:458: Placement group of an id, 656f9c54c57685dae4b6a63a81d401000000 is removed successfully.
+[2024-05-15 09:06:07,191 I 12692 12692] (gcs_server) gcs_placement_group_scheduler.cc:261: Finished cancelling the resource reserved for bundle: placement group id={656f9c54c57685dae4b6a63a81d401000000}, bundle index={0} at node 2808763200e5fb675aeed4f2c3a8a8a50b290dfd4d83a5db793b0691
+[2024-05-15 09:06:07,191 I 12692 12692] (gcs_server) gcs_placement_group_scheduler.cc:261: Finished cancelling the resource reserved for bundle: placement group id={656f9c54c57685dae4b6a63a81d401000000}, bundle index={1} at node 2808763200e5fb675aeed4f2c3a8a8a50b290dfd4d83a5db793b0691
+[2024-05-15 09:06:07,191 I 12692 12692] (gcs_server) gcs_placement_group_scheduler.cc:261: Finished cancelling the resource reserved for bundle: placement group id={656f9c54c57685dae4b6a63a81d401000000}, bundle index={2} at node 2808763200e5fb675aeed4f2c3a8a8a50b290dfd4d83a5db793b0691
+[2024-05-15 09:06:07,191 I 12692 12692] (gcs_server) gcs_placement_group_scheduler.cc:261: Finished cancelling the resource reserved for bundle: placement group id={656f9c54c57685dae4b6a63a81d401000000}, bundle index={3} at node 2808763200e5fb675aeed4f2c3a8a8a50b290dfd4d83a5db793b0691
+[2024-05-15 09:06:07,191 I 12692 12692] (gcs_server) gcs_placement_group_scheduler.cc:261: Finished cancelling the resource reserved for bundle: placement group id={656f9c54c57685dae4b6a63a81d401000000}, bundle index={4} at node 2808763200e5fb675aeed4f2c3a8a8a50b290dfd4d83a5db793b0691
+[2024-05-15 09:06:07,191 I 12692 12692] (gcs_server) gcs_actor_manager.cc:798: Actor 0b0450d90a301440d0afa9f001000000 is out of scope, destroying actor, job id = 01000000
+[2024-05-15 09:06:07,191 I 12692 12692] (gcs_server) gcs_actor_manager.cc:816: Destroying actor, actor id = 0b0450d90a301440d0afa9f001000000, job id = 01000000
+[2024-05-15 09:06:07,704 I 12692 12692] (gcs_server) gcs_job_manager.cc:87: Finished marking job state, job id = 01000000
+[2024-05-15 09:06:07,715 I 12692 12692] (gcs_server) gcs_node_manager.cc:128: Shutting down raylet, node id = 2808763200e5fb675aeed4f2c3a8a8a50b290dfd4d83a5db793b0691
+[2024-05-15 09:06:07,715 I 12692 12692] (gcs_server) gcs_node_manager.cc:252: Removing node, node id = 2808763200e5fb675aeed4f2c3a8a8a50b290dfd4d83a5db793b0691, node name = 192.168.1.56
+[2024-05-15 09:06:07,715 I 12692 12692] (gcs_server) gcs_placement_group_manager.cc:767: Node 2808763200e5fb675aeed4f2c3a8a8a50b290dfd4d83a5db793b0691 failed, rescheduling the placement groups on the dead node.
+[2024-05-15 09:06:07,715 I 12692 12692] (gcs_server) gcs_actor_manager.cc:1048: Node 2808763200e5fb675aeed4f2c3a8a8a50b290dfd4d83a5db793b0691 failed, reconstructing actors.
+[2024-05-15 09:06:07,715 I 12692 12692] (gcs_server) gcs_job_manager.cc:302: Node 2808763200e5fb675aeed4f2c3a8a8a50b290dfd4d83a5db793b0691 failed, mark all jobs from this node as finished
+[2024-05-15 09:06:07,817 I 12692 12692] (gcs_server) gcs_node_manager.cc:170: Raylet 2808763200e5fb675aeed4f2c3a8a8a50b290dfd4d83a5db793b0691 is drained. Status GrpcUnavailable: RPC Error message: Cancelling all calls; RPC Error details: . The information will be published to the cluster.
+[2024-05-15 09:06:07,830 I 12692 12740] (gcs_server) ray_syncer-inl.h:318: Failed to read the message from: 2808763200e5fb675aeed4f2c3a8a8a50b290dfd4d83a5db793b0691
+[2024-05-15 09:06:07,878 I 12692 12692] (gcs_server) gcs_server_main.cc:111: GCS server received SIGTERM, shutting down...
+[2024-05-15 09:06:07,878 I 12692 12692] (gcs_server) gcs_server.cc:272: Stopping GCS server.
+[2024-05-15 09:06:07,884 I 12692 12692] (gcs_server) gcs_server.cc:292: GCS server stopped.
+[2024-05-15 09:06:07,884 I 12692 12692] (gcs_server) io_service_pool.cc:47: IOServicePool is stopped.
+[2024-05-15 09:06:07,927 I 12692 12692] (gcs_server) stats.h:120: Stats module has shutdown.

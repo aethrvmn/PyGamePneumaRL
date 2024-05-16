@@ -1,0 +1,4 @@
+[gd_scene format=3 uid="uid://dxwjan054vgw0"]
+
+[node name="Notice" type="Area2D"]
+collision_mask = 2

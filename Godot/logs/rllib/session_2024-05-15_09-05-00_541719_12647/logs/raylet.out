@@ -1,0 +1,989 @@
+[2024-05-15 09:05:01,963 I 12828 12828] (raylet) main.cc:179: Setting cluster ID to: f80091d542af94b49f72839a1f9e8e9b93d17c7c67f37f1c21fb29b2
+[2024-05-15 09:05:01,971 I 12828 12828] (raylet) main.cc:242: Raylet is not set to kill unknown children.
+[2024-05-15 09:05:01,971 I 12828 12828] (raylet) io_service_pool.cc:35: IOServicePool is running with 1 io_service.
+[2024-05-15 09:05:01,971 I 12828 12828] (raylet) main.cc:371: Setting node ID to: 2808763200e5fb675aeed4f2c3a8a8a50b290dfd4d83a5db793b0691
+[2024-05-15 09:05:01,972 I 12828 12828] (raylet) store_runner.cc:32: Allowing the Plasma store to use up to 18.2754GB of memory.
+[2024-05-15 09:05:01,972 I 12828 12828] (raylet) store_runner.cc:48: Starting object store with directory /dev/shm, fallback /home/valapeos/Projects/pneumarl/logs/rllib, and huge page support disabled
+[2024-05-15 09:05:01,972 I 12828 12859] (raylet) dlmalloc.cc:154: create_and_mmap_buffer(18275500040, /dev/shm/plasmaXXXXXX)
+[2024-05-15 09:05:01,973 I 12828 12859] (raylet) store.cc:564: ========== Plasma store: =================
+Current usage: 0 / 18.2754 GB
+- num bytes created total: 0
+0 pending objects of total size 0MB
+- objects spillable: 0
+- bytes spillable: 0
+- objects unsealed: 0
+- bytes unsealed: 0
+- objects in use: 0
+- bytes in use: 0
+- objects evictable: 0
+- bytes evictable: 0
+
+- objects created by worker: 0
+- bytes created by worker: 0
+- objects restored: 0
+- bytes restored: 0
+- objects received: 0
+- bytes received: 0
+- objects errored: 0
+- bytes errored: 0
+
+[2024-05-15 09:05:01,974 I 12828 12828] (raylet) grpc_server.cc:134: ObjectManager server started, listening on port 34323.
+[2024-05-15 09:05:01,976 I 12828 12828] (raylet) worker_killing_policy.cc:101: Running GroupByOwner policy.
+[2024-05-15 09:05:01,976 W 12828 12828] (raylet) memory_monitor.cc:197: Got negative used memory for cgroup -1, setting it to zero
+[2024-05-15 09:05:01,976 I 12828 12828] (raylet) memory_monitor.cc:47: MemoryMonitor initialized with usage threshold at 63982133248 bytes (0.95 system memory), total system memory bytes: 67349614592
+[2024-05-15 09:05:01,976 I 12828 12828] (raylet) node_manager.cc:285: Initializing NodeManager with ID 2808763200e5fb675aeed4f2c3a8a8a50b290dfd4d83a5db793b0691
+[2024-05-15 09:05:01,976 I 12828 12828] (raylet) grpc_server.cc:134: NodeManager server started, listening on port 33813.
+[2024-05-15 09:05:01,981 I 12828 12890] (raylet) agent_manager.cc:78: Monitor agent process with name dashboard_agent/424238335
+[2024-05-15 09:05:01,982 I 12828 12892] (raylet) agent_manager.cc:78: Monitor agent process with name runtime_env_agent
+[2024-05-15 09:05:01,982 I 12828 12828] (raylet) event.cc:234: Set ray event level to warning
+[2024-05-15 09:05:01,982 I 12828 12828] (raylet) event.cc:342: Ray Event initialized for RAYLET
+[2024-05-15 09:05:01,983 I 12828 12828] (raylet) raylet.cc:128: Raylet of id, 2808763200e5fb675aeed4f2c3a8a8a50b290dfd4d83a5db793b0691 started. Raylet consists of node_manager and object_manager. node_manager address: 192.168.1.56:33813 object_manager address: 192.168.1.56:34323 hostname: valanixos
+[2024-05-15 09:05:01,985 I 12828 12828] (raylet) node_manager.cc:521: [state-dump] NodeManager:
+[state-dump] Node ID: 2808763200e5fb675aeed4f2c3a8a8a50b290dfd4d83a5db793b0691
+[state-dump] Node name: 192.168.1.56
+[state-dump] InitialConfigResources: {CPU: 120000, memory: 365508034560000, node:__internal_head__: 10000, node:192.168.1.56: 10000, object_store_memory: 182754017280000}
+[state-dump] ClusterTaskManager:
+[state-dump] ========== Node: 2808763200e5fb675aeed4f2c3a8a8a50b290dfd4d83a5db793b0691 =================
+[state-dump] Infeasible queue length: 0
+[state-dump] Schedule queue length: 0
+[state-dump] Dispatch queue length: 0
+[state-dump] num_waiting_for_resource: 0
+[state-dump] num_waiting_for_plasma_memory: 0
+[state-dump] num_waiting_for_remote_node_resources: 0
+[state-dump] num_worker_not_started_by_job_config_not_exist: 0
+[state-dump] num_worker_not_started_by_registration_timeout: 0
+[state-dump] num_tasks_waiting_for_workers: 0
+[state-dump] num_cancelled_tasks: 0
+[state-dump] cluster_resource_scheduler state: 
+[state-dump] Local id: 4706454582974575632 Local resources: {"total":{node:__internal_head__: [10000], CPU: [120000], memory: [365508034560000], object_store_memory: [182754017280000], node:192.168.1.56: [10000]}}, "available": {node:__internal_head__: [10000], CPU: [120000], memory: [365508034560000], object_store_memory: [182754017280000], node:192.168.1.56: [10000]}}, "labels":{"ray.io/node_id":"2808763200e5fb675aeed4f2c3a8a8a50b290dfd4d83a5db793b0691",} is_draining: 0 is_idle: 1 Cluster resources: node id: 4706454582974575632{"total":{object_store_memory: 182754017280000, CPU: 120000, memory: 365508034560000, node:__internal_head__: 10000, node:192.168.1.56: 10000}}, "available": {object_store_memory: 182754017280000, CPU: 120000, memory: 365508034560000, node:__internal_head__: 10000, node:192.168.1.56: 10000}}, "labels":{"ray.io/node_id":"2808763200e5fb675aeed4f2c3a8a8a50b290dfd4d83a5db793b0691",}, "is_draining": 0, "draining_deadline_timestamp_ms": -1} { "placment group locations": [], "node to bundles": []}
+[state-dump] Waiting tasks size: 0
+[state-dump] Number of executing tasks: 0
+[state-dump] Number of pinned task arguments: 0
+[state-dump] Number of total spilled tasks: 0
+[state-dump] Number of spilled waiting tasks: 0
+[state-dump] Number of spilled unschedulable tasks: 0
+[state-dump] Resource usage {
+[state-dump] }
+[state-dump] Running tasks by scheduling class:
+[state-dump] ==================================================
+[state-dump] 
+[state-dump] ClusterResources:
+[state-dump] LocalObjectManager:
+[state-dump] - num pinned objects: 0
+[state-dump] - pinned objects size: 0
+[state-dump] - num objects pending restore: 0
+[state-dump] - num objects pending spill: 0
+[state-dump] - num bytes pending spill: 0
+[state-dump] - num bytes currently spilled: 0
+[state-dump] - cumulative spill requests: 0
+[state-dump] - cumulative restore requests: 0
+[state-dump] - spilled objects pending delete: 0
+[state-dump] 
+[state-dump] ObjectManager:
+[state-dump] - num local objects: 0
+[state-dump] - num unfulfilled push requests: 0
+[state-dump] - num object pull requests: 0
+[state-dump] - num chunks received total: 0
+[state-dump] - num chunks received failed (all): 0
+[state-dump] - num chunks received failed / cancelled: 0
+[state-dump] - num chunks received failed / plasma error: 0
+[state-dump] Event stats:
+[state-dump] Global stats: 0 total (0 active)
+[state-dump] Queueing time: mean = -nan s, max = -0.000 s, min = 9223372036.855 s, total = 0.000 s
+[state-dump] Execution time:  mean = -nan s, total = 0.000 s
+[state-dump] Event stats:
+[state-dump] PushManager:
+[state-dump] - num pushes in flight: 0
+[state-dump] - num chunks in flight: 0
+[state-dump] - num chunks remaining: 0
+[state-dump] - max chunks allowed: 409
+[state-dump] OwnershipBasedObjectDirectory:
+[state-dump] - num listeners: 0
+[state-dump] - cumulative location updates: 0
+[state-dump] - num location updates per second: 0.000
+[state-dump] - num location lookups per second: 0.000
+[state-dump] - num locations added per second: 0.000
+[state-dump] - num locations removed per second: 0.000
+[state-dump] BufferPool:
+[state-dump] - create buffer state map size: 0
+[state-dump] PullManager:
+[state-dump] - num bytes available for pulled objects: 18275401728
+[state-dump] - num bytes being pulled (all): 0
+[state-dump] - num bytes being pulled / pinned: 0
+[state-dump] - get request bundles: BundlePullRequestQueue{0 total, 0 active, 0 inactive, 0 unpullable}
+[state-dump] - wait request bundles: BundlePullRequestQueue{0 total, 0 active, 0 inactive, 0 unpullable}
+[state-dump] - task request bundles: BundlePullRequestQueue{0 total, 0 active, 0 inactive, 0 unpullable}
+[state-dump] - first get request bundle: N/A
+[state-dump] - first wait request bundle: N/A
+[state-dump] - first task request bundle: N/A
+[state-dump] - num objects queued: 0
+[state-dump] - num objects actively pulled (all): 0
+[state-dump] - num objects actively pulled / pinned: 0
+[state-dump] - num bundles being pulled: 0
+[state-dump] - num pull retries: 0
+[state-dump] - max timeout seconds: 0
+[state-dump] - max timeout request is already processed. No entry.
+[state-dump] 
+[state-dump] WorkerPool:
+[state-dump] - registered jobs: 0
+[state-dump] - process_failed_job_config_missing: 0
+[state-dump] - process_failed_rate_limited: 0
+[state-dump] - process_failed_pending_registration: 0
+[state-dump] - process_failed_runtime_env_setup_failed: 0
+[state-dump] - num PYTHON workers: 0
+[state-dump] - num PYTHON drivers: 0
+[state-dump] - num object spill callbacks queued: 0
+[state-dump] - num object restore queued: 0
+[state-dump] - num util functions queued: 0
+[state-dump] - num idle workers: 0
+[state-dump] TaskDependencyManager:
+[state-dump] - task deps map size: 0
+[state-dump] - get req map size: 0
+[state-dump] - wait req map size: 0
+[state-dump] - local objects map size: 0
+[state-dump] WaitManager:
+[state-dump] - num active wait requests: 0
+[state-dump] Subscriber:
+[state-dump] Channel WORKER_OBJECT_LOCATIONS_CHANNEL
+[state-dump] - cumulative subscribe requests: 0
+[state-dump] - cumulative unsubscribe requests: 0
+[state-dump] - active subscribed publishers: 0
+[state-dump] - cumulative published messages: 0
+[state-dump] - cumulative processed messages: 0
+[state-dump] Channel WORKER_OBJECT_EVICTION
+[state-dump] - cumulative subscribe requests: 0
+[state-dump] - cumulative unsubscribe requests: 0
+[state-dump] - active subscribed publishers: 0
+[state-dump] - cumulative published messages: 0
+[state-dump] - cumulative processed messages: 0
+[state-dump] Channel WORKER_REF_REMOVED_CHANNEL
+[state-dump] - cumulative subscribe requests: 0
+[state-dump] - cumulative unsubscribe requests: 0
+[state-dump] - active subscribed publishers: 0
+[state-dump] - cumulative published messages: 0
+[state-dump] - cumulative processed messages: 0
+[state-dump] num async plasma notifications: 0
+[state-dump] Remote node managers: 
+[state-dump] Event stats:
+[state-dump] Global stats: 27 total (13 active)
+[state-dump] Queueing time: mean = 998.145 us, max = 7.175 ms, min = 5.610 us, total = 26.950 ms
+[state-dump] Execution time:  mean = 585.054 us, total = 15.796 ms
+[state-dump] Event stats:
+[state-dump] 	PeriodicalRunner.RunFnPeriodically - 11 total (2 active, 1 running), Execution time: mean = 122.294 us, total = 1.345 ms, Queueing time: mean = 2.449 ms, max = 7.175 ms, min = 18.609 us, total = 26.938 ms
+[state-dump] 	NodeManager.deadline_timer.flush_free_objects - 1 total (1 active), Execution time: mean = 0.000 s, total = 0.000 s, Queueing time: mean = 0.000 s, max = -0.000 s, min = 9223372036.855 s, total = 0.000 s
+[state-dump] 	RayletWorkerPool.deadline_timer.kill_idle_workers - 1 total (1 active), Execution time: mean = 0.000 s, total = 0.000 s, Queueing time: mean = 0.000 s, max = -0.000 s, min = 9223372036.855 s, total = 0.000 s
+[state-dump] 	NodeInfoGcsService.grpc_client.RegisterNode - 1 total (0 active), Execution time: mean = 863.500 us, total = 863.500 us, Queueing time: mean = 0.000 s, max = -0.000 s, min = 9223372036.855 s, total = 0.000 s
+[state-dump] 	NodeManager.deadline_timer.spill_objects_when_over_threshold - 1 total (1 active), Execution time: mean = 0.000 s, total = 0.000 s, Queueing time: mean = 0.000 s, max = -0.000 s, min = 9223372036.855 s, total = 0.000 s
+[state-dump] 	NodeManager.deadline_timer.debug_state_dump - 1 total (1 active), Execution time: mean = 0.000 s, total = 0.000 s, Queueing time: mean = 0.000 s, max = -0.000 s, min = 9223372036.855 s, total = 0.000 s
+[state-dump] 	InternalPubSubGcsService.grpc_client.GcsSubscriberCommandBatch.OnReplyReceived - 1 total (1 active), Execution time: mean = 0.000 s, total = 0.000 s, Queueing time: mean = 0.000 s, max = -0.000 s, min = 9223372036.855 s, total = 0.000 s
+[state-dump] 	InternalPubSubGcsService.grpc_client.GcsSubscriberPoll - 1 total (1 active), Execution time: mean = 0.000 s, total = 0.000 s, Queueing time: mean = 0.000 s, max = -0.000 s, min = 9223372036.855 s, total = 0.000 s
+[state-dump] 	ClusterResourceManager.ResetRemoteNodeView - 1 total (1 active), Execution time: mean = 0.000 s, total = 0.000 s, Queueing time: mean = 0.000 s, max = -0.000 s, min = 9223372036.855 s, total = 0.000 s
+[state-dump] 	NodeManager.deadline_timer.record_metrics - 1 total (1 active), Execution time: mean = 0.000 s, total = 0.000 s, Queueing time: mean = 0.000 s, max = -0.000 s, min = 9223372036.855 s, total = 0.000 s
+[state-dump] 	NodeManager.GCTaskFailureReason - 1 total (1 active), Execution time: mean = 0.000 s, total = 0.000 s, Queueing time: mean = 0.000 s, max = -0.000 s, min = 9223372036.855 s, total = 0.000 s
+[state-dump] 	NodeInfoGcsService.grpc_client.GetInternalConfig - 1 total (0 active), Execution time: mean = 522.368 us, total = 522.368 us, Queueing time: mean = 0.000 s, max = -0.000 s, min = 9223372036.855 s, total = 0.000 s
+[state-dump] 	NodeInfoGcsService.grpc_client.GetInternalConfig.OnReplyReceived - 1 total (0 active), Execution time: mean = 12.673 ms, total = 12.673 ms, Queueing time: mean = 5.610 us, max = 5.610 us, min = 5.610 us, total = 5.610 us
+[state-dump] 	NodeManager.ScheduleAndDispatchTasks - 1 total (1 active), Execution time: mean = 0.000 s, total = 0.000 s, Queueing time: mean = 0.000 s, max = -0.000 s, min = 9223372036.855 s, total = 0.000 s
+[state-dump] 	MemoryMonitor.CheckIsMemoryUsageAboveThreshold - 1 total (1 active), Execution time: mean = 0.000 s, total = 0.000 s, Queueing time: mean = 0.000 s, max = -0.000 s, min = 9223372036.855 s, total = 0.000 s
+[state-dump] 	InternalPubSubGcsService.grpc_client.GcsSubscriberCommandBatch - 1 total (0 active), Execution time: mean = 251.054 us, total = 251.054 us, Queueing time: mean = 0.000 s, max = -0.000 s, min = 9223372036.855 s, total = 0.000 s
+[state-dump] 	NodeInfoGcsService.grpc_client.RegisterNode.OnReplyReceived - 1 total (0 active), Execution time: mean = 140.966 us, total = 140.966 us, Queueing time: mean = 6.160 us, max = 6.160 us, min = 6.160 us, total = 6.160 us
+[state-dump] DebugString() time ms: 0
+[state-dump] 
+[state-dump] 
+[2024-05-15 09:05:01,985 I 12828 12828] (raylet) accessor.cc:627: Received notification for node id = 2808763200e5fb675aeed4f2c3a8a8a50b290dfd4d83a5db793b0691, IsAlive = 1
+[2024-05-15 09:05:02,075 I 12828 12828] (raylet) worker_pool.cc:494: Started worker process with pid 12910, the token is 0
+[2024-05-15 09:05:02,077 I 12828 12828] (raylet) worker_pool.cc:494: Started worker process with pid 12911, the token is 1
+[2024-05-15 09:05:02,079 I 12828 12828] (raylet) worker_pool.cc:494: Started worker process with pid 12912, the token is 2
+[2024-05-15 09:05:02,080 I 12828 12828] (raylet) worker_pool.cc:494: Started worker process with pid 12913, the token is 3
+[2024-05-15 09:05:02,082 I 12828 12828] (raylet) worker_pool.cc:494: Started worker process with pid 12914, the token is 4
+[2024-05-15 09:05:02,084 I 12828 12828] (raylet) worker_pool.cc:494: Started worker process with pid 12915, the token is 5
+[2024-05-15 09:05:02,086 I 12828 12828] (raylet) worker_pool.cc:494: Started worker process with pid 12916, the token is 6
+[2024-05-15 09:05:02,087 I 12828 12828] (raylet) worker_pool.cc:494: Started worker process with pid 12917, the token is 7
+[2024-05-15 09:05:02,089 I 12828 12828] (raylet) worker_pool.cc:494: Started worker process with pid 12918, the token is 8
+[2024-05-15 09:05:02,095 I 12828 12828] (raylet) worker_pool.cc:494: Started worker process with pid 12919, the token is 9
+[2024-05-15 09:05:02,101 I 12828 12828] (raylet) worker_pool.cc:494: Started worker process with pid 12920, the token is 10
+[2024-05-15 09:05:02,103 I 12828 12828] (raylet) worker_pool.cc:494: Started worker process with pid 12921, the token is 11
+[2024-05-15 09:05:02,430 I 12828 12859] (raylet) object_store.cc:35: Object store current usage 8e-09 / 18.2754 GB.
+[2024-05-15 09:05:02,568 I 12828 12828] (raylet) node_manager.cc:606: New job has started. Job id 01000000 Driver pid 12647 is dead: 0 driver address: 192.168.1.56
+[2024-05-15 09:05:02,568 I 12828 12828] (raylet) worker_pool.cc:677: Job 01000000 already started in worker pool.
+[2024-05-15 09:05:02,801 I 12828 12828] (raylet) runtime_env_agent_client.cc:369: Create runtime env for job 01000000
+[2024-05-15 09:05:02,803 I 12828 12828] (raylet) worker_pool.cc:494: Started worker process with pid 13649, the token is 12
+[2024-05-15 09:05:03,591 I 12828 12828] (raylet) node_manager.cc:1436: NodeManager::DisconnectClient, disconnect_type=1, has creation task exception = false
+[2024-05-15 09:05:03,591 I 12828 12828] (raylet) node_manager.cc:1436: NodeManager::DisconnectClient, disconnect_type=1, has creation task exception = false
+[2024-05-15 09:05:03,592 I 12828 12828] (raylet) node_manager.cc:1436: NodeManager::DisconnectClient, disconnect_type=1, has creation task exception = false
+[2024-05-15 09:05:03,592 I 12828 12828] (raylet) node_manager.cc:1436: NodeManager::DisconnectClient, disconnect_type=1, has creation task exception = false
+[2024-05-15 09:05:03,791 I 12828 12828] (raylet) node_manager.cc:1436: NodeManager::DisconnectClient, disconnect_type=1, has creation task exception = false
+[2024-05-15 09:05:04,757 I 12828 12828] (raylet) runtime_env_agent_client.cc:369: Create runtime env for job 01000000
+[2024-05-15 09:05:04,760 I 12828 12828] (raylet) worker_pool.cc:494: Started worker process with pid 13721, the token is 13
+[2024-05-15 09:05:04,760 I 12828 12828] (raylet) runtime_env_agent_client.cc:369: Create runtime env for job 01000000
+[2024-05-15 09:05:04,762 I 12828 12828] (raylet) worker_pool.cc:494: Started worker process with pid 13722, the token is 14
+[2024-05-15 09:05:04,763 I 12828 12828] (raylet) runtime_env_agent_client.cc:369: Create runtime env for job 01000000
+[2024-05-15 09:05:04,765 I 12828 12828] (raylet) worker_pool.cc:494: Started worker process with pid 13723, the token is 15
+[2024-05-15 09:05:04,765 I 12828 12828] (raylet) runtime_env_agent_client.cc:369: Create runtime env for job 01000000
+[2024-05-15 09:05:04,767 I 12828 12828] (raylet) worker_pool.cc:494: Started worker process with pid 13724, the token is 16
+[2024-05-15 09:05:06,985 W 12828 12828] (raylet) memory_monitor.cc:197: Got negative used memory for cgroup -1, setting it to zero
+[2024-05-15 09:05:11,980 W 12828 12853] (raylet) metric_exporter.cc:105: [1] Export metrics to agent failed: GrpcUnavailable: RPC Error message: failed to connect to all addresses; last error: UNKNOWN: ipv4:127.0.0.1:62660: Failed to connect to remote host: Connection refused; RPC Error details: . This won't affect Ray, but you can lose metrics from the cluster.
+[2024-05-15 09:05:11,989 W 12828 12828] (raylet) memory_monitor.cc:197: Got negative used memory for cgroup -1, setting it to zero
+[2024-05-15 09:05:16,992 W 12828 12828] (raylet) memory_monitor.cc:197: Got negative used memory for cgroup -1, setting it to zero
+[2024-05-15 09:05:21,993 W 12828 12828] (raylet) memory_monitor.cc:197: Got negative used memory for cgroup -1, setting it to zero
+[2024-05-15 09:05:26,996 W 12828 12828] (raylet) memory_monitor.cc:197: Got negative used memory for cgroup -1, setting it to zero
+[2024-05-15 09:05:31,998 W 12828 12828] (raylet) memory_monitor.cc:197: Got negative used memory for cgroup -1, setting it to zero
+[2024-05-15 09:05:37,000 W 12828 12828] (raylet) memory_monitor.cc:197: Got negative used memory for cgroup -1, setting it to zero
+[2024-05-15 09:05:42,002 W 12828 12828] (raylet) memory_monitor.cc:197: Got negative used memory for cgroup -1, setting it to zero
+[2024-05-15 09:05:47,004 W 12828 12828] (raylet) memory_monitor.cc:197: Got negative used memory for cgroup -1, setting it to zero
+[2024-05-15 09:05:52,006 W 12828 12828] (raylet) memory_monitor.cc:197: Got negative used memory for cgroup -1, setting it to zero
+[2024-05-15 09:05:57,008 W 12828 12828] (raylet) memory_monitor.cc:197: Got negative used memory for cgroup -1, setting it to zero
+[2024-05-15 09:06:01,973 I 12828 12859] (raylet) store.cc:564: ========== Plasma store: =================
+Current usage: 0 / 18.2754 GB
+- num bytes created total: 144
+0 pending objects of total size 0MB
+- objects spillable: 0
+- bytes spillable: 0
+- objects unsealed: 0
+- bytes unsealed: 0
+- objects in use: 0
+- bytes in use: 0
+- objects evictable: 0
+- bytes evictable: 0
+
+- objects created by worker: 0
+- bytes created by worker: 0
+- objects restored: 0
+- bytes restored: 0
+- objects received: 0
+- bytes received: 0
+- objects errored: 0
+- bytes errored: 0
+
+[2024-05-15 09:06:01,986 I 12828 12828] (raylet) node_manager.cc:521: [state-dump] NodeManager:
+[state-dump] Node ID: 2808763200e5fb675aeed4f2c3a8a8a50b290dfd4d83a5db793b0691
+[state-dump] Node name: 192.168.1.56
+[state-dump] InitialConfigResources: {CPU: 120000, memory: 365508034560000, node:__internal_head__: 10000, node:192.168.1.56: 10000, object_store_memory: 182754017280000}
+[state-dump] ClusterTaskManager:
+[state-dump] ========== Node: 2808763200e5fb675aeed4f2c3a8a8a50b290dfd4d83a5db793b0691 =================
+[state-dump] Infeasible queue length: 0
+[state-dump] Schedule queue length: 0
+[state-dump] Dispatch queue length: 0
+[state-dump] num_waiting_for_resource: 0
+[state-dump] num_waiting_for_plasma_memory: 0
+[state-dump] num_waiting_for_remote_node_resources: 0
+[state-dump] num_worker_not_started_by_job_config_not_exist: 0
+[state-dump] num_worker_not_started_by_registration_timeout: 0
+[state-dump] num_tasks_waiting_for_workers: 0
+[state-dump] num_cancelled_tasks: 0
+[state-dump] cluster_resource_scheduler state: 
+[state-dump] Local id: 4706454582974575632 Local resources: {"total":{object_store_memory: [182754017280000], node:192.168.1.56: [10000], CPU_group_1_656f9c54c57685dae4b6a63a81d401000000: [10000], bundle_group_1_656f9c54c57685dae4b6a63a81d401000000: [10000000], CPU_group_3_656f9c54c57685dae4b6a63a81d401000000: [10000], bundle_group_3_656f9c54c57685dae4b6a63a81d401000000: [10000000], CPU_group_656f9c54c57685dae4b6a63a81d401000000: [50000], bundle_group_0_656f9c54c57685dae4b6a63a81d401000000: [10000000], bundle_group_2_656f9c54c57685dae4b6a63a81d401000000: [10000000], bundle_group_4_656f9c54c57685dae4b6a63a81d401000000: [10000000], CPU: [120000], bundle_group_656f9c54c57685dae4b6a63a81d401000000: [50000000], CPU_group_2_656f9c54c57685dae4b6a63a81d401000000: [10000], memory: [365508034560000], node:__internal_head__: [10000], CPU_group_0_656f9c54c57685dae4b6a63a81d401000000: [10000], CPU_group_4_656f9c54c57685dae4b6a63a81d401000000: [10000]}}, "available": {object_store_memory: [182754017280000], node:192.168.1.56: [10000], CPU_group_1_656f9c54c57685dae4b6a63a81d401000000: [10000], bundle_group_1_656f9c54c57685dae4b6a63a81d401000000: [10000000], CPU_group_3_656f9c54c57685dae4b6a63a81d401000000: [10000], bundle_group_3_656f9c54c57685dae4b6a63a81d401000000: [10000000], CPU_group_656f9c54c57685dae4b6a63a81d401000000: [0], bundle_group_0_656f9c54c57685dae4b6a63a81d401000000: [9999990], bundle_group_2_656f9c54c57685dae4b6a63a81d401000000: [10000000], bundle_group_4_656f9c54c57685dae4b6a63a81d401000000: [10000000], CPU: [70000], bundle_group_656f9c54c57685dae4b6a63a81d401000000: [49999950], CPU_group_2_656f9c54c57685dae4b6a63a81d401000000: [10000], memory: [365508034560000], node:__internal_head__: [10000], CPU_group_0_656f9c54c57685dae4b6a63a81d401000000: [0], CPU_group_4_656f9c54c57685dae4b6a63a81d401000000: [10000]}}, "labels":{"ray.io/node_id":"2808763200e5fb675aeed4f2c3a8a8a50b290dfd4d83a5db793b0691",} is_draining: 0 is_idle: 0 Cluster resources: node id: 4706454582974575632{"total":{CPU_group_656f9c54c57685dae4b6a63a81d401000000: 50000, bundle_group_2_656f9c54c57685dae4b6a63a81d401000000: 10000000, bundle_group_0_656f9c54c57685dae4b6a63a81d401000000: 10000000, bundle_group_4_656f9c54c57685dae4b6a63a81d401000000: 10000000, bundle_group_3_656f9c54c57685dae4b6a63a81d401000000: 10000000, node:192.168.1.56: 10000, object_store_memory: 182754017280000, bundle_group_1_656f9c54c57685dae4b6a63a81d401000000: 10000000, CPU_group_3_656f9c54c57685dae4b6a63a81d401000000: 10000, node:__internal_head__: 10000, CPU_group_1_656f9c54c57685dae4b6a63a81d401000000: 10000, CPU_group_4_656f9c54c57685dae4b6a63a81d401000000: 10000, CPU_group_0_656f9c54c57685dae4b6a63a81d401000000: 10000, bundle_group_656f9c54c57685dae4b6a63a81d401000000: 50000000, CPU: 120000, memory: 365508034560000, CPU_group_2_656f9c54c57685dae4b6a63a81d401000000: 10000}}, "available": {CPU_group_4_656f9c54c57685dae4b6a63a81d401000000: 10000, CPU_group_1_656f9c54c57685dae4b6a63a81d401000000: 10000, CPU_group_3_656f9c54c57685dae4b6a63a81d401000000: 10000, bundle_group_3_656f9c54c57685dae4b6a63a81d401000000: 10000000, node:192.168.1.56: 10000, object_store_memory: 182754017280000, node:__internal_head__: 10000, memory: 365508034560000, CPU_group_2_656f9c54c57685dae4b6a63a81d401000000: 10000, bundle_group_656f9c54c57685dae4b6a63a81d401000000: 49999950, CPU: 70000, bundle_group_0_656f9c54c57685dae4b6a63a81d401000000: 9999990, bundle_group_4_656f9c54c57685dae4b6a63a81d401000000: 10000000, bundle_group_2_656f9c54c57685dae4b6a63a81d401000000: 10000000, bundle_group_1_656f9c54c57685dae4b6a63a81d401000000: 10000000}}, "labels":{"ray.io/node_id":"2808763200e5fb675aeed4f2c3a8a8a50b290dfd4d83a5db793b0691",}, "is_draining": 0, "draining_deadline_timestamp_ms": -1} { "placment group locations": [], "node to bundles": []}
+[state-dump] Waiting tasks size: 0
+[state-dump] Number of executing tasks: 5
+[state-dump] Number of pinned task arguments: 0
+[state-dump] Number of total spilled tasks: 0
+[state-dump] Number of spilled waiting tasks: 0
+[state-dump] Number of spilled unschedulable tasks: 0
+[state-dump] Resource usage {
+[state-dump]     - (language=PYTHON actor_or_task=RolloutWorker.__init__ pid=13722): {CPU_group_656f9c54c57685dae4b6a63a81d401000000: 10000, bundle_group_656f9c54c57685dae4b6a63a81d401000000: 10}
+[state-dump]     - (language=PYTHON actor_or_task=RolloutWorker.__init__ pid=13723): {CPU_group_656f9c54c57685dae4b6a63a81d401000000: 10000, bundle_group_656f9c54c57685dae4b6a63a81d401000000: 10}
+[state-dump]     - (language=PYTHON actor_or_task=PPO.__init__ pid=13649): {bundle_group_656f9c54c57685dae4b6a63a81d401000000: 10, CPU_group_656f9c54c57685dae4b6a63a81d401000000: 10000, CPU_group_0_656f9c54c57685dae4b6a63a81d401000000: 10000, bundle_group_0_656f9c54c57685dae4b6a63a81d401000000: 10}
+[state-dump]     - (language=PYTHON actor_or_task=RolloutWorker.__init__ pid=13721): {CPU_group_656f9c54c57685dae4b6a63a81d401000000: 10000, bundle_group_656f9c54c57685dae4b6a63a81d401000000: 10}
+[state-dump]     - (language=PYTHON actor_or_task=RolloutWorker.__init__ pid=13724): {CPU_group_656f9c54c57685dae4b6a63a81d401000000: 10000, bundle_group_656f9c54c57685dae4b6a63a81d401000000: 10}
+[state-dump] }
+[state-dump] Running tasks by scheduling class:
+[state-dump]     - {depth=1 function_descriptor={type=PythonFunctionDescriptor, module_name=ray.rllib.algorithms.ppo.ppo, class_name=PPO, function_name=__init__, function_hash=1023ce2155184297951346509793ac63} scheduling_strategy=placement_group_scheduling_strategy {
+[state-dump]   placement_group_id: "eo\234T\305v\205\332\344\266\246:\201\324\001\000\000\000"
+[state-dump]   placement_group_capture_child_tasks: true
+[state-dump] }
+[state-dump]  resource_set={bundle_group_0_656f9c54c57685dae4b6a63a81d401000000 : 0.001, CPU_group_656f9c54c57685dae4b6a63a81d401000000 : 1, CPU_group_0_656f9c54c57685dae4b6a63a81d401000000 : 1, bundle_group_656f9c54c57685dae4b6a63a81d401000000 : 0.001, }}: 1/18446744073709551615
+[state-dump]     - {depth=2 function_descriptor={type=PythonFunctionDescriptor, module_name=ray.rllib.evaluation.rollout_worker, class_name=RolloutWorker, function_name=__init__, function_hash=b8267bd017c84e5881fa6c6f47c3e4c0} scheduling_strategy=placement_group_scheduling_strategy {
+[state-dump]   placement_group_id: "eo\234T\305v\205\332\344\266\246:\201\324\001\000\000\000"
+[state-dump]   placement_group_bundle_index: -1
+[state-dump]   placement_group_capture_child_tasks: true
+[state-dump] }
+[state-dump]  resource_set={CPU_group_656f9c54c57685dae4b6a63a81d401000000 : 1, bundle_group_656f9c54c57685dae4b6a63a81d401000000 : 0.001, }}: 4/18446744073709551615
+[state-dump] ==================================================
+[state-dump] 
+[state-dump] ClusterResources:
+[state-dump] LocalObjectManager:
+[state-dump] - num pinned objects: 0
+[state-dump] - pinned objects size: 0
+[state-dump] - num objects pending restore: 0
+[state-dump] - num objects pending spill: 0
+[state-dump] - num bytes pending spill: 0
+[state-dump] - num bytes currently spilled: 0
+[state-dump] - cumulative spill requests: 0
+[state-dump] - cumulative restore requests: 0
+[state-dump] - spilled objects pending delete: 0
+[state-dump] 
+[state-dump] ObjectManager:
+[state-dump] - num local objects: 0
+[state-dump] - num unfulfilled push requests: 0
+[state-dump] - num object pull requests: 0
+[state-dump] - num chunks received total: 0
+[state-dump] - num chunks received failed (all): 0
+[state-dump] - num chunks received failed / cancelled: 0
+[state-dump] - num chunks received failed / plasma error: 0
+[state-dump] Event stats:
+[state-dump] Global stats: 0 total (0 active)
+[state-dump] Queueing time: mean = -nan s, max = -0.000 s, min = 9223372036.855 s, total = 0.000 s
+[state-dump] Execution time:  mean = -nan s, total = 0.000 s
+[state-dump] Event stats:
+[state-dump] PushManager:
+[state-dump] - num pushes in flight: 0
+[state-dump] - num chunks in flight: 0
+[state-dump] - num chunks remaining: 0
+[state-dump] - max chunks allowed: 409
+[state-dump] OwnershipBasedObjectDirectory:
+[state-dump] - num listeners: 0
+[state-dump] - cumulative location updates: 0
+[state-dump] - num location updates per second: 0.000
+[state-dump] - num location lookups per second: 0.000
+[state-dump] - num locations added per second: 0.000
+[state-dump] - num locations removed per second: 0.000
+[state-dump] BufferPool:
+[state-dump] - create buffer state map size: 0
+[state-dump] PullManager:
+[state-dump] - num bytes available for pulled objects: 18275401728
+[state-dump] - num bytes being pulled (all): 0
+[state-dump] - num bytes being pulled / pinned: 0
+[state-dump] - get request bundles: BundlePullRequestQueue{0 total, 0 active, 0 inactive, 0 unpullable}
+[state-dump] - wait request bundles: BundlePullRequestQueue{0 total, 0 active, 0 inactive, 0 unpullable}
+[state-dump] - task request bundles: BundlePullRequestQueue{0 total, 0 active, 0 inactive, 0 unpullable}
+[state-dump] - first get request bundle: N/A
+[state-dump] - first wait request bundle: N/A
+[state-dump] - first task request bundle: N/A
+[state-dump] - num objects queued: 0
+[state-dump] - num objects actively pulled (all): 0
+[state-dump] - num objects actively pulled / pinned: 0
+[state-dump] - num bundles being pulled: 0
+[state-dump] - num pull retries: 0
+[state-dump] - max timeout seconds: 0
+[state-dump] - max timeout request is already processed. No entry.
+[state-dump] 
+[state-dump] WorkerPool:
+[state-dump] - registered jobs: 1
+[state-dump] - process_failed_job_config_missing: 0
+[state-dump] - process_failed_rate_limited: 0
+[state-dump] - process_failed_pending_registration: 0
+[state-dump] - process_failed_runtime_env_setup_failed: 0
+[state-dump] - num PYTHON workers: 12
+[state-dump] - num PYTHON drivers: 1
+[state-dump] - num object spill callbacks queued: 0
+[state-dump] - num object restore queued: 0
+[state-dump] - num util functions queued: 0
+[state-dump] - num idle workers: 7
+[state-dump] TaskDependencyManager:
+[state-dump] - task deps map size: 0
+[state-dump] - get req map size: 0
+[state-dump] - wait req map size: 0
+[state-dump] - local objects map size: 0
+[state-dump] WaitManager:
+[state-dump] - num active wait requests: 0
+[state-dump] Subscriber:
+[state-dump] Channel WORKER_OBJECT_LOCATIONS_CHANNEL
+[state-dump] - cumulative subscribe requests: 0
+[state-dump] - cumulative unsubscribe requests: 0
+[state-dump] - active subscribed publishers: 0
+[state-dump] - cumulative published messages: 0
+[state-dump] - cumulative processed messages: 0
+[state-dump] Channel WORKER_OBJECT_EVICTION
+[state-dump] - cumulative subscribe requests: 0
+[state-dump] - cumulative unsubscribe requests: 0
+[state-dump] - active subscribed publishers: 0
+[state-dump] - cumulative published messages: 0
+[state-dump] - cumulative processed messages: 0
+[state-dump] Channel WORKER_REF_REMOVED_CHANNEL
+[state-dump] - cumulative subscribe requests: 0
+[state-dump] - cumulative unsubscribe requests: 0
+[state-dump] - active subscribed publishers: 0
+[state-dump] - cumulative published messages: 0
+[state-dump] - cumulative processed messages: 0
+[state-dump] num async plasma notifications: 0
+[state-dump] Remote node managers: 
+[state-dump] Event stats:
+[state-dump] Global stats: 4609 total (27 active)
+[state-dump] Queueing time: mean = 1.448 ms, max = 1.315 s, min = 70.000 ns, total = 6.673 s
+[state-dump] Execution time:  mean = 926.484 us, total = 4.270 s
+[state-dump] Event stats:
+[state-dump] 	NodeManagerService.grpc_server.ReportWorkerBacklog.HandleRequestImpl - 777 total (0 active), Execution time: mean = 9.890 us, total = 7.684 ms, Queueing time: mean = 11.345 us, max = 260.564 us, min = 5.370 us, total = 8.815 ms
+[state-dump] 	NodeManagerService.grpc_server.ReportWorkerBacklog - 777 total (0 active), Execution time: mean = 95.817 us, total = 74.450 ms, Queueing time: mean = 0.000 s, max = -0.000 s, min = 9223372036.855 s, total = 0.000 s
+[state-dump] 	NodeManager.CheckGC - 600 total (1 active), Execution time: mean = 862.498 ns, total = 517.499 us, Queueing time: mean = 51.458 us, max = 20.877 ms, min = 6.798 us, total = 30.875 ms
+[state-dump] 	RaySyncer.OnDemandBroadcasting - 600 total (1 active), Execution time: mean = 4.655 us, total = 2.793 ms, Queueing time: mean = 48.281 us, max = 20.869 ms, min = 7.100 us, total = 28.969 ms
+[state-dump] 	ObjectManager.UpdateAvailableMemory - 600 total (0 active), Execution time: mean = 1.120 us, total = 671.870 us, Queueing time: mean = 8.347 us, max = 17.989 us, min = 4.399 us, total = 5.008 ms
+[state-dump] 	RayletWorkerPool.deadline_timer.kill_idle_workers - 300 total (1 active), Execution time: mean = 9.071 us, total = 2.721 ms, Queueing time: mean = 24.985 us, max = 3.787 ms, min = 4.986 us, total = 7.495 ms
+[state-dump] 	MemoryMonitor.CheckIsMemoryUsageAboveThreshold - 240 total (1 active), Execution time: mean = 93.805 us, total = 22.513 ms, Queueing time: mean = 21.520 us, max = 1.959 ms, min = 4.529 us, total = 5.165 ms
+[state-dump] 	ClientConnection.async_read.ProcessMessageHeader - 83 total (13 active), Execution time: mean = 2.637 us, total = 218.895 us, Queueing time: mean = 78.589 ms, max = 1.315 s, min = 10.660 us, total = 6.523 s
+[state-dump] 	ClientConnection.async_read.ProcessMessage - 70 total (0 active), Execution time: mean = 556.123 us, total = 38.929 ms, Queueing time: mean = 20.546 us, max = 519.328 us, min = 1.760 us, total = 1.438 ms
+[state-dump] 	NodeManager.ScheduleAndDispatchTasks - 61 total (1 active), Execution time: mean = 4.952 us, total = 302.072 us, Queueing time: mean = 10.238 us, max = 28.640 us, min = 5.442 us, total = 624.532 us
+[state-dump] 	NodeManager.deadline_timer.spill_objects_when_over_threshold - 60 total (1 active), Execution time: mean = 1.159 us, total = 69.518 us, Queueing time: mean = 124.476 us, max = 4.077 ms, min = 6.857 us, total = 7.469 ms
+[state-dump] 	NodeManagerService.grpc_server.GetResourceLoad - 60 total (0 active), Execution time: mean = 156.631 us, total = 9.398 ms, Queueing time: mean = 0.000 s, max = -0.000 s, min = 9223372036.855 s, total = 0.000 s
+[state-dump] 	NodeManager.deadline_timer.flush_free_objects - 60 total (1 active), Execution time: mean = 2.495 us, total = 149.680 us, Queueing time: mean = 123.346 us, max = 4.077 ms, min = 4.140 us, total = 7.401 ms
+[state-dump] 	NodeManagerService.grpc_server.GetResourceLoad.HandleRequestImpl - 60 total (0 active), Execution time: mean = 53.331 us, total = 3.200 ms, Queueing time: mean = 13.716 us, max = 193.985 us, min = 6.280 us, total = 822.984 us
+[state-dump] 	ClusterResourceManager.ResetRemoteNodeView - 21 total (1 active), Execution time: mean = 1.950 us, total = 40.949 us, Queueing time: mean = 11.393 us, max = 23.973 us, min = 7.953 us, total = 239.256 us
+[state-dump] 	ClientConnection.async_write.DoAsyncWrites - 19 total (0 active), Execution time: mean = 595.789 ns, total = 11.320 us, Queueing time: mean = 12.061 us, max = 39.439 us, min = 6.350 us, total = 229.155 us
+[state-dump] 	ObjectManager.ObjectAdded - 18 total (0 active), Execution time: mean = 6.807 us, total = 122.527 us, Queueing time: mean = 12.869 us, max = 27.039 us, min = 5.780 us, total = 231.644 us
+[state-dump] 	NodeManagerService.grpc_server.GetSystemConfig.HandleRequestImpl - 18 total (0 active), Execution time: mean = 23.248 us, total = 418.471 us, Queueing time: mean = 10.128 us, max = 17.150 us, min = 6.550 us, total = 182.299 us
+[state-dump] 	ObjectManager.ObjectDeleted - 18 total (0 active), Execution time: mean = 7.564 us, total = 136.158 us, Queueing time: mean = 29.838 us, max = 161.227 us, min = 11.850 us, total = 537.091 us
+[state-dump] 	NodeManagerService.grpc_server.GetSystemConfig - 18 total (0 active), Execution time: mean = 114.145 us, total = 2.055 ms, Queueing time: mean = 0.000 s, max = -0.000 s, min = 9223372036.855 s, total = 0.000 s
+[state-dump] 	PeriodicalRunner.RunFnPeriodically - 13 total (0 active), Execution time: mean = 126.892 us, total = 1.650 ms, Queueing time: mean = 2.277 ms, max = 7.175 ms, min = 18.609 us, total = 29.601 ms
+[state-dump] 	NodeManager.deadline_timer.record_metrics - 12 total (1 active), Execution time: mean = 236.378 us, total = 2.837 ms, Queueing time: mean = 376.783 us, max = 3.826 ms, min = 9.922 us, total = 4.521 ms
+[state-dump] 	NodeInfoGcsService.grpc_client.CheckAlive - 12 total (0 active), Execution time: mean = 296.571 us, total = 3.559 ms, Queueing time: mean = 0.000 s, max = -0.000 s, min = 9223372036.855 s, total = 0.000 s
+[state-dump] 	NodeManager.GcsCheckAlive - 12 total (1 active), Execution time: mean = 96.280 us, total = 1.155 ms, Queueing time: mean = 504.905 us, max = 4.043 ms, min = 53.416 us, total = 6.059 ms
+[state-dump] 	NodeInfoGcsService.grpc_client.CheckAlive.OnReplyReceived - 12 total (0 active), Execution time: mean = 13.821 us, total = 165.847 us, Queueing time: mean = 10.679 us, max = 16.709 us, min = 7.860 us, total = 128.146 us
+[state-dump] 	NodeManagerService.grpc_server.RequestWorkerLease.HandleRequestImpl - 6 total (0 active), Execution time: mean = 129.099 us, total = 774.591 us, Queueing time: mean = 289.732 us, max = 937.888 us, min = 7.350 us, total = 1.738 ms
+[state-dump] 	NodeManagerService.grpc_server.RequestWorkerLease - 6 total (0 active), Execution time: mean = 375.071 ms, total = 2.250 s, Queueing time: mean = 0.000 s, max = -0.000 s, min = 9223372036.855 s, total = 0.000 s
+[state-dump] 	NodeManager.deadline_timer.debug_state_dump - 6 total (1 active), Execution time: mean = 1.167 ms, total = 7.003 ms, Queueing time: mean = 8.847 us, max = 13.645 us, min = 8.547 us, total = 53.084 us
+[state-dump] 	InternalPubSubGcsService.grpc_client.GcsSubscriberPoll - 5 total (1 active), Execution time: mean = 361.638 ms, total = 1.808 s, Queueing time: mean = 0.000 s, max = -0.000 s, min = 9223372036.855 s, total = 0.000 s
+[state-dump] 	CoreWorkerService.grpc_client.Exit - 5 total (0 active), Execution time: mean = 913.509 us, total = 4.568 ms, Queueing time: mean = 0.000 s, max = -0.000 s, min = 9223372036.855 s, total = 0.000 s
+[state-dump] 	CoreWorkerService.grpc_client.Exit.OnReplyReceived - 5 total (0 active), Execution time: mean = 11.781 us, total = 58.907 us, Queueing time: mean = 14.184 us, max = 38.179 us, min = 5.980 us, total = 70.919 us
+[state-dump] 	 - 5 total (0 active), Execution time: mean = 134.000 ns, total = 670.000 ns, Queueing time: mean = 8.842 us, max = 9.990 us, min = 8.019 us, total = 44.208 us
+[state-dump] 	WorkerInfoGcsService.grpc_client.ReportWorkerFailure.OnReplyReceived - 5 total (0 active), Execution time: mean = 17.188 us, total = 85.938 us, Queueing time: mean = 42.755 us, max = 68.518 us, min = 5.860 us, total = 213.773 us
+[state-dump] 	Subscriber.HandlePublishedMessage_GCS_WORKER_DELTA_CHANNEL - 5 total (0 active), Execution time: mean = 1.738 us, total = 8.689 us, Queueing time: mean = 93.382 us, max = 101.948 us, min = 69.249 us, total = 466.911 us
+[state-dump] 	WorkerInfoGcsService.grpc_client.ReportWorkerFailure - 5 total (0 active), Execution time: mean = 1.060 ms, total = 5.299 ms, Queueing time: mean = 0.000 s, max = -0.000 s, min = 9223372036.855 s, total = 0.000 s
+[state-dump] 	RaySyncer.BroadcastMessage - 5 total (0 active), Execution time: mean = 99.532 us, total = 497.658 us, Queueing time: mean = 352.000 ns, max = 1.100 us, min = 90.000 ns, total = 1.760 us
+[state-dump] 	InternalPubSubGcsService.grpc_client.GcsSubscriberPoll.OnReplyReceived - 4 total (0 active), Execution time: mean = 93.540 us, total = 374.162 us, Queueing time: mean = 9.925 us, max = 11.770 us, min = 6.350 us, total = 39.700 us
+[state-dump] 	InternalPubSubGcsService.grpc_client.GcsSubscriberCommandBatch.OnReplyReceived - 2 total (0 active), Execution time: mean = 70.573 us, total = 141.147 us, Queueing time: mean = 652.500 us, max = 1.244 ms, min = 60.769 us, total = 1.305 ms
+[state-dump] 	RaySyncerRegister - 2 total (0 active), Execution time: mean = 800.000 ns, total = 1.600 us, Queueing time: mean = 130.000 ns, max = 190.000 ns, min = 70.000 ns, total = 260.000 ns
+[state-dump] 	InternalPubSubGcsService.grpc_client.GcsSubscriberCommandBatch - 2 total (0 active), Execution time: mean = 241.449 us, total = 482.898 us, Queueing time: mean = 0.000 s, max = -0.000 s, min = 9223372036.855 s, total = 0.000 s
+[state-dump] 	NodeManager.deadline_timer.print_event_loop_stats - 1 total (1 active, 1 running), Execution time: mean = 0.000 s, total = 0.000 s, Queueing time: mean = 0.000 s, max = -0.000 s, min = 9223372036.855 s, total = 0.000 s
+[state-dump] 	NodeInfoGcsService.grpc_client.GetInternalConfig - 1 total (0 active), Execution time: mean = 522.368 us, total = 522.368 us, Queueing time: mean = 0.000 s, max = -0.000 s, min = 9223372036.855 s, total = 0.000 s
+[state-dump] 	WorkerPool.PopWorkerCallback - 1 total (0 active), Execution time: mean = 18.460 us, total = 18.460 us, Queueing time: mean = 6.200 us, max = 6.200 us, min = 6.200 us, total = 6.200 us
+[state-dump] 	NodeInfoGcsService.grpc_client.RegisterNode - 1 total (0 active), Execution time: mean = 863.500 us, total = 863.500 us, Queueing time: mean = 0.000 s, max = -0.000 s, min = 9223372036.855 s, total = 0.000 s
+[state-dump] 	NodeManagerService.grpc_server.CommitBundleResources - 1 total (0 active), Execution time: mean = 236.855 us, total = 236.855 us, Queueing time: mean = 0.000 s, max = -0.000 s, min = 9223372036.855 s, total = 0.000 s
+[state-dump] 	Subscriber.HandlePublishedMessage_GCS_JOB_CHANNEL - 1 total (0 active), Execution time: mean = 25.699 us, total = 25.699 us, Queueing time: mean = 94.678 us, max = 94.678 us, min = 94.678 us, total = 94.678 us
+[state-dump] 	JobInfoGcsService.grpc_client.GetAllJobInfo.OnReplyReceived - 1 total (0 active), Execution time: mean = 7.480 us, total = 7.480 us, Queueing time: mean = 10.389 us, max = 10.389 us, min = 10.389 us, total = 10.389 us
+[state-dump] 	JobInfoGcsService.grpc_client.GetAllJobInfo - 1 total (0 active), Execution time: mean = 236.415 us, total = 236.415 us, Queueing time: mean = 0.000 s, max = -0.000 s, min = 9223372036.855 s, total = 0.000 s
+[state-dump] 	JobInfoGcsService.grpc_client.AddJob - 1 total (0 active), Execution time: mean = 544.817 us, total = 544.817 us, Queueing time: mean = 0.000 s, max = -0.000 s, min = 9223372036.855 s, total = 0.000 s
+[state-dump] 	JobInfoGcsService.grpc_client.AddJob.OnReplyReceived - 1 total (0 active), Execution time: mean = 14.470 us, total = 14.470 us, Queueing time: mean = 92.518 us, max = 92.518 us, min = 92.518 us, total = 92.518 us
+[state-dump] 	NodeInfoGcsService.grpc_client.GetAllNodeInfo - 1 total (0 active), Execution time: mean = 257.524 us, total = 257.524 us, Queueing time: mean = 0.000 s, max = -0.000 s, min = 9223372036.855 s, total = 0.000 s
+[state-dump] 	NodeInfoGcsService.grpc_client.GetInternalConfig.OnReplyReceived - 1 total (0 active), Execution time: mean = 12.673 ms, total = 12.673 ms, Queueing time: mean = 5.610 us, max = 5.610 us, min = 5.610 us, total = 5.610 us
+[state-dump] 	NodeManagerService.grpc_server.PrepareBundleResources - 1 total (0 active), Execution time: mean = 282.294 us, total = 282.294 us, Queueing time: mean = 0.000 s, max = -0.000 s, min = 9223372036.855 s, total = 0.000 s
+[state-dump] 	NodeInfoGcsService.grpc_client.GetAllNodeInfo.OnReplyReceived - 1 total (0 active), Execution time: mean = 80.008 us, total = 80.008 us, Queueing time: mean = 7.170 us, max = 7.170 us, min = 7.170 us, total = 7.170 us
+[state-dump] 	NodeManagerService.grpc_server.ReturnWorker.HandleRequestImpl - 1 total (0 active), Execution time: mean = 47.639 us, total = 47.639 us, Queueing time: mean = 11.740 us, max = 11.740 us, min = 11.740 us, total = 11.740 us
+[state-dump] 	NodeManagerService.grpc_server.ReturnWorker - 1 total (0 active), Execution time: mean = 148.266 us, total = 148.266 us, Queueing time: mean = 0.000 s, max = -0.000 s, min = 9223372036.855 s, total = 0.000 s
+[state-dump] 	NodeManagerService.grpc_server.PrepareBundleResources.HandleRequestImpl - 1 total (0 active), Execution time: mean = 197.545 us, total = 197.545 us, Queueing time: mean = 8.130 us, max = 8.130 us, min = 8.130 us, total = 8.130 us
+[state-dump] 	NodeManager.GCTaskFailureReason - 1 total (1 active), Execution time: mean = 0.000 s, total = 0.000 s, Queueing time: mean = 0.000 s, max = -0.000 s, min = 9223372036.855 s, total = 0.000 s
+[state-dump] 	NodeInfoGcsService.grpc_client.RegisterNode.OnReplyReceived - 1 total (0 active), Execution time: mean = 140.966 us, total = 140.966 us, Queueing time: mean = 6.160 us, max = 6.160 us, min = 6.160 us, total = 6.160 us
+[state-dump] 	NodeManagerService.grpc_server.CommitBundleResources.HandleRequestImpl - 1 total (0 active), Execution time: mean = 182.946 us, total = 182.946 us, Queueing time: mean = 5.770 us, max = 5.770 us, min = 5.770 us, total = 5.770 us
+[state-dump] DebugString() time ms: 1
+[state-dump] 
+[state-dump] 
+[2024-05-15 09:06:02,011 W 12828 12828] (raylet) memory_monitor.cc:197: Got negative used memory for cgroup -1, setting it to zero
+[2024-05-15 09:06:06,928 I 12828 12828] (raylet) node_manager.cc:1436: NodeManager::DisconnectClient, disconnect_type=2, has creation task exception = true
+[2024-05-15 09:06:06,928 I 12828 12828] (raylet) node_manager.cc:1465: Formatted creation task exception: Traceback (most recent call last):
+
+  File "python/ray/_raylet.pyx", line 1883, in ray._raylet.execute_task
+
+  File "python/ray/_raylet.pyx", line 1984, in ray._raylet.execute_task
+
+  File "python/ray/_raylet.pyx", line 1889, in ray._raylet.execute_task
+
+  File "python/ray/_raylet.pyx", line 1830, in ray._raylet.execute_task.function_executor
+
+  File "/home/valapeos/.cache/pypoetry/virtualenvs/pneumarl-4s6AwDM4-py3.11/lib/python3.11/site-packages/ray/_private/function_manager.py", line 691, in actor_method_executor
+    return method(__ray_actor, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+  File "/home/valapeos/.cache/pypoetry/virtualenvs/pneumarl-4s6AwDM4-py3.11/lib/python3.11/site-packages/ray/util/tracing/tracing_helper.py", line 467, in _resume_span
+    return method(self, *_args, **_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+  File "/home/valapeos/.cache/pypoetry/virtualenvs/pneumarl-4s6AwDM4-py3.11/lib/python3.11/site-packages/ray/rllib/evaluation/rollout_worker.py", line 407, in __init__
+    self.env = env_creator(copy.deepcopy(self.env_context))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+  File "/home/valapeos/Projects/pneumarl/rllib_example.py", line 48, in env_creator
+    return RayVectorGodotEnv(config=env_config, port=port, seed=seed)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+  File "/home/valapeos/.cache/pypoetry/virtualenvs/pneumarl-4s6AwDM4-py3.11/lib/python3.11/site-packages/godot_rl/wrappers/ray_wrapper.py", line 22, in __init__
+    self._env = GodotEnv(
+                ^^^^^^^^^
+
+  File "/home/valapeos/.cache/pypoetry/virtualenvs/pneumarl-4s6AwDM4-py3.11/lib/python3.11/site-packages/godot_rl/core/godot_env.py", line 59, in __init__
+    self.connection = self._start_server()
+                      ^^^^^^^^^^^^^^^^^^^^
+
+  File "/home/valapeos/.cache/pypoetry/virtualenvs/pneumarl-4s6AwDM4-py3.11/lib/python3.11/site-packages/godot_rl/core/godot_env.py", line 317, in _start_server
+    connection, client_address = sock.accept()
+                                 ^^^^^^^^^^^^^
+
+  File "/nix/store/glfr70gi7hfaj50mwj2431p8bg60fhqw-python3-3.11.9/lib/python3.11/socket.py", line 294, in accept
+    fd, addr = self._accept()
+               ^^^^^^^^^^^^^^
+
+TimeoutError: timed out
+
+
+During handling of the above exception, another exception occurred:
+
+
+Traceback (most recent call last):
+
+  File "python/ray/_raylet.pyx", line 2281, in ray._raylet.task_execution_handler
+
+  File "python/ray/_raylet.pyx", line 2177, in ray._raylet.execute_task_with_cancellation_handler
+
+  File "python/ray/_raylet.pyx", line 1832, in ray._raylet.execute_task
+
+  File "python/ray/_raylet.pyx", line 1833, in ray._raylet.execute_task
+
+  File "python/ray/_raylet.pyx", line 2071, in ray._raylet.execute_task
+
+  File "python/ray/_raylet.pyx", line 1098, in ray._raylet.store_task_errors
+
+ray.exceptions.ActorDiedError: The actor died because of an error raised in its creation task, [36mray::RolloutWorker.__init__()[39m (pid=13721, ip=192.168.1.56, actor_id=cf76be01afb9954787ceb84801000000, repr=<ray.rllib.evaluation.rollout_worker.RolloutWorker object at 0x7fd32a36abd0>)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/valapeos/.cache/pypoetry/virtualenvs/pneumarl-4s6AwDM4-py3.11/lib/python3.11/site-packages/ray/rllib/evaluation/rollout_worker.py", line 407, in __init__
+    self.env = env_creator(copy.deepcopy(self.env_context))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/valapeos/Projects/pneumarl/rllib_example.py", line 48, in env_creator
+    return RayVectorGodotEnv(config=env_config, port=port, seed=seed)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/valapeos/.cache/pypoetry/virtualenvs/pneumarl-4s6AwDM4-py3.11/lib/python3.11/site-packages/godot_rl/wrappers/ray_wrapper.py", line 22, in __init__
+    self._env = GodotEnv(
+                ^^^^^^^^^
+  File "/home/valapeos/.cache/pypoetry/virtualenvs/pneumarl-4s6AwDM4-py3.11/lib/python3.11/site-packages/godot_rl/core/godot_env.py", line 59, in __init__
+    self.connection = self._start_server()
+                      ^^^^^^^^^^^^^^^^^^^^
+  File "/home/valapeos/.cache/pypoetry/virtualenvs/pneumarl-4s6AwDM4-py3.11/lib/python3.11/site-packages/godot_rl/core/godot_env.py", line 317, in _start_server
+    connection, client_address = sock.accept()
+                                 ^^^^^^^^^^^^^
+  File "/nix/store/glfr70gi7hfaj50mwj2431p8bg60fhqw-python3-3.11.9/lib/python3.11/socket.py", line 294, in accept
+    fd, addr = self._accept()
+               ^^^^^^^^^^^^^^
+TimeoutError: timed out
+, worker_id: 6edeb2bc45590aa290c046f72cb5570a133031f0fa08412f23f2528a
+[2024-05-15 09:06:06,938 I 12828 12828] (raylet) node_manager.cc:1436: NodeManager::DisconnectClient, disconnect_type=2, has creation task exception = true
+[2024-05-15 09:06:06,938 I 12828 12828] (raylet) node_manager.cc:1465: Formatted creation task exception: Traceback (most recent call last):
+
+  File "python/ray/_raylet.pyx", line 1883, in ray._raylet.execute_task
+
+  File "python/ray/_raylet.pyx", line 1984, in ray._raylet.execute_task
+
+  File "python/ray/_raylet.pyx", line 1889, in ray._raylet.execute_task
+
+  File "python/ray/_raylet.pyx", line 1830, in ray._raylet.execute_task.function_executor
+
+  File "/home/valapeos/.cache/pypoetry/virtualenvs/pneumarl-4s6AwDM4-py3.11/lib/python3.11/site-packages/ray/_private/function_manager.py", line 691, in actor_method_executor
+    return method(__ray_actor, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+  File "/home/valapeos/.cache/pypoetry/virtualenvs/pneumarl-4s6AwDM4-py3.11/lib/python3.11/site-packages/ray/util/tracing/tracing_helper.py", line 467, in _resume_span
+    return method(self, *_args, **_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+  File "/home/valapeos/.cache/pypoetry/virtualenvs/pneumarl-4s6AwDM4-py3.11/lib/python3.11/site-packages/ray/rllib/evaluation/rollout_worker.py", line 407, in __init__
+    self.env = env_creator(copy.deepcopy(self.env_context))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+  File "/home/valapeos/Projects/pneumarl/rllib_example.py", line 48, in env_creator
+    return RayVectorGodotEnv(config=env_config, port=port, seed=seed)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+  File "/home/valapeos/.cache/pypoetry/virtualenvs/pneumarl-4s6AwDM4-py3.11/lib/python3.11/site-packages/godot_rl/wrappers/ray_wrapper.py", line 22, in __init__
+    self._env = GodotEnv(
+                ^^^^^^^^^
+
+  File "/home/valapeos/.cache/pypoetry/virtualenvs/pneumarl-4s6AwDM4-py3.11/lib/python3.11/site-packages/godot_rl/core/godot_env.py", line 59, in __init__
+    self.connection = self._start_server()
+                      ^^^^^^^^^^^^^^^^^^^^
+
+  File "/home/valapeos/.cache/pypoetry/virtualenvs/pneumarl-4s6AwDM4-py3.11/lib/python3.11/site-packages/godot_rl/core/godot_env.py", line 317, in _start_server
+    connection, client_address = sock.accept()
+                                 ^^^^^^^^^^^^^
+
+  File "/nix/store/glfr70gi7hfaj50mwj2431p8bg60fhqw-python3-3.11.9/lib/python3.11/socket.py", line 294, in accept
+    fd, addr = self._accept()
+               ^^^^^^^^^^^^^^
+
+TimeoutError: timed out
+
+
+During handling of the above exception, another exception occurred:
+
+
+Traceback (most recent call last):
+
+  File "python/ray/_raylet.pyx", line 2281, in ray._raylet.task_execution_handler
+
+  File "python/ray/_raylet.pyx", line 2177, in ray._raylet.execute_task_with_cancellation_handler
+
+  File "python/ray/_raylet.pyx", line 1832, in ray._raylet.execute_task
+
+  File "python/ray/_raylet.pyx", line 1833, in ray._raylet.execute_task
+
+  File "python/ray/_raylet.pyx", line 2071, in ray._raylet.execute_task
+
+  File "python/ray/_raylet.pyx", line 1098, in ray._raylet.store_task_errors
+
+ray.exceptions.ActorDiedError: The actor died because of an error raised in its creation task, [36mray::RolloutWorker.__init__()[39m (pid=13723, ip=192.168.1.56, actor_id=6c1e2f8e5911cf8ba4dcac5b01000000, repr=<ray.rllib.evaluation.rollout_worker.RolloutWorker object at 0x7f8dd32043d0>)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/valapeos/.cache/pypoetry/virtualenvs/pneumarl-4s6AwDM4-py3.11/lib/python3.11/site-packages/ray/rllib/evaluation/rollout_worker.py", line 407, in __init__
+    self.env = env_creator(copy.deepcopy(self.env_context))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/valapeos/Projects/pneumarl/rllib_example.py", line 48, in env_creator
+    return RayVectorGodotEnv(config=env_config, port=port, seed=seed)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/valapeos/.cache/pypoetry/virtualenvs/pneumarl-4s6AwDM4-py3.11/lib/python3.11/site-packages/godot_rl/wrappers/ray_wrapper.py", line 22, in __init__
+    self._env = GodotEnv(
+                ^^^^^^^^^
+  File "/home/valapeos/.cache/pypoetry/virtualenvs/pneumarl-4s6AwDM4-py3.11/lib/python3.11/site-packages/godot_rl/core/godot_env.py", line 59, in __init__
+    self.connection = self._start_server()
+                      ^^^^^^^^^^^^^^^^^^^^
+  File "/home/valapeos/.cache/pypoetry/virtualenvs/pneumarl-4s6AwDM4-py3.11/lib/python3.11/site-packages/godot_rl/core/godot_env.py", line 317, in _start_server
+    connection, client_address = sock.accept()
+                                 ^^^^^^^^^^^^^
+  File "/nix/store/glfr70gi7hfaj50mwj2431p8bg60fhqw-python3-3.11.9/lib/python3.11/socket.py", line 294, in accept
+    fd, addr = self._accept()
+               ^^^^^^^^^^^^^^
+TimeoutError: timed out
+, worker_id: cd64a88e73d60e90bea69d93f771cc429cb8accd2441e342cb915a91
+[2024-05-15 09:06:06,972 I 12828 12828] (raylet) node_manager.cc:1436: NodeManager::DisconnectClient, disconnect_type=2, has creation task exception = true
+[2024-05-15 09:06:06,972 I 12828 12828] (raylet) node_manager.cc:1465: Formatted creation task exception: Traceback (most recent call last):
+
+  File "python/ray/_raylet.pyx", line 1883, in ray._raylet.execute_task
+
+  File "python/ray/_raylet.pyx", line 1984, in ray._raylet.execute_task
+
+  File "python/ray/_raylet.pyx", line 1889, in ray._raylet.execute_task
+
+  File "python/ray/_raylet.pyx", line 1830, in ray._raylet.execute_task.function_executor
+
+  File "/home/valapeos/.cache/pypoetry/virtualenvs/pneumarl-4s6AwDM4-py3.11/lib/python3.11/site-packages/ray/_private/function_manager.py", line 691, in actor_method_executor
+    return method(__ray_actor, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+  File "/home/valapeos/.cache/pypoetry/virtualenvs/pneumarl-4s6AwDM4-py3.11/lib/python3.11/site-packages/ray/util/tracing/tracing_helper.py", line 467, in _resume_span
+    return method(self, *_args, **_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+  File "/home/valapeos/.cache/pypoetry/virtualenvs/pneumarl-4s6AwDM4-py3.11/lib/python3.11/site-packages/ray/rllib/evaluation/rollout_worker.py", line 407, in __init__
+    self.env = env_creator(copy.deepcopy(self.env_context))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+  File "/home/valapeos/Projects/pneumarl/rllib_example.py", line 48, in env_creator
+    return RayVectorGodotEnv(config=env_config, port=port, seed=seed)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+  File "/home/valapeos/.cache/pypoetry/virtualenvs/pneumarl-4s6AwDM4-py3.11/lib/python3.11/site-packages/godot_rl/wrappers/ray_wrapper.py", line 22, in __init__
+    self._env = GodotEnv(
+                ^^^^^^^^^
+
+  File "/home/valapeos/.cache/pypoetry/virtualenvs/pneumarl-4s6AwDM4-py3.11/lib/python3.11/site-packages/godot_rl/core/godot_env.py", line 59, in __init__
+    self.connection = self._start_server()
+                      ^^^^^^^^^^^^^^^^^^^^
+
+  File "/home/valapeos/.cache/pypoetry/virtualenvs/pneumarl-4s6AwDM4-py3.11/lib/python3.11/site-packages/godot_rl/core/godot_env.py", line 317, in _start_server
+    connection, client_address = sock.accept()
+                                 ^^^^^^^^^^^^^
+
+  File "/nix/store/glfr70gi7hfaj50mwj2431p8bg60fhqw-python3-3.11.9/lib/python3.11/socket.py", line 294, in accept
+    fd, addr = self._accept()
+               ^^^^^^^^^^^^^^
+
+TimeoutError: timed out
+
+
+During handling of the above exception, another exception occurred:
+
+
+Traceback (most recent call last):
+
+  File "python/ray/_raylet.pyx", line 2281, in ray._raylet.task_execution_handler
+
+  File "python/ray/_raylet.pyx", line 2177, in ray._raylet.execute_task_with_cancellation_handler
+
+  File "python/ray/_raylet.pyx", line 1832, in ray._raylet.execute_task
+
+  File "python/ray/_raylet.pyx", line 1833, in ray._raylet.execute_task
+
+  File "python/ray/_raylet.pyx", line 2071, in ray._raylet.execute_task
+
+  File "python/ray/_raylet.pyx", line 1098, in ray._raylet.store_task_errors
+
+ray.exceptions.ActorDiedError: The actor died because of an error raised in its creation task, [36mray::RolloutWorker.__init__()[39m (pid=13724, ip=192.168.1.56, actor_id=79760d3ce8052092d662e89401000000, repr=<ray.rllib.evaluation.rollout_worker.RolloutWorker object at 0x7f6d4fb09490>)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/valapeos/.cache/pypoetry/virtualenvs/pneumarl-4s6AwDM4-py3.11/lib/python3.11/site-packages/ray/rllib/evaluation/rollout_worker.py", line 407, in __init__
+    self.env = env_creator(copy.deepcopy(self.env_context))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/valapeos/Projects/pneumarl/rllib_example.py", line 48, in env_creator
+    return RayVectorGodotEnv(config=env_config, port=port, seed=seed)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/valapeos/.cache/pypoetry/virtualenvs/pneumarl-4s6AwDM4-py3.11/lib/python3.11/site-packages/godot_rl/wrappers/ray_wrapper.py", line 22, in __init__
+    self._env = GodotEnv(
+                ^^^^^^^^^
+  File "/home/valapeos/.cache/pypoetry/virtualenvs/pneumarl-4s6AwDM4-py3.11/lib/python3.11/site-packages/godot_rl/core/godot_env.py", line 59, in __init__
+    self.connection = self._start_server()
+                      ^^^^^^^^^^^^^^^^^^^^
+  File "/home/valapeos/.cache/pypoetry/virtualenvs/pneumarl-4s6AwDM4-py3.11/lib/python3.11/site-packages/godot_rl/core/godot_env.py", line 317, in _start_server
+    connection, client_address = sock.accept()
+                                 ^^^^^^^^^^^^^
+  File "/nix/store/glfr70gi7hfaj50mwj2431p8bg60fhqw-python3-3.11.9/lib/python3.11/socket.py", line 294, in accept
+    fd, addr = self._accept()
+               ^^^^^^^^^^^^^^
+TimeoutError: timed out
+, worker_id: 5f80103a7fc6da866dac6d9a1f8048732e7c48f9a9b01d7546969c38
+[2024-05-15 09:06:07,013 W 12828 12828] (raylet) memory_monitor.cc:197: Got negative used memory for cgroup -1, setting it to zero
+[2024-05-15 09:06:07,044 I 12828 12828] (raylet) node_manager.cc:1436: NodeManager::DisconnectClient, disconnect_type=2, has creation task exception = true
+[2024-05-15 09:06:07,044 I 12828 12828] (raylet) node_manager.cc:1465: Formatted creation task exception: Traceback (most recent call last):
+
+  File "python/ray/_raylet.pyx", line 1883, in ray._raylet.execute_task
+
+  File "python/ray/_raylet.pyx", line 1984, in ray._raylet.execute_task
+
+  File "python/ray/_raylet.pyx", line 1889, in ray._raylet.execute_task
+
+  File "python/ray/_raylet.pyx", line 1830, in ray._raylet.execute_task.function_executor
+
+  File "/home/valapeos/.cache/pypoetry/virtualenvs/pneumarl-4s6AwDM4-py3.11/lib/python3.11/site-packages/ray/_private/function_manager.py", line 691, in actor_method_executor
+    return method(__ray_actor, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+  File "/home/valapeos/.cache/pypoetry/virtualenvs/pneumarl-4s6AwDM4-py3.11/lib/python3.11/site-packages/ray/util/tracing/tracing_helper.py", line 467, in _resume_span
+    return method(self, *_args, **_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+  File "/home/valapeos/.cache/pypoetry/virtualenvs/pneumarl-4s6AwDM4-py3.11/lib/python3.11/site-packages/ray/rllib/evaluation/rollout_worker.py", line 407, in __init__
+    self.env = env_creator(copy.deepcopy(self.env_context))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+  File "/home/valapeos/Projects/pneumarl/rllib_example.py", line 48, in env_creator
+    return RayVectorGodotEnv(config=env_config, port=port, seed=seed)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+  File "/home/valapeos/.cache/pypoetry/virtualenvs/pneumarl-4s6AwDM4-py3.11/lib/python3.11/site-packages/godot_rl/wrappers/ray_wrapper.py", line 22, in __init__
+    self._env = GodotEnv(
+                ^^^^^^^^^
+
+  File "/home/valapeos/.cache/pypoetry/virtualenvs/pneumarl-4s6AwDM4-py3.11/lib/python3.11/site-packages/godot_rl/core/godot_env.py", line 59, in __init__
+    self.connection = self._start_server()
+                      ^^^^^^^^^^^^^^^^^^^^
+
+  File "/home/valapeos/.cache/pypoetry/virtualenvs/pneumarl-4s6AwDM4-py3.11/lib/python3.11/site-packages/godot_rl/core/godot_env.py", line 317, in _start_server
+    connection, client_address = sock.accept()
+                                 ^^^^^^^^^^^^^
+
+  File "/nix/store/glfr70gi7hfaj50mwj2431p8bg60fhqw-python3-3.11.9/lib/python3.11/socket.py", line 294, in accept
+    fd, addr = self._accept()
+               ^^^^^^^^^^^^^^
+
+TimeoutError: timed out
+
+
+During handling of the above exception, another exception occurred:
+
+
+Traceback (most recent call last):
+
+  File "python/ray/_raylet.pyx", line 2281, in ray._raylet.task_execution_handler
+
+  File "python/ray/_raylet.pyx", line 2177, in ray._raylet.execute_task_with_cancellation_handler
+
+  File "python/ray/_raylet.pyx", line 1832, in ray._raylet.execute_task
+
+  File "python/ray/_raylet.pyx", line 1833, in ray._raylet.execute_task
+
+  File "python/ray/_raylet.pyx", line 2071, in ray._raylet.execute_task
+
+  File "python/ray/_raylet.pyx", line 1098, in ray._raylet.store_task_errors
+
+ray.exceptions.ActorDiedError: The actor died because of an error raised in its creation task, [36mray::RolloutWorker.__init__()[39m (pid=13722, ip=192.168.1.56, actor_id=64110d8601f56bf14e9797c501000000, repr=<ray.rllib.evaluation.rollout_worker.RolloutWorker object at 0x7fd9bed37cd0>)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/valapeos/.cache/pypoetry/virtualenvs/pneumarl-4s6AwDM4-py3.11/lib/python3.11/site-packages/ray/rllib/evaluation/rollout_worker.py", line 407, in __init__
+    self.env = env_creator(copy.deepcopy(self.env_context))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/valapeos/Projects/pneumarl/rllib_example.py", line 48, in env_creator
+    return RayVectorGodotEnv(config=env_config, port=port, seed=seed)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/valapeos/.cache/pypoetry/virtualenvs/pneumarl-4s6AwDM4-py3.11/lib/python3.11/site-packages/godot_rl/wrappers/ray_wrapper.py", line 22, in __init__
+    self._env = GodotEnv(
+                ^^^^^^^^^
+  File "/home/valapeos/.cache/pypoetry/virtualenvs/pneumarl-4s6AwDM4-py3.11/lib/python3.11/site-packages/godot_rl/core/godot_env.py", line 59, in __init__
+    self.connection = self._start_server()
+                      ^^^^^^^^^^^^^^^^^^^^
+  File "/home/valapeos/.cache/pypoetry/virtualenvs/pneumarl-4s6AwDM4-py3.11/lib/python3.11/site-packages/godot_rl/core/godot_env.py", line 317, in _start_server
+    connection, client_address = sock.accept()
+                                 ^^^^^^^^^^^^^
+  File "/nix/store/glfr70gi7hfaj50mwj2431p8bg60fhqw-python3-3.11.9/lib/python3.11/socket.py", line 294, in accept
+    fd, addr = self._accept()
+               ^^^^^^^^^^^^^^
+TimeoutError: timed out
+, worker_id: 7abd3065dca4325130aae9b5fed632b86b1f3673140c122382f8f4ed
+[2024-05-15 09:06:07,188 I 12828 12828] (raylet) node_manager.cc:1436: NodeManager::DisconnectClient, disconnect_type=2, has creation task exception = true
+[2024-05-15 09:06:07,188 I 12828 12828] (raylet) node_manager.cc:1465: Formatted creation task exception: Traceback (most recent call last):
+
+  File "/home/valapeos/.cache/pypoetry/virtualenvs/pneumarl-4s6AwDM4-py3.11/lib/python3.11/site-packages/ray/rllib/env/env_runner_group.py", line 169, in __init__
+    self._setup(
+
+  File "/home/valapeos/.cache/pypoetry/virtualenvs/pneumarl-4s6AwDM4-py3.11/lib/python3.11/site-packages/ray/rllib/env/env_runner_group.py", line 239, in _setup
+    self.add_workers(
+
+  File "/home/valapeos/.cache/pypoetry/virtualenvs/pneumarl-4s6AwDM4-py3.11/lib/python3.11/site-packages/ray/rllib/env/env_runner_group.py", line 754, in add_workers
+    raise result.get()
+
+  File "/home/valapeos/.cache/pypoetry/virtualenvs/pneumarl-4s6AwDM4-py3.11/lib/python3.11/site-packages/ray/rllib/utils/actor_manager.py", line 497, in _fetch_result
+    result = ray.get(r)
+             ^^^^^^^^^^
+
+  File "/home/valapeos/.cache/pypoetry/virtualenvs/pneumarl-4s6AwDM4-py3.11/lib/python3.11/site-packages/ray/_private/auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+
+  File "/home/valapeos/.cache/pypoetry/virtualenvs/pneumarl-4s6AwDM4-py3.11/lib/python3.11/site-packages/ray/_private/client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+
+  File "/home/valapeos/.cache/pypoetry/virtualenvs/pneumarl-4s6AwDM4-py3.11/lib/python3.11/site-packages/ray/_private/worker.py", line 2623, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+  File "/home/valapeos/.cache/pypoetry/virtualenvs/pneumarl-4s6AwDM4-py3.11/lib/python3.11/site-packages/ray/_private/worker.py", line 863, in get_objects
+    raise value
+
+ray.exceptions.ActorDiedError: The actor died because of an error raised in its creation task, [36mray::RolloutWorker.__init__()[39m (pid=13721, ip=192.168.1.56, actor_id=cf76be01afb9954787ceb84801000000, repr=<ray.rllib.evaluation.rollout_worker.RolloutWorker object at 0x7fd32a36abd0>)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/valapeos/.cache/pypoetry/virtualenvs/pneumarl-4s6AwDM4-py3.11/lib/python3.11/site-packages/ray/rllib/evaluation/rollout_worker.py", line 407, in __init__
+    self.env = env_creator(copy.deepcopy(self.env_context))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/valapeos/Projects/pneumarl/rllib_example.py", line 48, in env_creator
+    return RayVectorGodotEnv(config=env_config, port=port, seed=seed)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/valapeos/.cache/pypoetry/virtualenvs/pneumarl-4s6AwDM4-py3.11/lib/python3.11/site-packages/godot_rl/wrappers/ray_wrapper.py", line 22, in __init__
+    self._env = GodotEnv(
+                ^^^^^^^^^
+  File "/home/valapeos/.cache/pypoetry/virtualenvs/pneumarl-4s6AwDM4-py3.11/lib/python3.11/site-packages/godot_rl/core/godot_env.py", line 59, in __init__
+    self.connection = self._start_server()
+                      ^^^^^^^^^^^^^^^^^^^^
+  File "/home/valapeos/.cache/pypoetry/virtualenvs/pneumarl-4s6AwDM4-py3.11/lib/python3.11/site-packages/godot_rl/core/godot_env.py", line 317, in _start_server
+    connection, client_address = sock.accept()
+                                 ^^^^^^^^^^^^^
+  File "/nix/store/glfr70gi7hfaj50mwj2431p8bg60fhqw-python3-3.11.9/lib/python3.11/socket.py", line 294, in accept
+    fd, addr = self._accept()
+               ^^^^^^^^^^^^^^
+TimeoutError: timed out
+
+
+During handling of the above exception, another exception occurred:
+
+
+Traceback (most recent call last):
+
+  File "python/ray/_raylet.pyx", line 1883, in ray._raylet.execute_task
+
+  File "python/ray/_raylet.pyx", line 1984, in ray._raylet.execute_task
+
+  File "python/ray/_raylet.pyx", line 1889, in ray._raylet.execute_task
+
+  File "python/ray/_raylet.pyx", line 1830, in ray._raylet.execute_task.function_executor
+
+  File "/home/valapeos/.cache/pypoetry/virtualenvs/pneumarl-4s6AwDM4-py3.11/lib/python3.11/site-packages/ray/_private/function_manager.py", line 691, in actor_method_executor
+    return method(__ray_actor, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+  File "/home/valapeos/.cache/pypoetry/virtualenvs/pneumarl-4s6AwDM4-py3.11/lib/python3.11/site-packages/ray/util/tracing/tracing_helper.py", line 467, in _resume_span
+    return method(self, *_args, **_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+  File "/home/valapeos/.cache/pypoetry/virtualenvs/pneumarl-4s6AwDM4-py3.11/lib/python3.11/site-packages/ray/rllib/algorithms/algorithm.py", line 554, in __init__
+    super().__init__(
+
+  File "/home/valapeos/.cache/pypoetry/virtualenvs/pneumarl-4s6AwDM4-py3.11/lib/python3.11/site-packages/ray/tune/trainable/trainable.py", line 158, in __init__
+    self.setup(copy.deepcopy(self.config))
+
+  File "/home/valapeos/.cache/pypoetry/virtualenvs/pneumarl-4s6AwDM4-py3.11/lib/python3.11/site-packages/ray/util/tracing/tracing_helper.py", line 467, in _resume_span
+    return method(self, *_args, **_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+  File "/home/valapeos/.cache/pypoetry/virtualenvs/pneumarl-4s6AwDM4-py3.11/lib/python3.11/site-packages/ray/rllib/algorithms/algorithm.py", line 640, in setup
+    self.workers = EnvRunnerGroup(
+                   ^^^^^^^^^^^^^^^
+
+  File "/home/valapeos/.cache/pypoetry/virtualenvs/pneumarl-4s6AwDM4-py3.11/lib/python3.11/site-packages/ray/rllib/env/env_runner_group.py", line 191, in __init__
+    raise e.args[0].args[2]
+
+TimeoutError: timed out
+
+
+During handling of the above exception, another exception occurred:
+
+
+Traceback (most recent call last):
+
+  File "python/ray/_raylet.pyx", line 2281, in ray._raylet.task_execution_handler
+
+  File "python/ray/_raylet.pyx", line 2177, in ray._raylet.execute_task_with_cancellation_handler
+
+  File "python/ray/_raylet.pyx", line 1832, in ray._raylet.execute_task
+
+  File "python/ray/_raylet.pyx", line 1833, in ray._raylet.execute_task
+
+  File "python/ray/_raylet.pyx", line 2071, in ray._raylet.execute_task
+
+  File "python/ray/_raylet.pyx", line 1098, in ray._raylet.store_task_errors
+
+ray.exceptions.ActorDiedError: The actor died because of an error raised in its creation task, [36mray::PPO.__init__()[39m (pid=13649, ip=192.168.1.56, actor_id=0b0450d90a301440d0afa9f001000000, repr=PPO)
+  File "/home/valapeos/.cache/pypoetry/virtualenvs/pneumarl-4s6AwDM4-py3.11/lib/python3.11/site-packages/ray/rllib/env/env_runner_group.py", line 239, in _setup
+    self.add_workers(
+  File "/home/valapeos/.cache/pypoetry/virtualenvs/pneumarl-4s6AwDM4-py3.11/lib/python3.11/site-packages/ray/rllib/env/env_runner_group.py", line 754, in add_workers
+    raise result.get()
+  File "/home/valapeos/.cache/pypoetry/virtualenvs/pneumarl-4s6AwDM4-py3.11/lib/python3.11/site-packages/ray/rllib/utils/actor_manager.py", line 497, in _fetch_result
+    result = ray.get(r)
+             ^^^^^^^^^^
+           ^^^^^^^^^^^^^^^^^^^
+           ^^^^^^^^^^^^^^^^^^^^^
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ray.exceptions.ActorDiedError: The actor died because of an error raised in its creation task, [36mray::RolloutWorker.__init__()[39m (pid=13721, ip=192.168.1.56, actor_id=cf76be01afb9954787ceb84801000000, repr=<ray.rllib.evaluation.rollout_worker.RolloutWorker object at 0x7fd32a36abd0>)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/valapeos/.cache/pypoetry/virtualenvs/pneumarl-4s6AwDM4-py3.11/lib/python3.11/site-packages/ray/rllib/evaluation/rollout_worker.py", line 407, in __init__
+    self.env = env_creator(copy.deepcopy(self.env_context))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/valapeos/Projects/pneumarl/rllib_example.py", line 48, in env_creator
+    return RayVectorGodotEnv(config=env_config, port=port, seed=seed)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/valapeos/.cache/pypoetry/virtualenvs/pneumarl-4s6AwDM4-py3.11/lib/python3.11/site-packages/godot_rl/wrappers/ray_wrapper.py", line 22, in __init__
+    self._env = GodotEnv(
+                ^^^^^^^^^
+  File "/home/valapeos/.cache/pypoetry/virtualenvs/pneumarl-4s6AwDM4-py3.11/lib/python3.11/site-packages/godot_rl/core/godot_env.py", line 59, in __init__
+    self.connection = self._start_server()
+                      ^^^^^^^^^^^^^^^^^^^^
+  File "/home/valapeos/.cache/pypoetry/virtualenvs/pneumarl-4s6AwDM4-py3.11/lib/python3.11/site-packages/godot_rl/core/godot_env.py", line 317, in _start_server
+    connection, client_address = sock.accept()
+                                 ^^^^^^^^^^^^^
+  File "/nix/store/glfr70gi7hfaj50mwj2431p8bg60fhqw-python3-3.11.9/lib/python3.11/socket.py", line 294, in accept
+    fd, addr = self._accept()
+               ^^^^^^^^^^^^^^
+TimeoutError: timed out
+
+During handling of the above exception, another exception occurred:
+
+[36mray::PPO.__init__()[39m (pid=13649, ip=192.168.1.56, actor_id=0b0450d90a301440d0afa9f001000000, repr=PPO)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/valapeos/.cache/pypoetry/virtualenvs/pneumarl-4s6AwDM4-py3.11/lib/python3.11/site-packages/ray/rllib/algorithms/algorithm.py", line 554, in __init__
+    super().__init__(
+  File "/home/valapeos/.cache/pypoetry/virtualenvs/pneumarl-4s6AwDM4-py3.11/lib/python3.11/site-packages/ray/tune/trainable/trainable.py", line 158, in __init__
+    self.setup(copy.deepcopy(self.config))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/valapeos/.cache/pypoetry/virtualenvs/pneumarl-4s6AwDM4-py3.11/lib/python3.11/site-packages/ray/rllib/algorithms/algorithm.py", line 640, in setup
+    self.workers = EnvRunnerGroup(
+                   ^^^^^^^^^^^^^^^
+  File "/home/valapeos/.cache/pypoetry/virtualenvs/pneumarl-4s6AwDM4-py3.11/lib/python3.11/site-packages/ray/rllib/env/env_runner_group.py", line 191, in __init__
+    raise e.args[0].args[2]
+TimeoutError: timed out
+, worker_id: 88aa07750bd7c12dafbb7815838b15c7992641795664ee3b029e7c76
+[2024-05-15 09:06:07,704 I 12828 12828] (raylet) node_manager.cc:1436: NodeManager::DisconnectClient, disconnect_type=3, has creation task exception = false
+[2024-05-15 09:06:07,704 I 12828 12828] (raylet) node_manager.cc:1541: Driver (pid=12647) is disconnected. job_id: 01000000
+[2024-05-15 09:06:07,705 I 12828 12828] (raylet) node_manager.cc:606: New job has started. Job id 01000000 Driver pid 12647 is dead: 1 driver address: 192.168.1.56
+[2024-05-15 09:06:07,705 I 12828 12828] (raylet) worker_pool.cc:677: Job 01000000 already started in worker pool.
+[2024-05-15 09:06:07,714 I 12828 12828] (raylet) main.cc:413: Raylet received SIGTERM, shutting down...
+[2024-05-15 09:06:07,714 I 12828 12828] (raylet) accessor.cc:451: Unregistering node info, node id = 2808763200e5fb675aeed4f2c3a8a8a50b290dfd4d83a5db793b0691
+[2024-05-15 09:06:07,715 I 12828 12828] (raylet) agent_manager.cc:109: Killing agent dashboard_agent/424238335, pid 12889.
+[2024-05-15 09:06:07,720 I 12828 12890] (raylet) agent_manager.cc:80: Agent process with name dashboard_agent/424238335 exited, exit code 0.
+[2024-05-15 09:06:07,720 I 12828 12828] (raylet) agent_manager.cc:109: Killing agent runtime_env_agent, pid 12891.
+[2024-05-15 09:06:07,724 I 12828 12892] (raylet) agent_manager.cc:80: Agent process with name runtime_env_agent exited, exit code 0.
+[2024-05-15 09:06:07,724 I 12828 12828] (raylet) io_service_pool.cc:47: IOServicePool is stopped.
+[2024-05-15 09:06:07,815 I 12828 12828] (raylet) stats.h:120: Stats module has shutdown.
+[2024-05-15 09:06:07,815 I 12828 12894] (raylet) experimental_mutable_object_provider.cc:200: Core worker channel io service stopped.
