@@ -1,6 +1,8 @@
 import args
 import os
 import pathlib
+
+import torch as T
 import torch.nn as nn
 
 from typing import Callable
@@ -92,16 +94,16 @@ def linear_schedule(initial_value: float) -> Callable[[float], float]:
     return func
 
 policy_kwargs = dict(
-    activation_fn=nn.Tanh(),
-    net_atch = dict(
-        pi=[1024, 1024, 1024, 1024],
-        vf = [4096, 4096, 4096, 4096, 4096, 4096]
-    )
-)
-
-optimizer_kwargs = dict(
-    betas=(0.9, 0.9),
-    eps=1e-5
+    activation_fn=nn.Tanh,
+    net_arch = dict(
+        pi=[256],
+        vf = [2048, 2048]#, 4096, 4096, 4096, 4096]
+    ),
+    optimizer_class = T.optim.Adam,
+    optimizer_kwargs = dict(
+        betas=(0.9, 0.9),
+        eps=1e-5
+    ),
 )
 
 if args.resume_model_path is None:
@@ -111,6 +113,7 @@ if args.resume_model_path is None:
         linear_schedule(0.0003)
 
     model: PPO = PPO(
+        # 'MultiInputPolicy' serves as an alias for MultiInputActorCriticPolicy
         "MultiInputPolicy",
         env,
         batch_size=64,
@@ -119,6 +122,8 @@ if args.resume_model_path is None:
         n_steps=256,
         tensorboard_log=args.exper_dir,
         learning_rate=learning_rate,
+        policy_kwargs=policy_kwargs,
+        # optimizer_kwargs=optimizer_kwargs,
     )
 else:
     path_zip = pathlib.Path(args.resume_model_path)

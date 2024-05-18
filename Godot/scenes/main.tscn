@@ -1356,13 +1356,16 @@ position = Vector2(758, 192)
 position = Vector2(763, -713)
 
 [node name="Bamboo11" parent="Bamboos" instance=ExtResource("4_8jerw")]
-position = Vector2(-45, -136)
+position = Vector2(-158, -96)
 
 [node name="Bamboo12" parent="Bamboos" instance=ExtResource("4_8jerw")]
 position = Vector2(967, -238)
 
 [node name="Bamboo13" parent="Bamboos" instance=ExtResource("4_8jerw")]
 position = Vector2(294, -594)
+
+[node name="Bamboo14" parent="Bamboos" instance=ExtResource("4_8jerw")]
+position = Vector2(560, -141)
 
 [node name="Killzone" parent="." instance=ExtResource("5_3xrri")]
 
