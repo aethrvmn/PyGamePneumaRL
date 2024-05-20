@@ -1,38 +1,131 @@
-from typing import Callable, Dict, List, Optional, Tuple, Type, Union
+import torch as T
+import torch.nn as nn
 
-from gymnasium import spaces
-import torch as th
-from torch import nn
+policy_small=dict(
+    net_arch=dict(
+        pi=[256],
+        vf=[256]
+    )
+)
 
-from stable_baselines3 import PPO
-from stable_baselines3.common.policies import MultiInputPolicy
+policy_small_optim=dict(
+    net_arch=dict(
+        pi=[256],
+        vf=[256]
+    ),
+    optimizer_kwargs=dict(
+        betas=(0.9, 0.9),
+        eps=1e-5,
+    ),
+)
 
-class CustomACPolicy(nn.Module):
-    """
-    Custom network for policy and value functions.
+policy_small_tanh=dict(
+    activation_fn=nn.Tanh,
+    net_arch=dict(
+        pi=[256],
+        vf=[256]
+    )
+)
 
-    It receives as input the number of layers for each network, the activation function and the optimizer parameters.
-    """
+policy_small_optim_tanh=dict(
+    net_arch=dict(
+        pi=[256],
+        vf=[256]
+    ),
+    optimizer_class=T.optim.Adam,
+    optimizer_kwargs=dict(
+        betas=(0.9, 0.9),
+        eps=1e-5,
+    ),
+)
 
-    def __init__(
-        self,
-        feature_dim: int,
-        last_layer_dim_pi: int = 64,
-        last_layer_dim_vf: int = 64,
-    ):
-        super().__init__()
+policy_mid=dict(
+    net_arch=dict(
+        pi=[512],
+        vf=[2048, 2048]
+    )
+)
 
-        self.latent_dim_pi = last_layer_dim_pi
-        self.latent_dim_vf = last_layer_dim_vf
+policy_mid_tanh=dict(
+    activation_fn=nn.Tanh,
+    net_arch=dict(
+        pi=[512],
+        vf=[2048, 2048]
+    )
+)
 
-        # Policy network
-        self.policy_net = nn.Sequential(
-            nn.Linear(feature_dim, last_layer_dim_pi),
-            nn.Tanh()
-        )
+policy_mid_optim=dict(
+    net_arch=dict(
+        pi=[512],
+        vf=[2048, 2048]
+    ),
+    optimizer_kwargs=dict(
+      betas=(0.9,0.9),
+      eps=1e-5  
+    )
+)
 
-        # Value network
-        self.value_net = nn.Sequential(
-            nn.Linear(feature_dim, last_layer_dim_vf),
-            nn.Tanh()
-        )
+policy_mid_optim_tanh=dict(
+    activation_fn=nn.Tanh,
+    net_arch=dict(
+        pi=[512],
+        vf=[2048, 2048]
+    ),
+    optimizer_kwargs=dict(
+      betas=(0.9,0.9),
+      eps=1e-5  
+    )
+)
+
+policy_big=dict(
+    net_arch=dict(
+        pi=[1024, 1024],
+        vf=[4096, 4096, 4096, 4096]
+    )
+)
+
+policy_big_tanh=dict(
+    activation_fn=nn.Tanh,
+    net_arch=dict(
+        pi=[1024, 1024],
+        vf=[4096, 4096, 4096, 4096]
+    )
+)
+
+policy_big_optim=dict(    
+    net_arch=dict(
+        pi=[1024, 1024],
+        vf=[4096, 4096, 4096, 4096]
+    ),
+    optimizer_kwargs=dict(
+        betas=(0.9, 0.9),
+        eps=1e-5,
+    ),
+)
+
+policy_big_optim_tanh = dict(
+    activation_fn=nn.Tanh,
+     net_arch=dict(
+        pi=[1024, 1024],
+        vf=[4096, 4096, 4096, 4096],
+    ),
+    optimizer_kwargs=dict(
+        betas=(0.9, 0.9),
+        eps=1e-5,
+    ),
+)
+
+policies={
+    "policy_small": policy_small,
+    "policy_small_optim": policy_small_optim,
+    "policy_small_tanh": policy_small_tanh,
+    "policy_small_optim_tanh": policy_small_optim_tanh,
+    "policy_mid": policy_mid,
+    "policy_mid_optim": policy_mid_optim,
+    "policy_mid_tanh": policy_mid_tanh,
+    "policy_mid_optim_tanh": policy_mid_optim_tanh,       
+    "policy_big": policy_big,
+    "policy_big_optim": policy_big_optim,
+    "policy_big_tanh": policy_big_tanh,
+    "policy_big_optim_tanh": policy_big_optim_tanh,       
+}
